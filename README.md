@@ -14,13 +14,25 @@ npm run dev
 
 Pushes to `main` build and deploy via [`.github/workflows/deploy.yml`](.github/workflows/deploy.yml).
 
-**One-time setup** (repo owner):
+**Finish setup** (one-time, in your terminal):
 
-1. Open **Settings → Pages**
-2. Under **Build and deployment**, set **Source** to **GitHub Actions**
-3. If the repo is **private**, you need a [GitHub paid plan](https://docs.github.com/en/pages/getting-started-with-github-pages/about-github-pages#types-of-github-pages-sites) for Pages on private repos — or make the repo public for free Pages
+```bash
+# Grant workflow scope so the deploy file can be pushed
+gh auth refresh -h github.com -s workflow,repo
 
-Live URL (after deploy): `https://<username>.github.io/auxosure-landing/`
+cd /path/to/GrowSurel
+git add .github/workflows/deploy.yml
+git commit -m "Add GitHub Pages deploy workflow"
+git push
+```
+
+Then in GitHub: **Settings → Pages → Build and deployment → Source: GitHub Actions**.
+
+**Private repo note:** GitHub Pages on private repos requires a [paid GitHub plan](https://docs.github.com/en/pages/getting-started-with-github-pages/about-github-pages#types-of-github-pages-sites). For free hosting on a private repo, use **Vercel** below.
+
+Live URL (after deploy): `https://aadithya1996.github.io/auxosure-landing/`
+
+**Repo:** https://github.com/aadithya1996/auxosure-landing (private)
 
 ## Vercel (alternative)
 
