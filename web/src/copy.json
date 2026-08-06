@@ -1,0 +1,58 @@
+{
+  "brand": {
+    "company": "Auxosure",
+    "product": "Auxo"
+  },
+  "header": {
+    "title": "Auxosure",
+    "ctaText": "Request a Demo"
+  },
+  "hero": {
+    "pill": "Meet Auxo",
+    "headline": "Meet Auxo: Your confident voice for agency growth and operations.",
+    "description": "Empowering insurance teams with voice solutions and operational automation that scale with your business.",
+    "primaryCta": "Request a Demo",
+    "secondaryCta": "Learn More about Auxo"
+  },
+  "bento": {
+    "pill": "Why Auxosure",
+    "headline": "Built for brokerage & underwriting growth",
+    "cards": [
+      {
+        "tag": "Lifetime Value",
+        "title": "Increase the lifetime value of your policyholders.",
+        "bubble": "Hi Nicholas! Your commercial policy is up for renewal. I've pre-filled the application with your current details. Ready to proceed?"
+      },
+      {
+        "tag": "Channels",
+        "title": "Unify your communication channels."
+      },
+      {
+        "tag": "Operations",
+        "title": "Automate routine operational tasks."
+      },
+      {
+        "tag": "Bandwidth",
+        "title": "Increase bandwidth for more clients."
+      }
+    ]
+  },
+  "integrations": {
+    "items": [
+      "Applied Epic",
+      "Vertafore",
+      "Guidewire",
+      "Duck Creek",
+      "HawkSoft",
+      "EZLynx",
+      "NowCerts",
+      "AgencyMatrix",
+      "Salesforce",
+      "Twilio"
+    ],
+    "footerText": "40+ live integrations across AMS, PAS, and telephony."
+  },
+  "footer": {
+    "copyright": "All rights reserved."
+  }
+}

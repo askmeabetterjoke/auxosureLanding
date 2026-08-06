@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    body { margin: 0; background: #14121F; font-family: 'Manrope', sans-serif; }
+    a { color: #2A2550; text-decoration: none; }
+    a:hover { color: #FF6B57; }
+    @keyframes x-bounce {
+      0% { transform: translateY(0) rotate(0deg); }
+      10% { transform: translateY(0) scaleY(0.9) rotate(0deg); }
+      18% { transform: translateY(-70px) rotateY(120deg); }
+      30% { transform: translateY(-90px) rotateY(240deg); }
+      42% { transform: translateY(0) rotateY(360deg); }
+      48% { transform: translateY(0) scaleY(0.9) rotateY(360deg); }
+      56% { transform: translateY(-24px) rotateY(360deg); }
+      66% { transform: translateY(0) rotateY(360deg); }
+      100% { transform: translateY(0) rotateY(360deg); }
+    }
+    @keyframes skid-s1 {
+      0% { opacity: 0; }
+      12% { opacity: 0.4; }
+      82% { opacity: 0.4; }
+      92%, 100% { opacity: 0; }
+    }
+    @keyframes skid-s2 {
+      0%, 22% { opacity: 0; }
+      34% { opacity: 0.7; }
+      82% { opacity: 0.7; }
+      92%, 100% { opacity: 0; }
+    }
+    @keyframes skid-s3 {
+      0%, 44% { opacity: 0; }
+      56% { opacity: 1; }
+      82% { opacity: 1; }
+      92%, 100% { opacity: 0; }
+    }
+  </style>
+</helmet>
+<x-import component-from-global-scope="deck-stage" from="./deck-stage.js" width="1920" height="1080" hint-size="100%,100%">
+
+  <section data-label="Title" data-speaker-notes="Rebrand recap: from the legacy shield to a software-first identity. This deck walks the five exploration rounds and lands on the final mark." style="background: #2A2550; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 48px;">
+    <div style="display: flex; align-items: center; gap: 36px;">
+      <div style="display: flex; align-items: baseline;">
+        <div style="font-size: 130px; font-weight: 800; color: #FF6B57; letter-spacing: -0.02em;">a</div>
+        <div style="font-size: 130px; font-weight: 800; color: #FFFFFF; letter-spacing: -0.02em;">u</div>
+        <svg width="100" height="144" viewBox="0 0 72 104" style="margin: 0 -10px 0 8px; animation: x-bounce 2.6s ease-in-out infinite; transform-origin: 50% 92%; transform-style: preserve-3d; perspective: 600px;">
+          <line x1="13" y1="42" x2="56" y2="94" stroke="#FF6B57" stroke-width="16" stroke-linecap="round"></line>
+          <line x1="10" y1="94" x2="48" y2="30" stroke="#FF6B57" stroke-width="16" stroke-linecap="round"></line>
+          <polygon points="60,8 57,35 39,23" fill="#FF6B57"></polygon>
+        </svg>
+        <div style="font-size: 130px; font-weight: 800; color: #FFFFFF; letter-spacing: -0.02em;">osure</div>
+      </div>
+      <svg width="140" height="108" viewBox="0 -12 52 52" style="overflow: visible;">
+        <line x1="4" y1="32" x2="13" y2="16" stroke="#FF6B57" stroke-width="6" stroke-linecap="round" opacity="0.4" style="animation: skid-s1 2.4s linear infinite;"></line>
+        <line x1="17" y1="34" x2="29" y2="10" stroke="#FF6B57" stroke-width="6" stroke-linecap="round" opacity="0.7" style="animation: skid-s2 2.4s linear infinite;"></line>
+        <line x1="33" y1="36" x2="48" y2="4" stroke="#FF6B57" stroke-width="6" stroke-linecap="round" style="animation: skid-s3 2.4s linear infinite;"></line>
+      </svg>
+    </div>
+    <div style="display: flex; flex-direction: column; align-items: center; gap: 14px;">
+      <div style="font-size: 40px; font-weight: 700; color: #F1EFFA;">Logo rebrand — exploration to final</div>
+      <div style="font-size: 26px; font-weight: 500; color: #9A93C4;">Ops &amp; Growth OS for insurance brokerages · August 2026</div>
+    </div>
+  </section>
+
+  <section data-label="Brief" data-speaker-notes="The old mark said legacy carrier. The brief: fast modern software for a slow industry, no insurance cliches." style="background: #FFFFFF; display: flex; flex-direction: column; justify-content: center; padding: 140px 160px; gap: 56px;">
+    <div style="font-size: 30px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: #FF6B57;">The brief</div>
+    <div style="font-size: 76px; font-weight: 800; color: #2A2550; letter-spacing: -0.01em; line-height: 1.15; max-width: 1400px;">Fast, modern software for a slow industry.</div>
+    <div style="display: flex; gap: 32px;">
+      <div style="flex: 1; background: #F1EFFA; border-radius: 24px; padding: 44px; display: flex; flex-direction: column; gap: 16px;">
+        <div style="font-size: 28px; font-weight: 800; color: #2A2550;">Keep</div>
+        <div style="font-size: 26px; line-height: 1.5; color: #5C5880;">The Auxosure name. A palette an insurance buyer can trust.</div>
+      </div>
+      <div style="flex: 1; background: #F1EFFA; border-radius: 24px; padding: 44px; display: flex; flex-direction: column; gap: 16px;">
+        <div style="font-size: 28px; font-weight: 800; color: #2A2550;">Lose</div>
+        <div style="font-size: 26px; line-height: 1.5; color: #5C5880;">The shield. Anything that reads legacy carrier.</div>
+      </div>
+      <div style="flex: 1; background: #F1EFFA; border-radius: 24px; padding: 44px; display: flex; flex-direction: column; gap: 16px;">
+        <div style="font-size: 28px; font-weight: 800; color: #2A2550;">Add</div>
+        <div style="font-size: 26px; line-height: 1.5; color: #5C5880;">Speed and compounding growth, built into the mark itself.</div>
+      </div>
+    </div>
+  </section>
+
+  <section data-label="Round 1" data-speaker-notes="Round one: four directions, zero shields. Growth bars, network nodes, a velocity glyph, and a wordmark with a software cursor." style="background: #FFFFFF; display: flex; flex-direction: column; padding: 100px 140px; gap: 64px;">
+    <div style="display: flex; flex-direction: column; gap: 12px;">
+      <div style="font-size: 26px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: #FF6B57;">Round 1</div>
+      <div style="font-size: 60px; font-weight: 800; color: #2A2550; letter-spacing: -0.01em;">Four directions, zero shields</div>
+    </div>
+    <div style="display: flex; gap: 36px; flex: 1;">
+      <div style="flex: 1; background: #F7F6F3; border-radius: 24px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 36px;">
+        <svg width="200" height="200" viewBox="0 0 100 100">
+          <rect x="14" y="50" width="20" height="35" rx="5" fill="#16234F"></rect>
+          <rect x="40" y="20" width="20" height="65" rx="5" fill="#F2994A"></rect>
+          <rect x="66" y="40" width="20" height="45" rx="5" fill="#16234F"></rect>
+        </svg>
+        <div style="font-size: 27px; font-weight: 700; color: #2A2550;">Ascending bars</div>
+      </div>
+      <div style="flex: 1; background: #F7F6F3; border-radius: 24px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 36px;">
+        <svg width="200" height="200" viewBox="0 0 100 100">
+          <line x1="50" y1="20" x2="20" y2="80" stroke="#16234F" stroke-width="6" stroke-linecap="round"></line>
+          <line x1="50" y1="20" x2="80" y2="80" stroke="#16234F" stroke-width="6" stroke-linecap="round"></line>
+          <line x1="20" y1="80" x2="80" y2="80" stroke="#16234F" stroke-width="6" stroke-linecap="round"></line>
+          <circle cx="50" cy="20" r="10" fill="#F2994A"></circle>
+          <circle cx="20" cy="80" r="10" fill="#16234F"></circle>
+          <circle cx="80" cy="80" r="10" fill="#16234F"></circle>
+        </svg>
+        <div style="font-size: 27px; font-weight: 700; color: #2A2550;">Network nodes</div>
+      </div>
+      <div style="flex: 1; background: #F7F6F3; border-radius: 24px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 36px;">
+        <svg width="200" height="200" viewBox="0 0 100 100">
+          <rect x="5" y="5" width="90" height="90" rx="20" fill="#16234F"></rect>
+          <path d="M33,28 L55,50 L33,72" stroke="#F2994A" stroke-width="9" fill="none" stroke-linecap="round" stroke-linejoin="round"></path>
+          <path d="M53,28 L75,50 L53,72" stroke="#F2994A" stroke-width="9" fill="none" stroke-linecap="round" stroke-linejoin="round" opacity="0.55"></path>
+        </svg>
+        <div style="font-size: 27px; font-weight: 700; color: #2A2550;">Velocity mark</div>
+      </div>
+      <div style="flex: 1; background: #F7F6F3; border-radius: 24px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 36px;">
+        <div style="display: flex; align-items: baseline; gap: 6px;">
+          <div style="font-size: 52px; font-weight: 800; color: #16234F; letter-spacing: -0.02em;">auxosure</div>
+          <div style="width: 14px; height: 40px; background: #F2994A; border-radius: 3px;"></div>
+        </div>
+        <div style="font-size: 27px; font-weight: 700; color: #2A2550;">Wordmark + cursor</div>
+      </div>
+    </div>
+  </section>
+
+  <section data-label="Round 2" data-speaker-notes="Round two came from fast objects — jetski, UI slider, sledge, rollerskates — abstracted into geometry." style="background: #FFFFFF; display: flex; flex-direction: column; padding: 100px 140px; gap: 64px;">
+    <div style="display: flex; flex-direction: column; gap: 12px;">
+      <div style="font-size: 26px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: #FF6B57;">Round 2</div>
+      <div style="font-size: 60px; font-weight: 800; color: #2A2550; letter-spacing: -0.01em;">Built from fast objects</div>
+    </div>
+    <div style="display: flex; gap: 36px; flex: 1;">
+      <div style="flex: 1; background: #F7F6F3; border-radius: 24px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 36px;">
+        <svg width="200" height="200" viewBox="0 0 100 100">
+          <line x1="5" y1="35" x2="27" y2="40" stroke="#F2994A" stroke-width="6" stroke-linecap="round"></line>
+          <line x1="2" y1="50" x2="30" y2="50" stroke="#F2994A" stroke-width="6" stroke-linecap="round"></line>
+          <line x1="5" y1="65" x2="27" y2="60" stroke="#F2994A" stroke-width="6" stroke-linecap="round"></line>
+          <polygon points="35,18 88,50 35,82" fill="#16234F"></polygon>
+        </svg>
+        <div style="font-size: 27px; font-weight: 700; color: #2A2550;">Wake — jetski</div>
+      </div>
+      <div style="flex: 1; background: #F7F6F3; border-radius: 24px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 36px;">
+        <svg width="200" height="200" viewBox="0 0 100 100">
+          <rect x="8" y="44" width="84" height="12" rx="6" fill="#16234F" opacity="0.1"></rect>
+          <rect x="25" y="47" width="10" height="6" rx="3" fill="#16234F" opacity="0.15"></rect>
+          <rect x="38" y="47" width="14" height="6" rx="3" fill="#16234F" opacity="0.25"></rect>
+          <rect x="55" y="47" width="16" height="6" rx="3" fill="#16234F" opacity="0.4"></rect>
+          <circle cx="72" cy="50" r="17" fill="#F2994A"></circle>
+        </svg>
+        <div style="font-size: 27px; font-weight: 700; color: #2A2550;">Slider</div>
+      </div>
+      <div style="flex: 1; background: #F7F6F3; border-radius: 24px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 36px;">
+        <svg width="200" height="200" viewBox="0 0 100 100">
+          <line x1="20" y1="25" x2="34" y2="35" stroke="#F2994A" stroke-width="5" stroke-linecap="round"></line>
+          <line x1="30" y1="18" x2="44" y2="30" stroke="#F2994A" stroke-width="5" stroke-linecap="round" opacity="0.6"></line>
+          <path d="M14,60 L62,60 Q80,60 80,44" stroke="#16234F" stroke-width="8" fill="none" stroke-linecap="round"></path>
+          <path d="M14,78 L58,78 Q74,78 74,63" stroke="#16234F" stroke-width="8" fill="none" stroke-linecap="round"></path>
+        </svg>
+        <div style="font-size: 27px; font-weight: 700; color: #2A2550;">Runners — sledge</div>
+      </div>
+      <div style="flex: 1; background: #F7F6F3; border-radius: 24px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 36px;">
+        <svg width="200" height="200" viewBox="0 0 100 100">
+          <path d="M10,72 Q20,74 30,66" stroke="#16234F" stroke-width="5" fill="none" stroke-linecap="round" opacity="0.3"></path>
+          <path d="M16,60 Q28,60 38,50" stroke="#16234F" stroke-width="5" fill="none" stroke-linecap="round" opacity="0.5"></path>
+          <circle cx="30" cy="68" r="15" fill="#16234F"></circle>
+          <circle cx="70" cy="34" r="15" fill="#F2994A"></circle>
+        </svg>
+        <div style="font-size: 27px; font-weight: 700; color: #2A2550;">Roll — skates</div>
+      </div>
+    </div>
+  </section>
+
+  <section data-label="Round 3" data-speaker-notes="Round three introduced AX — Agentic Experience — as a lettermark with speed and growth built in." style="background: #FFFFFF; display: flex; flex-direction: column; padding: 100px 140px; gap: 64px;">
+    <div style="display: flex; flex-direction: column; gap: 12px;">
+      <div style="font-size: 26px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: #FF6B57;">Round 3</div>
+      <div style="font-size: 60px; font-weight: 800; color: #2A2550; letter-spacing: -0.01em;">AX — Agentic Experience</div>
+    </div>
+    <div style="display: flex; gap: 36px; flex: 1;">
+      <div style="flex: 1; background: #F7F6F3; border-radius: 24px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 36px;">
+        <svg width="260" height="180" viewBox="0 0 140 100">
+          <text x="8" y="78" font-size="66" font-weight="800" font-family="Manrope, sans-serif" fill="#16234F">AX</text>
+          <path d="M108,32 L132,6" stroke="#F2994A" stroke-width="8" stroke-linecap="round"></path>
+          <polygon points="132,6 116,10 124,20" fill="#F2994A"></polygon>
+        </svg>
+        <div style="font-size: 27px; font-weight: 700; color: #2A2550;">AX ascend</div>
+      </div>
+      <div style="flex: 1; background: #F7F6F3; border-radius: 24px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 36px;">
+        <svg width="260" height="180" viewBox="0 0 140 100">
+          <text x="8" y="78" font-size="66" font-weight="800" font-family="Manrope, sans-serif" fill="#16234F">A</text>
+          <path d="M80,25 L102,50 L80,75" stroke="#F2994A" stroke-width="9" fill="none" stroke-linecap="round" stroke-linejoin="round"></path>
+          <path d="M124,25 L102,50 L124,75" stroke="#F2994A" stroke-width="9" fill="none" stroke-linecap="round" stroke-linejoin="round" opacity="0.55"></path>
+        </svg>
+        <div style="font-size: 27px; font-weight: 700; color: #2A2550;">AX collision</div>
+      </div>
+      <div style="flex: 1; background: #F7F6F3; border-radius: 24px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 36px;">
+        <svg width="260" height="180" viewBox="0 0 140 100">
+          <path d="M8,90 Q60,90 85,85 Q108,80 130,35" stroke="#F2994A" stroke-width="6" fill="none" stroke-linecap="round"></path>
+          <polygon points="130,35 116,40 121,50" fill="#F2994A"></polygon>
+          <text x="8" y="76" font-size="62" font-weight="800" font-family="Manrope, sans-serif" fill="#16234F">AX</text>
+        </svg>
+        <div style="font-size: 27px; font-weight: 700; color: #2A2550;">AX breakout ★</div>
+      </div>
+      <div style="flex: 1; background: #F7F6F3; border-radius: 24px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 36px;">
+        <svg width="180" height="180" viewBox="0 0 100 100">
+          <g transform="rotate(-6 50 50)">
+            <rect x="5" y="5" width="90" height="90" rx="20" fill="#16234F"></rect>
+            <text x="50" y="66" font-size="42" font-weight="800" font-family="Manrope, sans-serif" text-anchor="middle" fill="#F2994A">AX</text>
+          </g>
+        </svg>
+        <div style="font-size: 27px; font-weight: 700; color: #2A2550;">AX tile</div>
+      </div>
+    </div>
+  </section>
+
+  <section data-label="Round 4" data-speaker-notes="Round four: minimalist lowercase wordmark plus one reduced glyph, inspired by spare fintech wordmarks. The skid marks were born here." style="background: #FFFFFF; display: flex; flex-direction: column; padding: 100px 140px; gap: 64px;">
+    <div style="display: flex; flex-direction: column; gap: 12px;">
+      <div style="font-size: 26px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: #FF6B57;">Round 4</div>
+      <div style="font-size: 60px; font-weight: 800; color: #2A2550; letter-spacing: -0.01em;">One wordmark, one small mark</div>
+    </div>
+    <div style="display: flex; gap: 36px; flex: 1;">
+      <div style="flex: 1; background: #F7F6F3; border-radius: 24px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 36px;">
+        <div style="display: flex; align-items: center; gap: 14px;">
+          <div style="font-size: 44px; font-weight: 800; color: #16234F; letter-spacing: -0.02em;">auxosure</div>
+          <svg width="40" height="40" viewBox="0 0 40 40"><path d="M3,30 L20,6 L37,30" stroke="#16234F" stroke-width="7" fill="none" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+        </div>
+        <div style="font-size: 27px; font-weight: 700; color: #2A2550;">Peak</div>
+      </div>
+      <div style="flex: 1; background: #F7F6F3; border-radius: 24px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 36px;">
+        <div style="display: flex; align-items: center; gap: 14px;">
+          <div style="font-size: 44px; font-weight: 800; color: #16234F; letter-spacing: -0.02em;">auxosure</div>
+          <svg width="36" height="40" viewBox="0 0 34 40"><polygon points="4,4 4,36 30,20" fill="#16234F"></polygon></svg>
+        </div>
+        <div style="font-size: 27px; font-weight: 700; color: #2A2550;">Forward</div>
+      </div>
+      <div style="flex: 1; background: #F7F6F3; border-radius: 24px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 36px;">
+        <div style="display: flex; align-items: center; gap: 14px;">
+          <div style="font-size: 44px; font-weight: 800; color: #16234F; letter-spacing: -0.02em;">auxosure</div>
+          <svg width="40" height="40" viewBox="0 0 40 40"><circle cx="20" cy="20" r="15" stroke="#F2994A" stroke-width="6" fill="none" stroke-dasharray="72 22" stroke-linecap="round" transform="rotate(-40 20 20)"></circle></svg>
+        </div>
+        <div style="font-size: 27px; font-weight: 700; color: #2A2550;">Loop</div>
+      </div>
+      <div style="flex: 1; background: #F7F6F3; border-radius: 24px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 36px;">
+        <div style="display: flex; align-items: center; gap: 14px;">
+          <div style="font-size: 44px; font-weight: 800; color: #16234F; letter-spacing: -0.02em;">auxosure</div>
+          <svg width="36" height="40" viewBox="0 0 36 40"><line x1="4" y1="34" x2="20" y2="6" stroke="#16234F" stroke-width="6" stroke-linecap="round"></line><line x1="20" y1="34" x2="36" y2="6" stroke="#16234F" stroke-width="6" stroke-linecap="round" opacity="0.45"></line></svg>
+        </div>
+        <div style="font-size: 27px; font-weight: 700; color: #2A2550;">Skid ★</div>
+      </div>
+    </div>
+  </section>
+
+  <section data-label="Round 5" data-speaker-notes="Round five doubled down on the two picks with fresh palettes — ink and lime, indigo and coral, forest and gold, carbon and mint. Indigo-coral won." style="background: #FFFFFF; display: flex; flex-direction: column; padding: 100px 140px; gap: 64px;">
+    <div style="display: flex; flex-direction: column; gap: 12px;">
+      <div style="font-size: 26px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: #FF6B57;">Round 5</div>
+      <div style="font-size: 60px; font-weight: 800; color: #2A2550; letter-spacing: -0.01em;">Doubling down, four new palettes</div>
+    </div>
+    <div style="display: flex; gap: 36px; flex: 1;">
+      <div style="flex: 1; background: #F6F4EC; border-radius: 24px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 36px;">
+        <svg width="240" height="176" viewBox="0 0 150 110">
+          <path d="M8,96 Q70,103 102,80 Q126,62 138,22" stroke="#B8E052" stroke-width="8" fill="none" stroke-linecap="round"></path>
+          <polygon points="140,16 124,24 132,34" fill="#B8E052"></polygon>
+          <text x="10" y="84" font-size="68" font-weight="800" font-family="Manrope, sans-serif" fill="#14171C">AX</text>
+        </svg>
+        <div style="font-size: 27px; font-weight: 700; color: #14171C;">Ink + lime</div>
+      </div>
+      <div style="flex: 1; background: #F1EFFA; border-radius: 24px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 36px;">
+        <div style="display: flex; align-items: baseline;">
+          <div style="font-size: 44px; font-weight: 800; color: #2A2550; letter-spacing: -0.02em;">au</div>
+          <div style="font-size: 44px; font-weight: 800; color: #FF6B57; letter-spacing: -0.02em; font-style: italic; transform: skewX(-8deg);">x</div>
+          <div style="font-size: 44px; font-weight: 800; color: #2A2550; letter-spacing: -0.02em;">osure</div>
+        </div>
+        <div style="font-size: 27px; font-weight: 700; color: #2A2550;">Indigo + coral ★</div>
+      </div>
+      <div style="flex: 1; background: #F5F1E6; border-radius: 24px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 36px;">
+        <svg width="190" height="176" viewBox="0 0 100 100">
+          <line x1="18" y1="82" x2="44" y2="16" stroke="#1E4D3B" stroke-width="9" stroke-linecap="round"></line>
+          <line x1="44" y1="16" x2="70" y2="82" stroke="#1E4D3B" stroke-width="9" stroke-linecap="round"></line>
+          <line x1="30" y1="58" x2="58" y2="58" stroke="#1E4D3B" stroke-width="7" stroke-linecap="round"></line>
+          <line x1="34" y1="82" x2="84" y2="22" stroke="#E3B341" stroke-width="8" stroke-linecap="round"></line>
+          <polygon points="90,14 74,18 82,28" fill="#E3B341"></polygon>
+        </svg>
+        <div style="font-size: 27px; font-weight: 700; color: #1E4D3B;">Forest + gold</div>
+      </div>
+      <div style="flex: 1; background: #EEF4F1; border-radius: 24px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 36px;">
+        <svg width="176" height="176" viewBox="0 0 100 100">
+          <rect x="5" y="5" width="90" height="90" rx="22" fill="#0E1116"></rect>
+          <line x1="27" y1="72" x2="39" y2="50" stroke="#3EE6C1" stroke-width="8" stroke-linecap="round" opacity="0.45"></line>
+          <line x1="45" y1="74" x2="61" y2="42" stroke="#3EE6C1" stroke-width="8" stroke-linecap="round" opacity="0.7"></line>
+          <line x1="63" y1="76" x2="83" y2="30" stroke="#3EE6C1" stroke-width="8" stroke-linecap="round"></line>
+        </svg>
+        <div style="font-size: 27px; font-weight: 700; color: #0E1116;">Carbon + mint</div>
+      </div>
+    </div>
+  </section>
+
+  <section data-label="Final Logo" data-speaker-notes="The final mark: coral a, X-arrow glyph, plus three ascending skid marks. Dark, icon-only, and mono variants all hold up." style="background: #F1EFFA; display: flex; flex-direction: column; padding: 100px 140px; gap: 56px;">
+    <div style="display: flex; flex-direction: column; gap: 12px;">
+      <div style="font-size: 26px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: #FF6B57;">The final mark</div>
+      <div style="font-size: 60px; font-weight: 800; color: #2A2550; letter-spacing: -0.01em;">Slash X + skid marks</div>
+    </div>
+    <div style="flex: 1; background: #FFFFFF; border-radius: 28px; display: flex; align-items: center; justify-content: center;">
+      <div style="display: flex; align-items: center; gap: 26px;">
+        <div style="display: flex; align-items: baseline;">
+          <div style="font-size: 96px; font-weight: 800; color: #FF6B57; letter-spacing: -0.02em;">a</div>
+          <div style="font-size: 96px; font-weight: 800; color: #2A2550; letter-spacing: -0.02em;">u</div>
+          <svg width="73" height="106" viewBox="0 0 72 104" style="margin: 0 -8px 0 6px; animation: x-bounce 2.6s ease-in-out infinite; transform-origin: 50% 92%; transform-style: preserve-3d; perspective: 600px;">
+            <line x1="13" y1="42" x2="56" y2="94" stroke="#FF6B57" stroke-width="16" stroke-linecap="round"></line>
+            <line x1="10" y1="94" x2="48" y2="30" stroke="#FF6B57" stroke-width="16" stroke-linecap="round"></line>
+            <polygon points="60,8 57,35 39,23" fill="#FF6B57"></polygon>
+          </svg>
+          <div style="font-size: 96px; font-weight: 800; color: #2A2550; letter-spacing: -0.02em;">osure</div>
+        </div>
+        <svg width="104" height="80" viewBox="0 -12 52 52" style="overflow: visible;">
+          <line x1="4" y1="32" x2="13" y2="16" stroke="#FF6B57" stroke-width="6" stroke-linecap="round" opacity="0.4" style="animation: skid-s1 2.4s linear infinite;"></line>
+          <line x1="17" y1="34" x2="29" y2="10" stroke="#FF6B57" stroke-width="6" stroke-linecap="round" opacity="0.7" style="animation: skid-s2 2.4s linear infinite;"></line>
+          <line x1="33" y1="36" x2="48" y2="4" stroke="#FF6B57" stroke-width="6" stroke-linecap="round" style="animation: skid-s3 2.4s linear infinite;"></line>
+        </svg>
+      </div>
+    </div>
+    <div style="display: flex; gap: 32px; height: 240px;">
+      <div style="flex: 1; background: #2A2550; border-radius: 24px; display: flex; align-items: center; justify-content: center; gap: 14px;">
+        <div style="display: flex; align-items: baseline;">
+          <div style="font-size: 40px; font-weight: 800; color: #FF6B57; letter-spacing: -0.02em;">a</div>
+          <div style="font-size: 40px; font-weight: 800; color: #FFFFFF; letter-spacing: -0.02em;">u</div>
+          <svg width="30" height="44" viewBox="0 0 72 104" style="margin: 0 -3px 0 3px;">
+            <line x1="13" y1="42" x2="56" y2="94" stroke="#FF6B57" stroke-width="16" stroke-linecap="round"></line>
+            <line x1="10" y1="94" x2="48" y2="30" stroke="#FF6B57" stroke-width="16" stroke-linecap="round"></line>
+            <polygon points="60,8 57,35 39,23" fill="#FF6B57"></polygon>
+          </svg>
+          <div style="font-size: 40px; font-weight: 800; color: #FFFFFF; letter-spacing: -0.02em;">osure</div>
+        </div>
+        <svg width="46" height="36" viewBox="0 0 52 40">
+          <line x1="4" y1="32" x2="13" y2="16" stroke="#FF6B57" stroke-width="6" stroke-linecap="round" opacity="0.4"></line>
+          <line x1="17" y1="34" x2="29" y2="10" stroke="#FF6B57" stroke-width="6" stroke-linecap="round" opacity="0.7"></line>
+          <line x1="33" y1="36" x2="48" y2="4" stroke="#FF6B57" stroke-width="6" stroke-linecap="round"></line>
+        </svg>
+      </div>
+      <div style="width: 240px; background: #2A2550; border-radius: 24px; display: flex; align-items: center; justify-content: center;">
+        <svg width="100" height="78" viewBox="0 0 52 40">
+          <line x1="4" y1="32" x2="13" y2="16" stroke="#FF6B57" stroke-width="6" stroke-linecap="round" opacity="0.4"></line>
+          <line x1="17" y1="34" x2="29" y2="10" stroke="#FF6B57" stroke-width="6" stroke-linecap="round" opacity="0.7"></line>
+          <line x1="33" y1="36" x2="48" y2="4" stroke="#FF6B57" stroke-width="6" stroke-linecap="round"></line>
+        </svg>
+      </div>
+      <div style="flex: 1; background: #FFFFFF; border-radius: 24px; display: flex; align-items: center; justify-content: center; gap: 14px;">
+        <div style="display: flex; align-items: baseline;">
+          <div style="font-size: 40px; font-weight: 800; color: #2A2550; letter-spacing: -0.02em;">au</div>
+          <svg width="30" height="44" viewBox="0 0 72 104" style="margin: 0 -3px 0 3px;">
+            <line x1="13" y1="42" x2="56" y2="94" stroke="#2A2550" stroke-width="16" stroke-linecap="round"></line>
+            <line x1="10" y1="94" x2="48" y2="30" stroke="#2A2550" stroke-width="16" stroke-linecap="round"></line>
+            <polygon points="60,8 57,35 39,23" fill="#2A2550"></polygon>
+          </svg>
+          <div style="font-size: 40px; font-weight: 800; color: #2A2550; letter-spacing: -0.02em;">osure</div>
+        </div>
+        <svg width="46" height="36" viewBox="0 0 52 40">
+          <line x1="4" y1="32" x2="13" y2="16" stroke="#2A2550" stroke-width="6" stroke-linecap="round" opacity="0.4"></line>
+          <line x1="17" y1="34" x2="29" y2="10" stroke="#2A2550" stroke-width="6" stroke-linecap="round" opacity="0.7"></line>
+          <line x1="33" y1="36" x2="48" y2="4" stroke="#2A2550" stroke-width="6" stroke-linecap="round"></line>
+        </svg>
+      </div>
+    </div>
+  </section>
+
+  <section data-label="Brand Spec" data-speaker-notes="Spec: Manrope ExtraBold lowercase; Midnight Indigo, Signal Coral, Fog. The x is the pivot where ops accelerate; the skid marks are speed compounding into growth." style="background: #FFFFFF; display: flex; flex-direction: column; padding: 100px 140px; gap: 64px;">
+    <div style="display: flex; flex-direction: column; gap: 12px;">
+      <div style="font-size: 26px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: #FF6B57;">Brand spec</div>
+      <div style="font-size: 60px; font-weight: 800; color: #2A2550; letter-spacing: -0.01em;">Type, color, meaning</div>
+    </div>
+    <div style="display: flex; gap: 40px; flex: 1;">
+      <div style="flex: 1; background: #F1EFFA; border-radius: 28px; padding: 52px; display: flex; flex-direction: column; gap: 24px;">
+        <div style="font-size: 24px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: #FF6B57;">Typeface</div>
+        <div style="font-size: 40px; font-weight: 800; color: #2A2550;">Manrope ExtraBold</div>
+        <div style="font-size: 26px; line-height: 1.55; color: #5C5880;">Lowercase, −0.02em tracking. The a set in coral; the x is a custom X-arrow glyph breaking above the cap line.</div>
+      </div>
+      <div style="flex: 1; background: #F1EFFA; border-radius: 28px; padding: 52px; display: flex; flex-direction: column; gap: 28px;">
+        <div style="font-size: 24px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: #FF6B57;">Color schema</div>
+        <div style="display: flex; align-items: center; gap: 16px;">
+          <div style="width: 44px; height: 44px; border-radius: 50%; background: #2A2550;"></div>
+          <div style="font-size: 27px; font-weight: 700; color: #2A2550;">Midnight Indigo · #2A2550</div>
+        </div>
+        <div style="display: flex; align-items: center; gap: 16px;">
+          <div style="width: 44px; height: 44px; border-radius: 50%; background: #FF6B57;"></div>
+          <div style="font-size: 27px; font-weight: 700; color: #2A2550;">Signal Coral · #FF6B57</div>
+        </div>
+        <div style="display: flex; align-items: center; gap: 16px;">
+          <div style="width: 44px; height: 44px; border-radius: 50%; background: #FFFFFF; border: 2px solid rgba(42,37,80,0.2);"></div>
+          <div style="font-size: 27px; font-weight: 700; color: #2A2550;">Fog · #F1EFFA</div>
+        </div>
+      </div>
+      <div style="flex: 1.2; background: #2A2550; border-radius: 28px; padding: 52px; display: flex; flex-direction: column; gap: 24px;">
+        <div style="font-size: 24px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: #FF6B57;">What it signifies</div>
+        <div style="font-size: 26px; line-height: 1.6; color: #E8E5F5;">The coral a sparks the name; the X breaks upward into an arrow — the pivot where a brokerage's ops accelerate. Three skid marks, each longer and steeper: speed compounding into growth. Indigo holds the trust; coral is the software moving fast inside it.</div>
+      </div>
+    </div>
+  </section>
+
+</x-import>
+</x-dc>
+</body>
+</html>
