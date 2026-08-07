@@ -91,12 +91,12 @@ function LedgerCard({ column, title, count, modules }) {
   );
 }
 
-const ServicePortfolio = () => {
+const ServicePortfolio = ({ onRequestDemo }) => {
   return (
     <section className="section svc-section" id="services">
       <div className="container">
         <div className="svc-intro">
-          <div className="pill-tag">
+          <div className="pill-tag pill-tag--on-ink">
             <span className="pill-dot" />
             Service modules
           </div>
@@ -126,9 +126,9 @@ const ServicePortfolio = () => {
             <span className="ledger-footer-label">Net effect</span>
             <p>More bound premium in. Fewer ops hours out.</p>
           </div>
-          <a className="ledger-footer-link" href="#services">
-            See the service portfolio →
-          </a>
+          <button type="button" className="btn btn-primary ledger-footer-cta" onClick={onRequestDemo}>
+            Request a Demo
+          </button>
         </div>
       </div>
     </section>

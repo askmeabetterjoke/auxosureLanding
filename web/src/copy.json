@@ -22,7 +22,8 @@
   "services": {
     "pill": "Service modules",
     "headline": "What Auxo runs for you.",
-    "description": "Nine modules, one ledger. Hover a line — watch the dollars move."
+    "description": "Nine modules, one ledger. Hover a line — watch the dollars move.",
+    "cta": "Request a Demo"
   },
   "delivery": {
     "eyebrow": "How it works",

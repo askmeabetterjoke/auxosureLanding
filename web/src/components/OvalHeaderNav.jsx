@@ -2,23 +2,41 @@ import React, { useEffect, useState } from 'react';
 import AnimatedLogo from './AnimatedLogo';
 
 const NAV_LINKS = [
-  { href: '#build', label: 'Build' },
-  { href: '#services', label: 'Services' },
-  { href: '#delivery', label: 'Delivery' },
-  { href: '#integrations', label: 'Integrations' },
+  { href: '#build', label: 'Build', id: 'build' },
+  { href: '#services', label: 'Services', id: 'services' },
+  { href: '#delivery', label: 'Delivery', id: 'delivery' },
+  { href: '#integrations', label: 'Integrations', id: 'integrations' },
 ];
 
 const OvalHeaderNav = ({ onRequestDemo }) => {
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
+  const [activeHref, setActiveHref] = useState('');
 
   useEffect(() => {
     const onScroll = () => {
       setScrolled(window.scrollY > 40);
+
+      const offset = 120;
+      let current = '';
+      for (const link of NAV_LINKS) {
+        const el = document.getElementById(link.id);
+        if (!el) continue;
+        const top = el.getBoundingClientRect().top;
+        if (top - offset <= 0) {
+          current = link.href;
+        }
+      }
+      setActiveHref(current);
     };
+
     onScroll();
     window.addEventListener('scroll', onScroll, { passive: true });
-    return () => window.removeEventListener('scroll', onScroll);
+    window.addEventListener('resize', onScroll);
+    return () => {
+      window.removeEventListener('scroll', onScroll);
+      window.removeEventListener('resize', onScroll);
+    };
   }, []);
 
   const handleNavClick = () => setMobileOpen(false);
@@ -31,6 +49,7 @@ const OvalHeaderNav = ({ onRequestDemo }) => {
           onClick={(e) => {
             e.preventDefault();
             window.scrollTo({ top: 0, behavior: 'smooth' });
+            setActiveHref('');
           }}
         >
           <AnimatedLogo size="small" darkTheme />
@@ -39,7 +58,13 @@ const OvalHeaderNav = ({ onRequestDemo }) => {
         <ul className="oval-nav-links">
           {NAV_LINKS.map((link) => (
             <li key={link.href}>
-              <a href={link.href}>{link.label}</a>
+              <a
+                href={link.href}
+                className={activeHref === link.href ? 'is-active' : undefined}
+                aria-current={activeHref === link.href ? 'true' : undefined}
+              >
+                {link.label}
+              </a>
             </li>
           ))}
         </ul>
@@ -61,7 +86,12 @@ const OvalHeaderNav = ({ onRequestDemo }) => {
       {mobileOpen && (
         <div className="oval-nav-mobile">
           {NAV_LINKS.map((link) => (
-            <a key={link.href} href={link.href} onClick={handleNavClick}>
+            <a
+              key={link.href}
+              href={link.href}
+              className={activeHref === link.href ? 'is-active' : undefined}
+              onClick={handleNavClick}
+            >
               {link.label}
             </a>
           ))}

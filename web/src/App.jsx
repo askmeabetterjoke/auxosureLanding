@@ -33,7 +33,7 @@ function App() {
       <main>
         <HeroSection onRequestDemo={openDemo} />
         <BuilderSection />
-        <ServicePortfolio />
+        <ServicePortfolio onRequestDemo={openDemo} />
         <DeliverySection onBookCall={() => openCall()} />
         <IntegrationMarquee />
       </main>

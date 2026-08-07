@@ -364,6 +364,17 @@ section[id] {
   color: var(--paper);
   background: rgba(250, 247, 242, 0.08);
 }
+.oval-nav-links a.is-active {
+  color: var(--paper);
+  background: rgba(228, 121, 91, 0.18);
+  box-shadow: inset 0 -2px 0 var(--accent);
+}
+
+.oval-nav-mobile a.is-active {
+  color: var(--paper);
+  background: rgba(228, 121, 91, 0.18);
+}
+
 
 .oval-nav-cta {
   flex-shrink: 0;
@@ -944,13 +955,22 @@ section[id] {
 .builder-section {
   position: relative;
   overflow: hidden;
-  background: var(--paper);
-  border-top: 1px solid var(--hairline);
-  border-bottom: none;
+  background:
+    radial-gradient(ellipse 50% 60% at 100% 20%, rgba(228, 121, 91, 0.12), transparent 55%),
+    radial-gradient(ellipse 45% 50% at 0% 100%, rgba(38, 42, 68, 0.08), transparent 50%),
+    linear-gradient(180deg, #ffffff 0%, #F1EFFA 48%, #f7f5fc 100%);
+  border-top: 1px solid rgba(38, 42, 68, 0.06);
+  border-bottom: 1px solid rgba(38, 42, 68, 0.06);
 }
 
 .builder-section::before {
-  display: none;
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(135deg, rgba(255, 255, 255, 0.9) 0%, transparent 42%),
+    linear-gradient(315deg, rgba(241, 239, 250, 0.65) 0%, transparent 38%);
+  pointer-events: none;
 }
 
 .builder-layout {
@@ -963,12 +983,14 @@ section[id] {
 }
 
 .builder-copy {
-  background: transparent;
-  border: none;
-  border-radius: 0;
-  padding: 0;
-  box-shadow: none;
-  backdrop-filter: none;
+  background: rgba(255, 255, 255, 0.82);
+  border: 1px solid rgba(38, 42, 68, 0.08);
+  border-radius: 24px;
+  padding: 36px 32px 28px;
+  box-shadow:
+    0 24px 48px rgba(38, 42, 68, 0.06),
+    0 1px 0 rgba(255, 255, 255, 0.9) inset;
+  backdrop-filter: blur(8px);
 }
 
 .builder-eyebrow {
@@ -980,21 +1002,21 @@ section[id] {
   font-weight: 500;
   letter-spacing: 0.14em;
   text-transform: uppercase;
-  color: var(--ink);
+  color: var(--accent);
   margin-bottom: 20px;
-  padding: 6px 14px;
-  border: 1px solid var(--hairline);
-  border-radius: 999px;
+  padding: 0;
+  border: none;
+  border-radius: 0;
 }
 
 .builder-eyebrow .pill-dot {
   background: var(--accent);
-  box-shadow: none;
+  box-shadow: 0 0 0 4px rgba(228, 121, 91, 0.15);
 }
 
 .builder-headline {
   font-size: clamp(28px, 3.6vw, 42px);
-  color: var(--ink);
+  color: #262A44;
   margin-bottom: 16px;
   line-height: 1.15;
   letter-spacing: -0.02em;
@@ -1003,15 +1025,15 @@ section[id] {
 
 .builder-sub {
   font-size: 16px;
-  line-height: 1.55;
-  color: var(--muted);
+  line-height: 1.7;
+  color: #5b6478;
   max-width: 480px;
   margin-bottom: 36px;
 }
 
 .builder-steps {
   list-style: none;
-  border-top: 1px solid var(--hairline);
+  border-top: 1px solid rgba(38, 42, 68, 0.1);
 }
 
 .builder-step {
@@ -1019,10 +1041,10 @@ section[id] {
   text-align: left;
   background: none;
   border: none;
-  border-bottom: 1px solid var(--hairline);
+  border-bottom: 1px solid rgba(38, 42, 68, 0.08);
   padding: 18px 0;
   cursor: pointer;
-  color: var(--inactive);
+  color: rgba(38, 42, 68, 0.42);
   transition: color 0.3s ease, background 0.3s ease;
   position: relative;
 }
@@ -1034,12 +1056,12 @@ section[id] {
   top: 0;
   width: 0;
   height: 2px;
-  background: var(--accent);
+  background: linear-gradient(90deg, var(--accent), rgba(228, 121, 91, 0.45));
   transition: width 0.35s ease;
 }
 
 .builder-step--active {
-  color: var(--ink);
+  color: #262A44;
 }
 
 .builder-step--active::before {
@@ -1476,19 +1498,19 @@ section[id] {
 
 /* ========== Service Modules ledger ========== */
 .svc-section {
-  background: var(--paper);
-  border-top: 1px solid var(--hairline);
-  color: var(--ink);
+  background: var(--ink);
+  border-top: 1px solid rgba(250, 247, 242, 0.1);
+  color: var(--paper);
   padding-top: 72px;
 }
 
 .svc-section .section-title {
-  color: var(--ink);
+  color: var(--paper);
   font-size: 46px;
 }
 
 .svc-section .section-desc {
-  color: var(--muted);
+  color: rgba(250, 247, 242, 0.65);
   margin-bottom: 40px;
 }
 
@@ -1629,7 +1651,8 @@ section[id] {
   justify-content: space-between;
   gap: 20px;
   flex-wrap: wrap;
-  background: var(--ink);
+  background: rgba(250, 247, 242, 0.08);
+  border: 1px solid rgba(250, 247, 242, 0.14);
   border-radius: 16px;
   padding: 20px 24px;
 }
@@ -1655,16 +1678,9 @@ section[id] {
   color: rgba(250, 247, 242, 0.85);
 }
 
-.ledger-footer-link {
-  font-family: var(--font-display);
-  font-size: 15px;
-  font-weight: 600;
-  color: var(--accent);
+.ledger-footer-cta {
+  flex-shrink: 0;
   white-space: nowrap;
-}
-
-.ledger-footer-link:hover {
-  color: var(--accent-deep);
 }
 
 @media (max-width: 950px) {

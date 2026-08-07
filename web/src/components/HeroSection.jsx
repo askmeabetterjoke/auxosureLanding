@@ -125,8 +125,8 @@ const HeroSection = ({ onRequestDemo }) => {
     };
   }, []);
 
-  // Default night at top; scroll transitions night → day
-  const night = 1 - Math.min(1, Math.max(0, (progress - 0.2) / 0.45));
+  // Day first at top; scroll transitions day → night
+  const night = Math.min(1, Math.max(0, (progress - 0.32) / 0.36));
   const isNight = night > 0.55;
 
   const dayActiveBrianna = useTaskCycle(DAY.brianna.tasks.length, TASK_INTERVAL_MS, !isNight);
@@ -174,45 +174,60 @@ const HeroSection = ({ onRequestDemo }) => {
               </a>
             </div>
             <div className="hero-scroll-hint" aria-hidden="true">
-              <span className={`hint-chip ${isNight ? 'hint-chip--on' : ''}`}>Night</span>
-              <span className="hint-track">
-                <span className="hint-thumb" style={{ left: `${(1 - night) * 100}%` }} />
-              </span>
               <span className={`hint-chip ${!isNight ? 'hint-chip--on' : ''}`}>Day</span>
+              <span className="hint-track">
+                <span className="hint-thumb" style={{ left: `${night * 100}%` }} />
+              </span>
+              <span className={`hint-chip ${isNight ? 'hint-chip--on' : ''}`}>Night</span>
             </div>
           </div>
 
           <div className="hero-overlays" aria-live="polite">
-            {!isNight && (
-              <>
-                <div className="hero-overlay hero-overlay--brianna">
-                  <WorkflowStack
-                    person={DAY.brianna}
-                    accent="#E4795B"
-                    activeIndex={dayActiveBrianna}
-                    variant="human"
-                  />
-                </div>
-                <div className="hero-overlay hero-overlay--auxo-day">
-                  <WorkflowStack
-                    person={DAY.auxo}
-                    accent="#E4795B"
-                    activeIndex={dayActiveAuxo}
-                    variant="auxo"
-                  />
-                </div>
-              </>
-            )}
-            {isNight && (
-              <div className="hero-overlay hero-overlay--auxo-night">
-                <WorkflowStack
-                  person={NIGHT.auxo}
-                  accent="#E4795B"
-                  activeIndex={nightActiveAuxo}
-                  variant="auxo"
-                />
-              </div>
-            )}
+            <div
+              className="hero-overlay hero-overlay--brianna"
+              style={{
+                opacity: Math.max(0, 1 - night * 1.35),
+                transform: `translateY(${night * 20}px)`,
+                pointerEvents: night > 0.75 ? 'none' : 'auto',
+              }}
+            >
+              <WorkflowStack
+                person={DAY.brianna}
+                accent="#E4795B"
+                activeIndex={dayActiveBrianna}
+                variant="human"
+              />
+            </div>
+            <div
+              className="hero-overlay hero-overlay--auxo-day"
+              style={{
+                opacity: Math.max(0, 1 - night * 1.4),
+                transform: `translateY(${night * -10}px)`,
+                pointerEvents: night > 0.7 ? 'none' : 'auto',
+              }}
+            >
+              <WorkflowStack
+                person={DAY.auxo}
+                accent="#E4795B"
+                activeIndex={dayActiveAuxo}
+                variant="auxo"
+              />
+            </div>
+            <div
+              className="hero-overlay hero-overlay--auxo-night"
+              style={{
+                opacity: Math.min(1, Math.max(0, (night - 0.3) / 0.45)),
+                transform: `translateY(${(1 - night) * 24}px)`,
+                pointerEvents: night < 0.45 ? 'none' : 'auto',
+              }}
+            >
+              <WorkflowStack
+                person={NIGHT.auxo}
+                accent="#E4795B"
+                activeIndex={nightActiveAuxo}
+                variant="auxo"
+              />
+            </div>
           </div>
         </div>
       </div>
