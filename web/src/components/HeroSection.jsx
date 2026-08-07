@@ -1,4 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
+import { assetUrl } from '../lib/assetUrl';
 
 const DAY = {
   brianna: {
@@ -155,12 +156,12 @@ const HeroSection = ({ onRequestDemo }) => {
       >
         <div
           className="hero-photo hero-photo--day"
-          style={{ backgroundImage: 'url(/hero/day.jpeg)' }}
+          style={{ backgroundImage: `url(${assetUrl('hero/day.jpeg')})` }}
           aria-hidden="true"
         />
         <div
           className="hero-photo hero-photo--night"
-          style={{ backgroundImage: 'url(/hero/night.jpeg)' }}
+          style={{ backgroundImage: `url(${assetUrl('hero/night.jpeg')})` }}
           aria-hidden="true"
         />
         <div className="hero-photo-scrim" aria-hidden="true" />

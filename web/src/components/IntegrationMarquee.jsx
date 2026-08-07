@@ -1,5 +1,6 @@
 import React from 'react';
 import integrations from '../integrations.json';
+import { assetUrl } from '../lib/assetUrl';
 
 const IntegrationMarquee = () => {
   // Only show partners that have a logo asset; text-only entries skip the scroller
@@ -24,7 +25,7 @@ const IntegrationMarquee = () => {
             <div key={`${item.name}-${i}`} className="marquee-item" title={item.name}>
               <span className="marquee-item-frame">
                 <img
-                  src={item.logo}
+                  src={assetUrl(item.logo)}
                   alt={item.name}
                   className="marquee-item-logo"
                   style={{ transform: `scale(${item.scale || 1})` }}
