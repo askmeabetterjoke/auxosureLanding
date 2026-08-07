@@ -13,6 +13,7 @@ const DemoModal = ({ isOpen, onClose, mode = 'demo', initialServiceId = '' }) =>
   });
   const [errors, setErrors] = useState({});
   const [submitted, setSubmitted] = useState(false);
+  const [minimized, setMinimized] = useState(false);
   const overlayRef = useRef(null);
   const firstInputRef = useRef(null);
 
@@ -23,18 +24,19 @@ const DemoModal = ({ isOpen, onClose, mode = 'demo', initialServiceId = '' }) =>
       if (e.key === 'Escape') onClose();
     };
     document.addEventListener('keydown', onKey);
-    document.body.style.overflow = 'hidden';
-    firstInputRef.current?.focus();
+    document.body.style.overflow = minimized ? '' : 'hidden';
+    if (!minimized) firstInputRef.current?.focus();
 
     return () => {
       document.removeEventListener('keydown', onKey);
       document.body.style.overflow = '';
     };
-  }, [isOpen, onClose]);
+  }, [isOpen, onClose, minimized]);
 
   useEffect(() => {
     if (!isOpen) {
       setSubmitted(false);
+      setMinimized(false);
       setForm({
         name: '',
         email: '',
@@ -53,6 +55,20 @@ const DemoModal = ({ isOpen, onClose, mode = 'demo', initialServiceId = '' }) =>
   }, [isOpen, initialServiceId]);
 
   if (!isOpen) return null;
+
+  if (minimized) {
+    return (
+      <button
+        type="button"
+        className="modal-minimized"
+        onClick={() => setMinimized(false)}
+        aria-label="Restore Book a call dialog"
+      >
+        <span className="modal-minimized-label">Book a call</span>
+        <span className="modal-minimized-action">Restore</span>
+      </button>
+    );
+  }
 
   const validate = () => {
     const next = {};
@@ -93,9 +109,24 @@ const DemoModal = ({ isOpen, onClose, mode = 'demo', initialServiceId = '' }) =>
       aria-labelledby="demo-modal-title"
     >
       <div className="modal-content">
-        <button className="modal-close" onClick={onClose} aria-label="Close dialog">
-          ×
-        </button>
+        <div className="modal-controls">
+          <button
+            type="button"
+            className="modal-control modal-control--minimize"
+            onClick={() => setMinimized(true)}
+            aria-label="Minimize dialog"
+          >
+            −
+          </button>
+          <button
+            type="button"
+            className="modal-control modal-control--close"
+            onClick={onClose}
+            aria-label="Close dialog"
+          >
+            ×
+          </button>
+        </div>
 
         {submitted ? (
           <div className="modal-success">

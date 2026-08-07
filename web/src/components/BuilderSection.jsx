@@ -2,8 +2,8 @@ import React, { useEffect, useState } from 'react';
 
 const STEPS = [
   {
-    id: 'scout',
-    title: 'Design with Scout',
+    id: 'auxo',
+    title: 'Design with Auxo',
     description:
       'Ingest your agency policies, ACORD documents, and past customer interactions to auto-draft Auxo’s knowledge base.',
   },
@@ -23,7 +23,7 @@ const STEPS = [
 
 const STEP_INTERVAL_MS = 5500;
 
-function ScoutPanel() {
+function AuxoPanel() {
   return (
     <>
       <div className="builder-bubble builder-bubble--user">
@@ -142,7 +142,7 @@ function PoliciesPanel() {
   );
 }
 
-const PANELS = [ScoutPanel, BrandPanel, PoliciesPanel];
+const PANELS = [AuxoPanel, BrandPanel, PoliciesPanel];
 
 const BuilderSection = () => {
   const [active, setActive] = useState(0);
