@@ -1142,12 +1142,60 @@ img {
   gap: 8px;
 }
 
-.builder-window-actions span {
-  width: 10px;
-  height: 10px;
-  border-radius: 2px;
-  border: 1px solid rgba(42, 37, 80, 0.18);
+.builder-window-btn {
+  width: 24px;
+  height: 24px;
+  border-radius: 6px;
+  border: 1px solid rgba(42, 37, 80, 0.16);
   background: #fff;
+  color: rgba(42, 37, 80, 0.72);
+  font-size: 16px;
+  line-height: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background 0.2s, border-color 0.2s, color 0.2s;
+}
+
+.builder-window-btn:hover {
+  background: #f7f6fb;
+  border-color: rgba(42, 37, 80, 0.28);
+  color: var(--midnight-indigo);
+}
+
+.builder-window-btn--minimize {
+  font-size: 18px;
+  padding-bottom: 2px;
+}
+
+.builder-window-btn--close {
+  font-size: 18px;
+}
+
+.builder-window--minimized {
+  max-width: 320px;
+}
+
+.builder-window-restore {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: 420px;
+  min-height: 120px;
+  border-radius: 16px;
+  border: 1px dashed rgba(42, 37, 80, 0.2);
+  background: rgba(255, 255, 255, 0.72);
+  color: var(--midnight-indigo);
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s, border-color 0.2s;
+}
+
+.builder-window-restore:hover {
+  background: #fff;
+  border-color: rgba(42, 37, 80, 0.32);
 }
 
 .builder-window-body {

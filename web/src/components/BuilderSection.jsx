@@ -147,6 +147,8 @@ const PANELS = [AuxoPanel, BrandPanel, PoliciesPanel];
 const BuilderSection = () => {
   const [active, setActive] = useState(0);
   const [paused, setPaused] = useState(false);
+  const [windowMinimized, setWindowMinimized] = useState(false);
+  const [windowClosed, setWindowClosed] = useState(false);
 
   useEffect(() => {
     if (paused) return undefined;
@@ -164,6 +166,13 @@ const BuilderSection = () => {
   const replay = () => {
     setActive(0);
     setPaused(false);
+    setWindowMinimized(false);
+    setWindowClosed(false);
+  };
+
+  const restoreWindow = () => {
+    setWindowClosed(false);
+    setWindowMinimized(false);
   };
 
   return (
@@ -207,31 +216,61 @@ const BuilderSection = () => {
 
         <div className="builder-stage">
           <div className="builder-glow" aria-hidden="true" />
-          <div className="builder-window" key={STEPS[active].id}>
-            <div className="builder-window-bar">
-              <span className="builder-window-title">Auxo · Agency agent</span>
-              <span className="builder-window-actions" aria-hidden="true">
-                <span />
-                <span />
-              </span>
+          {windowClosed ? (
+            <button type="button" className="builder-window-restore" onClick={restoreWindow}>
+              Restore Auxo builder
+            </button>
+          ) : (
+            <div
+              className={`builder-window ${windowMinimized ? 'builder-window--minimized' : ''}`}
+              key={STEPS[active].id}
+            >
+              <div className="builder-window-bar">
+                <span className="builder-window-title">Auxo · Agency agent</span>
+                <div className="builder-window-actions">
+                  <button
+                    type="button"
+                    className="builder-window-btn builder-window-btn--minimize"
+                    onClick={() => setWindowMinimized((v) => !v)}
+                    aria-label={windowMinimized ? 'Restore window' : 'Minimize window'}
+                  >
+                    −
+                  </button>
+                  <button
+                    type="button"
+                    className="builder-window-btn builder-window-btn--close"
+                    onClick={() => {
+                      setWindowClosed(true);
+                      setWindowMinimized(false);
+                    }}
+                    aria-label="Close window"
+                  >
+                    ×
+                  </button>
+                </div>
+              </div>
+              {!windowMinimized && (
+                <>
+                  <div className="builder-window-body">
+                    <Panel />
+                  </div>
+                  <div className="builder-window-footer">
+                    <input
+                      type="text"
+                      className="builder-followup"
+                      placeholder="Ask a follow-up…"
+                      readOnly
+                      tabIndex={-1}
+                      aria-hidden="true"
+                    />
+                    <button type="button" className="builder-send" aria-hidden="true" tabIndex={-1}>
+                      ↑
+                    </button>
+                  </div>
+                </>
+              )}
             </div>
-            <div className="builder-window-body">
-              <Panel />
-            </div>
-            <div className="builder-window-footer">
-              <input
-                type="text"
-                className="builder-followup"
-                placeholder="Ask a follow-up…"
-                readOnly
-                tabIndex={-1}
-                aria-hidden="true"
-              />
-              <button type="button" className="builder-send" aria-hidden="true" tabIndex={-1}>
-                ↑
-              </button>
-            </div>
-          </div>
+          )}
 
           <button type="button" className="builder-replay" onClick={replay}>
             <span aria-hidden="true">↻</span> Replay
