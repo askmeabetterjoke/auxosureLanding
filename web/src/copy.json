@@ -22,35 +22,12 @@
   "services": {
     "pill": "Service modules",
     "headline": "What Auxo runs for you.",
-    "description": "Hover a tile. Watch the dollars move."
+    "description": "Nine modules, one ledger. Hover a line — watch the dollars move."
   },
   "delivery": {
     "eyebrow": "How it works",
-    "headline": "what happens after you book.",
-    "description": "Scroll to move through the weeks. one workflow chosen up front · three weeks to the first live service."
-  },
-  "bento": {
-    "pill": "Why Auxosure",
-    "headline": "Built for brokerage & underwriting growth",
-    "cards": [
-      {
-        "tag": "Lifetime Value",
-        "title": "Increase the lifetime value of your policyholders.",
-        "bubble": "Hi Nicholas! Your commercial policy is up for renewal. I've pre-filled the application with your current details. Ready to proceed?"
-      },
-      {
-        "tag": "Channels",
-        "title": "Unify your communication channels."
-      },
-      {
-        "tag": "Operations",
-        "title": "Automate routine operational tasks."
-      },
-      {
-        "tag": "Bandwidth",
-        "title": "Increase bandwidth for more clients."
-      }
-    ]
+    "headline": "What happens after you book.",
+    "description": "Scroll to move through the weeks. One workflow chosen up front · three weeks to the first live service."
   },
   "integrations": {
     "items": [

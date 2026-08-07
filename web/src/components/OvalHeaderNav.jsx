@@ -10,13 +10,11 @@ const NAV_LINKS = [
 
 const OvalHeaderNav = ({ onRequestDemo }) => {
   const [scrolled, setScrolled] = useState(false);
-  const [pastHero, setPastHero] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
 
   useEffect(() => {
     const onScroll = () => {
       setScrolled(window.scrollY > 40);
-      setPastHero(window.scrollY > window.innerHeight * 0.75);
     };
     onScroll();
     window.addEventListener('scroll', onScroll, { passive: true });
@@ -28,8 +26,14 @@ const OvalHeaderNav = ({ onRequestDemo }) => {
   return (
     <div className="oval-nav-wrapper">
       <nav className={`oval-nav ${scrolled ? 'scrolled' : ''}`} aria-label="Primary">
-        <a href="#" onClick={(e) => { e.preventDefault(); window.scrollTo({ top: 0, behavior: 'smooth' }); }}>
-          <AnimatedLogo size="small" darkTheme compact={pastHero} />
+        <a
+          href="#"
+          onClick={(e) => {
+            e.preventDefault();
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+          }}
+        >
+          <AnimatedLogo size="small" darkTheme />
         </a>
 
         <ul className="oval-nav-links">

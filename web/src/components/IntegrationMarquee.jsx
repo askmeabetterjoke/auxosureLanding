@@ -2,20 +2,20 @@ import React from 'react';
 import integrations from '../integrations.data.js';
 
 const IntegrationMarquee = () => {
-  // Only show partners that have a logo asset; text-only entries skip the scroller
   const withLogos = integrations.filter((item) => item.logo);
   const items = [...withLogos, ...withLogos];
 
   return (
-    <section className="section" id="integrations" style={{ paddingTop: 48 }}>
-      <div className="container" style={{ textAlign: 'center', marginBottom: 40 }}>
-        <div className="pill-tag">
+    <section className="section integrations-section" id="integrations">
+      <div className="container integrations-intro">
+        <div className="pill-tag pill-tag--on-ink">
           <span className="pill-dot" />
           Integrations
         </div>
         <h2 className="section-title">Works with the systems you already run</h2>
-        <p className="section-desc" style={{ margin: '0 auto 0' }}>
-          Auxo connects to AMS, PAS, CRM, and telephony — your workflows stay the same, they just run faster.
+        <p className="section-desc">
+          Auxo connects to AMS, PAS, CRM, and telephony — your workflows stay the same, they just run
+          faster.
         </p>
       </div>
       <div className="marquee-wrapper">
@@ -35,14 +35,7 @@ const IntegrationMarquee = () => {
           ))}
         </div>
       </div>
-      <p
-        style={{
-          textAlign: 'center',
-          marginTop: 24,
-          fontSize: 13,
-          color: 'var(--text-muted)',
-        }}
-      >
+      <p className="integrations-footnote">
         40+ live integrations across AMS, PAS, and telephony.
       </p>
     </section>

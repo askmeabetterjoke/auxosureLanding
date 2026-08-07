@@ -4,24 +4,21 @@ import ConfettiBurst from './ConfettiBurst';
 const STAGES = [
   {
     id: 'week1',
-    label: 'Week 1',
+    label: 'WEEK 1',
     title: 'Pick the workflow',
-    body: 'We sit with your team, map the real handoffs, and lock the first service.',
-    icon: '◷',
+    body: 'We sit with your team, map the real handoffs, lock the first service.',
   },
   {
     id: 'week2',
-    label: 'Week 2',
+    label: 'WEEK 2',
     title: 'Build against your rules',
-    body: 'Auxo ingests the playbooks and forms you already use. Tone, escalation, and channel rules get wired to your brand.',
-    icon: '⚙',
+    body: 'Auxo ingests your playbooks and forms; tone, escalation, and channel rules wired to your brand.',
   },
   {
     id: 'week3',
-    label: 'Week 3',
+    label: 'WEEK 3',
     title: 'Go live',
-    body: 'First service ships into a controlled lane. Your people keep the exceptions. We watch the queue together.',
-    icon: '✦',
+    body: 'First service ships into a controlled lane; your people keep the exceptions.',
   },
 ];
 
@@ -88,11 +85,14 @@ const DeliverySection = ({ onBookCall }) => {
       <div className="delivery-pin" ref={pinRef}>
         <div className="delivery-sticky">
           <div className="container delivery-container">
-            <p className="delivery-eyebrow">// How it works</p>
-            <h2 className="delivery-headline">what happens after you book.</h2>
+            <div className="pill-tag">
+              <span className="pill-dot" />
+              How it works
+            </div>
+            <h2 className="delivery-headline">What happens after you book.</h2>
             <p className="delivery-sub">
-              Scroll to move through the weeks. <em>one workflow</em> chosen up front ·{' '}
-              <em>three weeks</em> to the first live service.
+              Scroll to move through the weeks. One workflow chosen up front · three weeks to the
+              first live service.
             </p>
 
             <div className="delivery-progress-meta" aria-live="polite">
@@ -111,10 +111,7 @@ const DeliverySection = ({ onBookCall }) => {
             <div className="delivery-timeline">
               <ConfettiBurst trigger={confettiKey} />
               <div className="delivery-line">
-                <div
-                  className="delivery-line-fill"
-                  style={{ width: `${progress}%` }}
-                />
+                <div className="delivery-line-fill" style={{ width: `${progress}%` }} />
               </div>
               {STAGES.map((item, index) => (
                 <div
@@ -125,9 +122,7 @@ const DeliverySection = ({ onBookCall }) => {
                     {index === STAGES.length - 1 ? (
                       <MilestoneFlag active={index === stage} done={index < stage} />
                     ) : (
-                      <div className="delivery-dot">
-                        <span className="delivery-dot-icon">{item.icon}</span>
-                      </div>
+                      <div className="delivery-dot" />
                     )}
                   </div>
                   <div className="delivery-node-label">{item.label}</div>
@@ -139,7 +134,8 @@ const DeliverySection = ({ onBookCall }) => {
 
             <div className="delivery-cta">
               <p>
-                Let&apos;s ship with high velocity and remove one pain at a time, delivered in 3 weeks.
+                Let&apos;s ship with high velocity and remove one pain at a time, delivered in 3
+                weeks.
               </p>
               <button type="button" className="btn btn-primary" onClick={() => onBookCall?.()}>
                 Book a call

@@ -78,9 +78,9 @@ function BrandPanel() {
         <div className="builder-brand-row">
           <span className="builder-brand-label">Colors</span>
           <span className="builder-brand-swatches">
-            <span style={{ background: '#2A2550' }} />
-            <span style={{ background: '#FF6B57' }} />
-            <span style={{ background: '#F1EFFA' }} />
+            <span style={{ background: '#262A44' }} />
+            <span style={{ background: '#E4795B' }} />
+            <span style={{ background: '#FAF7F2' }} />
           </span>
         </div>
         <div className="builder-brand-row">

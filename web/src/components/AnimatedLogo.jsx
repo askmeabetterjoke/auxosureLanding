@@ -48,8 +48,8 @@ const AnimatedLogo = ({ size = 'medium', darkTheme = true, compact = false, onCl
   };
 
   const scale = getScaleFactor();
-  const textColor = darkTheme ? '#FFFFFF' : '#2A2550';
-  const coralColor = '#FF6B57';
+  const textColor = darkTheme ? '#FAF7F2' : '#262A44';
+  const coralColor = '#E4795B';
 
   const XGlyph = ({ subtle = false }) => (
     <svg
@@ -97,7 +97,7 @@ const AnimatedLogo = ({ size = 'medium', darkTheme = true, compact = false, onCl
       onClick={onClick}
       className="animated-logo"
       style={{
-        fontFamily: "'Manrope', sans-serif",
+        fontFamily: "'Schibsted Grotesk', sans-serif",
         cursor: onClick ? 'pointer' : 'default',
         userSelect: 'none',
         display: 'inline-flex',
@@ -110,7 +110,7 @@ const AnimatedLogo = ({ size = 'medium', darkTheme = true, compact = false, onCl
       {compact ? (
         <>
           <div style={{ display: 'flex', alignItems: 'baseline' }}>
-            <span style={{ fontSize: scale.fontSize, fontWeight: 800, color: coralColor, letterSpacing: '-0.02em' }}>
+            <span style={{ fontSize: scale.fontSize, fontWeight: 700, color: coralColor, letterSpacing: '-0.02em' }}>
               a
             </span>
             <XGlyph subtle />
@@ -120,14 +120,14 @@ const AnimatedLogo = ({ size = 'medium', darkTheme = true, compact = false, onCl
       ) : (
         <>
           <div style={{ display: 'flex', alignItems: 'baseline' }}>
-            <span style={{ fontSize: scale.fontSize, fontWeight: 800, color: coralColor, letterSpacing: '-0.02em' }}>
+            <span style={{ fontSize: scale.fontSize, fontWeight: 700, color: coralColor, letterSpacing: '-0.02em' }}>
               a
             </span>
-            <span style={{ fontSize: scale.fontSize, fontWeight: 800, color: textColor, letterSpacing: '-0.02em' }}>
+            <span style={{ fontSize: scale.fontSize, fontWeight: 700, color: textColor, letterSpacing: '-0.02em' }}>
               u
             </span>
             <XGlyph />
-            <span style={{ fontSize: scale.fontSize, fontWeight: 800, color: textColor, letterSpacing: '-0.02em' }}>
+            <span style={{ fontSize: scale.fontSize, fontWeight: 700, color: textColor, letterSpacing: '-0.02em' }}>
               osure
             </span>
           </div>

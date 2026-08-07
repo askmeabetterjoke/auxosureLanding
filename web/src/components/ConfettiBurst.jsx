@@ -1,6 +1,6 @@
 import React, { useEffect, useRef } from 'react';
 
-const COLORS = ['#C97B6C', '#2A2550', '#FFB347', '#7C6FD4', '#4ADE80', '#F1EFFA', '#E8A598'];
+const COLORS = ['#E4795B', '#262A44', '#3E5C76', '#FAF7F2', '#C65D42'];
 
 const ConfettiBurst = ({ trigger }) => {
   const canvasRef = useRef(null);
@@ -65,7 +65,7 @@ const ConfettiBurst = ({ trigger }) => {
         ctx.fillStyle = p.color;
 
         if (p.shape === 'dollar') {
-          ctx.font = `800 ${p.size}px Manrope, sans-serif`;
+          ctx.font = `700 ${p.size}px "Schibsted Grotesk", sans-serif`;
           ctx.textAlign = 'center';
           ctx.textBaseline = 'middle';
           ctx.fillText('$', 0, 0);

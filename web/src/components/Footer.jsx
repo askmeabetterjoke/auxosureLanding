@@ -7,7 +7,7 @@ const Footer = ({ onRequestDemo }) => {
       <div className="container footer-inner">
         <div>
           <AnimatedLogo size="small" darkTheme />
-          <p className="footer-copy" style={{ marginTop: 12 }}>
+          <p className="footer-copy">
             © {new Date().getFullYear()} Auxosure. All rights reserved.
           </p>
         </div>
@@ -16,18 +16,7 @@ const Footer = ({ onRequestDemo }) => {
           <a href="#services">Services</a>
           <a href="#delivery">Delivery</a>
           <a href="#integrations">Integrations</a>
-          <button
-            onClick={onRequestDemo}
-            style={{
-              background: 'none',
-              border: 'none',
-              color: 'var(--signal-coral)',
-              fontSize: 13,
-              fontWeight: 600,
-              cursor: 'pointer',
-              padding: 0,
-            }}
-          >
+          <button type="button" className="footer-cta" onClick={onRequestDemo}>
             Book a call
           </button>
         </div>
