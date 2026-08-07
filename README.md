@@ -57,8 +57,8 @@ Set **Root Directory** to `web` if importing from the GitHub repo in the Vercel 
 ```
 GrowSurel/
 ├── web/                 # React app (deploy this)
-│   ├── public/hero/     # day.jpg, night.jpg backgrounds
+│   ├── public/hero/     # day.jpeg, night.jpeg backgrounds
 │   └── src/
-├── day.jpg / Night.jpg  # source hero photos (also copied to public/hero)
+├── Day.jpeg / Night.jpeg  # source hero photos (copied to public/hero)
 └── implementation_plan.md
 ```

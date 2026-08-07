@@ -5,14 +5,29 @@
   },
   "header": {
     "title": "Auxosure",
-    "ctaText": "Request a Demo"
+    "ctaText": "Book a call"
   },
   "hero": {
     "pill": "Meet Auxo",
     "headline": "Meet Auxo: Your confident voice for agency growth and operations.",
     "description": "Empowering insurance teams with voice solutions and operational automation that scale with your business.",
-    "primaryCta": "Request a Demo",
-    "secondaryCta": "Learn More about Auxo"
+    "primaryCta": "Book a call",
+    "secondaryCta": "See the service portfolio"
+  },
+  "builder": {
+    "pill": "Build",
+    "headline": "Build your first multimodal agent in less than five minutes",
+    "description": "Design Auxo your way. It automatically ingests your agency’s policies, knowledge, and operations to build an agent that works like a veteran member of your team."
+  },
+  "services": {
+    "pill": "Service modules",
+    "headline": "What Auxo runs for you.",
+    "description": "Hover a tile. Watch the dollars move."
+  },
+  "delivery": {
+    "eyebrow": "How it works",
+    "headline": "what happens after you book.",
+    "description": "Scroll to move through the weeks. one workflow chosen up front · three weeks to the first live service."
   },
   "bento": {
     "pill": "Why Auxosure",

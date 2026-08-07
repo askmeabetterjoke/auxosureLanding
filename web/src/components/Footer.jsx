@@ -12,8 +12,9 @@ const Footer = ({ onRequestDemo }) => {
           </p>
         </div>
         <div className="footer-links">
-          <a href="#why-auxosure">Why Auxosure</a>
-          <a href="#voice-demo">Voice Demo</a>
+          <a href="#build">Build</a>
+          <a href="#services">Services</a>
+          <a href="#delivery">Delivery</a>
           <a href="#integrations">Integrations</a>
           <button
             onClick={onRequestDemo}
@@ -27,7 +28,7 @@ const Footer = ({ onRequestDemo }) => {
               padding: 0,
             }}
           >
-            Request a Demo
+            Book a call
           </button>
         </div>
       </div>

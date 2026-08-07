@@ -2,9 +2,9 @@ import React, { useEffect, useState } from 'react';
 import AnimatedLogo from './AnimatedLogo';
 
 const NAV_LINKS = [
-  { href: '#why-auxosure', label: 'Why Auxosure' },
-  { href: '#bento', label: 'Bento Value' },
-  { href: '#voice-demo', label: 'Voice Demo' },
+  { href: '#build', label: 'Build' },
+  { href: '#services', label: 'Services' },
+  { href: '#delivery', label: 'Delivery' },
   { href: '#integrations', label: 'Integrations' },
 ];
 
@@ -41,7 +41,7 @@ const OvalHeaderNav = ({ onRequestDemo }) => {
         </ul>
 
         <button className="btn btn-primary btn-sm oval-nav-cta" onClick={onRequestDemo}>
-          Request a Demo
+          Book a call
         </button>
 
         <button
@@ -69,7 +69,7 @@ const OvalHeaderNav = ({ onRequestDemo }) => {
               onRequestDemo();
             }}
           >
-            Request a Demo
+            Book a call
           </button>
         </div>
       )}

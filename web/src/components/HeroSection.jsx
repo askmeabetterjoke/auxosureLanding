@@ -34,8 +34,8 @@ const NIGHT = {
   },
 };
 
-const TASK_INTERVAL_MS = 6200;
-const NIGHT_TASK_INTERVAL_MS = 6500;
+const TASK_INTERVAL_MS = 1000;
+const NIGHT_TASK_INTERVAL_MS = 1000;
 
 function useTaskCycle(taskCount, intervalMs, enabled) {
   const [index, setIndex] = useState(0);
@@ -135,7 +135,7 @@ const HeroSection = ({ onRequestDemo }) => {
   );
   const dayActiveAuxo = useTaskCycle(
     DAY.auxo.tasks.length,
-    TASK_INTERVAL_MS + 600,
+    TASK_INTERVAL_MS,
     !isNight
   );
   const nightActiveAuxo = useTaskCycle(
@@ -155,12 +155,12 @@ const HeroSection = ({ onRequestDemo }) => {
       >
         <div
           className="hero-photo hero-photo--day"
-          style={{ backgroundImage: 'url(/hero/day.jpg)' }}
+          style={{ backgroundImage: 'url(/hero/day.jpeg)' }}
           aria-hidden="true"
         />
         <div
           className="hero-photo hero-photo--night"
-          style={{ backgroundImage: 'url(/hero/night.jpg)' }}
+          style={{ backgroundImage: 'url(/hero/night.jpeg)' }}
           aria-hidden="true"
         />
         <div className="hero-photo-scrim" aria-hidden="true" />
@@ -178,10 +178,10 @@ const HeroSection = ({ onRequestDemo }) => {
             </p>
             <div className="hero-actions">
               <button className="btn btn-primary" onClick={onRequestDemo}>
-                Request a Demo
+                Book a call
               </button>
-              <a className="btn btn-hero-ghost" href="#why-auxosure">
-                Learn More about Auxo
+              <a className="btn btn-hero-ghost" href="#services">
+                See the service portfolio
               </a>
             </div>
             <div className="hero-scroll-hint" aria-hidden="true">

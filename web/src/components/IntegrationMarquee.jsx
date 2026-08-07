@@ -1,14 +1,10 @@
 import React from 'react';
 import integrations from '../integrations.json';
 
-/**
- * Add integration logos:
- * 1. Place SVG or PNG files in web/public/integrations/ (e.g. applied-epic.svg)
- * 2. Set the "logo" field below to "/integrations/applied-epic.svg"
- * 3. Leave logo as null to show the partner name as text until an image is ready
- */
 const IntegrationMarquee = () => {
-  const items = [...integrations, ...integrations];
+  // Only show partners that have a logo asset; text-only entries skip the scroller
+  const withLogos = integrations.filter((item) => item.logo);
+  const items = [...withLogos, ...withLogos];
 
   return (
     <section className="section" id="integrations" style={{ paddingTop: 48 }}>
@@ -23,19 +19,18 @@ const IntegrationMarquee = () => {
         </p>
       </div>
       <div className="marquee-wrapper">
-        <div className="marquee-track" aria-hidden="true">
+        <div className="marquee-track">
           {items.map((item, i) => (
-            <div key={`${item.name}-${i}`} className="marquee-item">
-              {item.logo ? (
+            <div key={`${item.name}-${i}`} className="marquee-item" title={item.name}>
+              <span className="marquee-item-frame">
                 <img
                   src={item.logo}
                   alt={item.name}
                   className="marquee-item-logo"
+                  style={{ transform: `scale(${item.scale || 1})` }}
                   loading="lazy"
                 />
-              ) : (
-                <span className="marquee-item-text">{item.name}</span>
-              )}
+              </span>
             </div>
           ))}
         </div>

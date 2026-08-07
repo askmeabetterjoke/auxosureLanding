@@ -1,7 +1,16 @@
 import React, { useEffect, useRef, useState } from 'react';
+import { SERVICES } from './ServicePortfolio';
 
-const DemoModal = ({ isOpen, onClose }) => {
-  const [form, setForm] = useState({ name: '', email: '', company: '', role: '' });
+const DemoModal = ({ isOpen, onClose, mode = 'demo', initialServiceId = '' }) => {
+  const isCall = mode === 'call';
+  const [form, setForm] = useState({
+    name: '',
+    email: '',
+    company: '',
+    role: '',
+    service: initialServiceId || '',
+    note: '',
+  });
   const [errors, setErrors] = useState({});
   const [submitted, setSubmitted] = useState(false);
   const overlayRef = useRef(null);
@@ -26,10 +35,22 @@ const DemoModal = ({ isOpen, onClose }) => {
   useEffect(() => {
     if (!isOpen) {
       setSubmitted(false);
-      setForm({ name: '', email: '', company: '', role: '' });
+      setForm({
+        name: '',
+        email: '',
+        company: '',
+        role: '',
+        service: '',
+        note: '',
+      });
       setErrors({});
+    } else {
+      setForm((prev) => ({
+        ...prev,
+        service: initialServiceId || prev.service,
+      }));
     }
-  }, [isOpen]);
+  }, [isOpen, initialServiceId]);
 
   if (!isOpen) return null;
 
@@ -42,6 +63,7 @@ const DemoModal = ({ isOpen, onClose }) => {
       next.email = 'Enter a valid email';
     }
     if (!form.company.trim()) next.company = 'Company is required';
+    if (isCall && !form.service) next.service = 'Pick a service to talk about';
     setErrors(next);
     return Object.keys(next).length === 0;
   };
@@ -57,6 +79,9 @@ const DemoModal = ({ isOpen, onClose }) => {
     setForm((prev) => ({ ...prev, [name]: value }));
     if (errors[name]) setErrors((prev) => ({ ...prev, [name]: undefined }));
   };
+
+  const serviceName =
+    SERVICES.find((s) => s.id === form.service)?.name || 'your workflow';
 
   return (
     <div
@@ -75,10 +100,11 @@ const DemoModal = ({ isOpen, onClose }) => {
         {submitted ? (
           <div className="modal-success">
             <div className="modal-success-icon">✓</div>
-            <h2 id="demo-modal-title">Request received</h2>
+            <h2 id="demo-modal-title">{isCall ? 'Call booked' : 'Request received'}</h2>
             <p>
-              Thanks, {form.name.split(' ')[0]}! Our team will reach out within one business day
-              to schedule your Auxo demo.
+              {isCall
+                ? `Thanks, ${form.name.split(' ')[0]}. We will follow up within one business day to schedule a call on ${serviceName}.`
+                : `Thanks, ${form.name.split(' ')[0]}! We will reach out within one business day to schedule your call.`}
             </p>
             <button className="btn btn-primary" onClick={onClose}>
               Done
@@ -86,8 +112,12 @@ const DemoModal = ({ isOpen, onClose }) => {
           </div>
         ) : (
           <>
-            <h2 id="demo-modal-title">Request a Demo</h2>
-            <p>See how Auxo handles renewals, FNOL intake, and quoting for your team.</p>
+            <h2 id="demo-modal-title">Book a call</h2>
+            <p>
+              {isCall
+                ? 'Tell us which workflow you want live first. We will come prepared with a three-week cut of that service.'
+                : 'See Auxo on renewals, FNOL, and the ops work your team still does by hand.'}
+            </p>
             <form onSubmit={handleSubmit} noValidate>
               <div className="form-group">
                 <label htmlFor="demo-name">Full name</label>
@@ -140,8 +170,41 @@ const DemoModal = ({ isOpen, onClose }) => {
                   <option value="other">Other</option>
                 </select>
               </div>
+              {isCall && (
+                <>
+                  <div className="form-group">
+                    <label htmlFor="demo-service">Service</label>
+                    <select
+                      id="demo-service"
+                      name="service"
+                      value={form.service}
+                      onChange={handleChange}
+                      className={errors.service ? 'error-field' : ''}
+                    >
+                      <option value="">Which workflow first?</option>
+                      {SERVICES.map((s) => (
+                        <option key={s.id} value={s.id}>
+                          {s.name}
+                        </option>
+                      ))}
+                    </select>
+                    {errors.service && <div className="error">{errors.service}</div>}
+                  </div>
+                  <div className="form-group">
+                    <label htmlFor="demo-note">Anything we should know? (optional)</label>
+                    <input
+                      id="demo-note"
+                      name="note"
+                      type="text"
+                      value={form.note}
+                      onChange={handleChange}
+                      placeholder="Volume, AMS, carrier pressure…"
+                    />
+                  </div>
+                </>
+              )}
               <button type="submit" className="btn btn-primary" style={{ width: '100%', marginTop: 8 }}>
-                Request a Demo
+                Book a call
               </button>
             </form>
           </>

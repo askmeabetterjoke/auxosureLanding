@@ -1,12 +1,12 @@
 [
-  { "name": "Applied Epic", "logo": null },
-  { "name": "Vertafore", "logo": null },
-  { "name": "Guidewire", "logo": null },
-  { "name": "Duck Creek", "logo": null },
+  { "name": "Applied Epic", "logo": "/integrations/applied-epic.webp", "scale": 1.05 },
+  { "name": "Vertafore", "logo": "/integrations/vertafore.png", "scale": 1.1 },
+  { "name": "Guidewire", "logo": "/integrations/guidewire.png", "scale": 0.92 },
+  { "name": "Duck Creek", "logo": "/integrations/duck-creek.webp", "scale": 0.95 },
   { "name": "HawkSoft", "logo": null },
-  { "name": "EZLynx", "logo": null },
-  { "name": "NowCerts", "logo": null },
+  { "name": "EZLynx", "logo": "/integrations/ezlynx.png", "scale": 0.85 },
+  { "name": "NowCerts", "logo": "/integrations/nowcerts.png", "scale": 1.05 },
   { "name": "AgencyMatrix", "logo": null },
-  { "name": "Salesforce", "logo": null },
-  { "name": "Twilio", "logo": null }
+  { "name": "Salesforce", "logo": "/integrations/salesforce.png", "scale": 1.15 },
+  { "name": "Twilio", "logo": "/integrations/twilio.png", "scale": 1.2 }
 ]
