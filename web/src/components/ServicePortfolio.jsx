@@ -177,10 +177,6 @@ const ServicePortfolio = ({ onRequestDemo }) => {
     <section className="section engine-section" id="services">
       <div className="container">
         <div className="engine-intro">
-          <div className="pill-tag pill-tag--on-ink">
-            <span className="pill-dot" />
-            The Auxo Engine
-          </div>
           <h2 className="section-title">End-to-end agency automation</h2>
           <p className="section-desc">
             Nine modules built to scale your book and protect your margins.

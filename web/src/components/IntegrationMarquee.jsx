@@ -8,10 +8,6 @@ const IntegrationMarquee = () => {
   return (
     <section className="section integrations-section" id="integrations">
       <div className="container integrations-intro">
-        <div className="pill-tag pill-tag--on-ink">
-          <span className="pill-dot" />
-          Integrations
-        </div>
         <h2 className="section-title">Works with the systems you already run</h2>
         <p className="section-desc">
           Auxo connects to AMS, PAS, CRM, and telephony. Your workflows stay the same, they just run

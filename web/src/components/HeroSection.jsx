@@ -37,7 +37,7 @@ const NIGHT = {
 };
 
 const PRODUCER_TASK_MS = 2000;
-const AI_TASK_MS = 1000;
+const AI_TASK_MS = 1500;
 
 function useTaskCycle(taskCount, intervalMs, enabled) {
   const [index, setIndex] = useState(0);
@@ -49,13 +49,16 @@ function useTaskCycle(taskCount, intervalMs, enabled) {
     }
 
     setIndex(0);
-    if (taskCount <= 1) return undefined;
+    if (taskCount <= 0) return undefined;
 
     const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     const delay = prefersReduced ? intervalMs * 2.5 : intervalMs;
 
     const id = setInterval(() => {
-      setIndex((i) => (i + 1) % taskCount);
+      setIndex((i) => {
+        const next = i + 1;
+        return next > taskCount ? 0 : next;
+      });
     }, delay);
 
     return () => clearInterval(id);
@@ -82,6 +85,8 @@ function AuxoMark() {
 
 function WorkflowStack({ person, accent, activeIndex, variant = 'human' }) {
   const isAuxo = person.name === 'Auxo';
+  const taskCount = person.tasks.length;
+  const allDone = activeIndex >= taskCount;
 
   return (
     <div className={`workflow-stack workflow-stack--${variant}`} style={{ '--wf-accent': accent }}>
@@ -95,8 +100,8 @@ function WorkflowStack({ person, accent, activeIndex, variant = 'human' }) {
       </div>
       <ul className="workflow-stack-list">
         {person.tasks.map((task, i) => {
-          const isActive = i === activeIndex;
-          const isDone = i < activeIndex;
+          const isActive = !allDone && i === activeIndex;
+          const isDone = i < activeIndex || allDone;
           return (
             <li
               key={task}
@@ -181,10 +186,6 @@ const HeroSection = ({ onRequestDemo }) => {
 
         <div className="hero-layout">
           <div className="hero-copy">
-            <div className="pill-tag hero-pill">
-              <span className="pill-dot" />
-              Meet Auxo
-            </div>
             <h1>Meet Auxo, your confident voice in insurance operations.</h1>
             <p className="hero-sub">
               Our AI-powered voice automation and work orchestration platform automates document

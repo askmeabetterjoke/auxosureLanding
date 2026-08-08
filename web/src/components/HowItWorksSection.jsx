@@ -44,7 +44,6 @@ const HowItWorksSection = () => {
     <section className="section model-section" id="delivery">
       <div className="container">
         <div className="model-intro">
-          <p className="model-eyebrow">Auxosure delivery</p>
           <h2 className="model-title">First call to delivery in 3 weeks</h2>
           <p className="model-lede">
             Same model every time: strategize, build, run. Agency automation only sticks when it

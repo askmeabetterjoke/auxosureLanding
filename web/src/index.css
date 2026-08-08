@@ -1522,7 +1522,7 @@ section[id] {
 .engine-section .section-title {
   color: var(--paper);
   font-size: clamp(32px, 5vw, 48px);
-  margin-top: 16px;
+  margin-top: 0;
 }
 
 .engine-section .section-desc {
@@ -2824,7 +2824,7 @@ section[id] {
   font-weight: 700;
   letter-spacing: -0.025em;
   color: var(--ink);
-  margin: 16px 0 14px;
+  margin: 0 0 14px;
   line-height: 1.12;
 }
 

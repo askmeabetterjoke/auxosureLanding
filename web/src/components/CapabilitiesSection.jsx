@@ -131,10 +131,6 @@ const CapabilitiesSection = () => {
     <section className="section cap-section" id="capabilities">
       <div className="container">
         <div className="cap-intro">
-          <div className="pill-tag">
-            <span className="pill-dot" />
-            Capabilities
-          </div>
           <h2 className="cap-section-title">The Engine Powering the Modern Agency</h2>
           <p className="cap-section-desc">
             Automate your most time-consuming workflows across every channel, so your team can
@@ -146,10 +142,6 @@ const CapabilitiesSection = () => {
           <article className="cap-card">
             <div className="cap-card-inner cap-card-inner--tight">
               <DocumentVisual />
-              <div className="pill-tag" style={{ marginTop: 'auto' }}>
-                <span className="pill-dot" />
-                Document intelligence
-              </div>
               <h3 className="cap-card-title">Zero-Touch Submission Packages.</h3>
               <p className="cap-card-desc">
                 Stop wrestling with PDFs. Our AI instantly ingests ACORDs, dec pages, and loss
@@ -190,10 +182,6 @@ const CapabilitiesSection = () => {
                   </div>
                 </div>
                 <SoundWave />
-              </div>
-              <div className="pill-tag">
-                <span className="pill-dot" />
-                Omnichannel voice
               </div>
               <h3 className="cap-card-title">Your Top Agent, Cloned at Scale.</h3>
               <p className="cap-card-desc">
