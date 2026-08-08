@@ -178,8 +178,9 @@ const HeroSection = ({ onRequestDemo }) => {
             </div>
             <h1>Meet Auxo, your confident voice in insurance operations.</h1>
             <p className="hero-sub">
-              Empowering insurance teams with voice solutions and workflow automation that scale
-              with your business.
+              Our AI-powered voice automation and work orchestration platform automates document
+              submissions, customer communications, portal filings, and analytics to compress
+              turnaround times from days to minutes.
             </p>
             <div className="hero-actions">
               <button className="btn btn-primary" onClick={onRequestDemo}>

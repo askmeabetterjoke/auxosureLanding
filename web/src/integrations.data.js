@@ -1,6 +1,6 @@
 import appliedEpic from './assets/integrations/applied-epic.webp';
 import vertafore from './assets/integrations/vertafore.png';
-import guidewire from './assets/integrations/guidewire.webp';
+import guidewire from './assets/integrations/guidewire.png';
 import duckCreek from './assets/integrations/duck-creek.webp';
 import hawksoft from './assets/integrations/hawksoft.png';
 import ezlynx from './assets/integrations/ezlynx.png';
