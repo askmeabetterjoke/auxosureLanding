@@ -9,26 +9,26 @@
   },
   "hero": {
     "pill": "Meet Auxo",
-    "headline": "Meet Auxo: Your confident voice for agency growth and operations.",
-    "description": "Empowering insurance teams with voice solutions and operational automation that scale with your business.",
+    "headline": "Meet Auxo, your confident voice in insurance operations.",
+    "description": "Empowering insurance teams with voice solutions and workflow automation that scale with your business.",
     "primaryCta": "Book a call",
     "secondaryCta": "See the service portfolio"
   },
-  "builder": {
-    "pill": "Build",
-    "headline": "Build your first multimodal agent in less than five minutes",
-    "description": "Design Auxo your way. It automatically ingests your agency’s policies, knowledge, and operations to build an agent that works like a veteran member of your team."
-  },
   "services": {
-    "pill": "Service modules",
-    "headline": "What Auxo runs for you.",
-    "description": "Nine modules, one ledger. Hover a line — watch the dollars move.",
+    "pill": "The Auxo Engine",
+    "headline": "End-to-end agency automation",
+    "description": "Nine modules built to scale your book and protect your margins. Hover a line. Watch the dollars move.",
     "cta": "Request a Demo"
   },
   "delivery": {
-    "eyebrow": "How it works",
-    "headline": "What happens after you book.",
-    "description": "Scroll to move through the weeks. One workflow chosen up front · three weeks to the first live service."
+    "eyebrow": "Auxosure delivery",
+    "headline": "First call to delivery in 3 weeks",
+    "description": "Same model every time: strategize, build, run. We build alongside your team so delivery lands in three weeks."
+  },
+  "contact": {
+    "eyebrow": "Auxosure",
+    "headline": "The agency workflow exists. Making it work inside your operation is the hard part.",
+    "cta": "Talk to the team"
   },
   "integrations": {
     "items": [

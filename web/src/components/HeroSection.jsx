@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import dayHero from '../assets/hero/day.jpeg';
 import nightHero from '../assets/hero/night.jpeg';
 
@@ -36,17 +36,23 @@ const NIGHT = {
   },
 };
 
-const TASK_INTERVAL_MS = 1000;
-const NIGHT_TASK_INTERVAL_MS = 1000;
+const PRODUCER_TASK_MS = 2000;
+const AI_TASK_MS = 1000;
+/** Scroll past this (px) → night; above → day. Hysteresis avoids flicker. */
+const NIGHT_ENTER_PX = 80;
+const DAY_ENTER_PX = 40;
 
 function useTaskCycle(taskCount, intervalMs, enabled) {
   const [index, setIndex] = useState(0);
 
   useEffect(() => {
-    if (!enabled || taskCount <= 1) {
+    if (!enabled) {
       setIndex(0);
-      return;
+      return undefined;
     }
+
+    setIndex(0);
+    if (taskCount <= 1) return undefined;
 
     const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     const delay = prefersReduced ? intervalMs * 2.5 : intervalMs;
@@ -58,19 +64,33 @@ function useTaskCycle(taskCount, intervalMs, enabled) {
     return () => clearInterval(id);
   }, [taskCount, intervalMs, enabled]);
 
-  useEffect(() => {
-    if (enabled) setIndex(0);
-  }, [enabled]);
-
   return index;
 }
 
+function AuxoMark() {
+  return (
+    <svg
+      className="workflow-stack-mark"
+      viewBox="0 0 52 40"
+      width="16"
+      height="12"
+      aria-hidden="true"
+    >
+      <line x1="4" y1="32" x2="13" y2="16" stroke="currentColor" strokeWidth="6" strokeLinecap="round" />
+      <line x1="17" y1="34" x2="29" y2="10" stroke="currentColor" strokeWidth="6" strokeLinecap="round" />
+      <line x1="33" y1="36" x2="48" y2="4" stroke="currentColor" strokeWidth="6" strokeLinecap="round" />
+    </svg>
+  );
+}
+
 function WorkflowStack({ person, accent, activeIndex, variant = 'human' }) {
+  const isAuxo = person.name === 'Auxo';
+
   return (
     <div className={`workflow-stack workflow-stack--${variant}`} style={{ '--wf-accent': accent }}>
       <div className="workflow-stack-label">
         <span className="workflow-stack-avatar" aria-hidden="true">
-          {person.name === 'Auxo' ? 'A' : person.name.charAt(0)}
+          {isAuxo ? <AuxoMark /> : person.name.charAt(0)}
         </span>
         <span className="workflow-stack-title">
           {person.name}, {person.role}
@@ -79,17 +99,19 @@ function WorkflowStack({ person, accent, activeIndex, variant = 'human' }) {
       <ul className="workflow-stack-list">
         {person.tasks.map((task, i) => {
           const isActive = i === activeIndex;
-          const depth = Math.abs(i - activeIndex);
+          const isDone = i < activeIndex;
           return (
             <li
               key={task}
-              className={`workflow-card ${isActive ? 'workflow-card--active' : ''}`}
-              style={{
-                opacity: isActive ? 1 : Math.max(0.45, 0.78 - depth * 0.16),
-                transform: `scale(${isActive ? 1 : 0.98 - depth * 0.01})`,
-              }}
+              className={`workflow-card ${isActive ? 'workflow-card--active' : ''} ${isDone ? 'workflow-card--done' : ''}`}
             >
               <span className="workflow-card-text">{task}</span>
+              <span
+                className={`workflow-card-status ${isDone ? 'workflow-card-status--done' : ''} ${isActive ? 'workflow-card-status--active' : ''}`}
+                aria-hidden="true"
+              >
+                {isDone ? '✓' : ''}
+              </span>
             </li>
           );
         })}
@@ -99,42 +121,36 @@ function WorkflowStack({ person, accent, activeIndex, variant = 'human' }) {
 }
 
 const HeroSection = ({ onRequestDemo }) => {
-  const pinRef = useRef(null);
-  const [progress, setProgress] = useState(0);
+  const [phase, setPhase] = useState('day');
+
+  const isNight = phase === 'night';
+  const night = isNight ? 1 : 0;
 
   useEffect(() => {
     const onScroll = () => {
-      const el = pinRef.current;
-      if (!el) return;
-      const rect = el.getBoundingClientRect();
-      const total = el.offsetHeight - window.innerHeight;
-      if (total <= 0) {
-        setProgress(0);
-        return;
-      }
-      const scrolled = Math.min(Math.max(-rect.top, 0), total);
-      setProgress(scrolled / total);
+      const y = window.scrollY;
+      setPhase((current) => {
+        if (current === 'day' && y >= NIGHT_ENTER_PX) return 'night';
+        if (current === 'night' && y <= DAY_ENTER_PX) return 'day';
+        return current;
+      });
     };
 
     onScroll();
     window.addEventListener('scroll', onScroll, { passive: true });
-    window.addEventListener('resize', onScroll);
-    return () => {
-      window.removeEventListener('scroll', onScroll);
-      window.removeEventListener('resize', onScroll);
-    };
+    return () => window.removeEventListener('scroll', onScroll);
   }, []);
 
-  // Day first at top; scroll transitions day → night
-  const night = Math.min(1, Math.max(0, (progress - 0.32) / 0.36));
-  const isNight = night > 0.55;
-
-  const dayActiveBrianna = useTaskCycle(DAY.brianna.tasks.length, TASK_INTERVAL_MS, !isNight);
-  const dayActiveAuxo = useTaskCycle(DAY.auxo.tasks.length, TASK_INTERVAL_MS, !isNight);
-  const nightActiveAuxo = useTaskCycle(NIGHT.auxo.tasks.length, NIGHT_TASK_INTERVAL_MS, isNight);
+  const dayActiveBrianna = useTaskCycle(
+    DAY.brianna.tasks.length,
+    PRODUCER_TASK_MS,
+    !isNight
+  );
+  const dayActiveAuxo = useTaskCycle(DAY.auxo.tasks.length, AI_TASK_MS, !isNight);
+  const nightActiveAuxo = useTaskCycle(NIGHT.auxo.tasks.length, AI_TASK_MS, isNight);
 
   return (
-    <section className="hero-pin" ref={pinRef} aria-label="Meet Auxo day and night">
+    <section className="hero-pin" aria-label="Meet Auxo day and night">
       <div
         className={`hero-sticky ${isNight ? 'hero-sticky--night' : 'hero-sticky--day'}`}
         style={{
@@ -160,10 +176,10 @@ const HeroSection = ({ onRequestDemo }) => {
               <span className="pill-dot" />
               Meet Auxo
             </div>
-            <h1>Meet Auxo: Your confident voice for agency growth and operations.</h1>
+            <h1>Meet Auxo, your confident voice in insurance operations.</h1>
             <p className="hero-sub">
-              Empowering insurance teams with voice solutions and operational automation that
-              scale with your business.
+              Empowering insurance teams with voice solutions and workflow automation that scale
+              with your business.
             </p>
             <div className="hero-actions">
               <button className="btn btn-primary" onClick={onRequestDemo}>
@@ -173,38 +189,21 @@ const HeroSection = ({ onRequestDemo }) => {
                 See the service portfolio
               </a>
             </div>
-            <div className="hero-scroll-hint" aria-hidden="true">
-              <span className={`hint-chip ${!isNight ? 'hint-chip--on' : ''}`}>Day</span>
-              <span className="hint-track">
-                <span className="hint-thumb" style={{ left: `${night * 100}%` }} />
-              </span>
-              <span className={`hint-chip ${isNight ? 'hint-chip--on' : ''}`}>Night</span>
-            </div>
           </div>
 
           <div className="hero-overlays" aria-live="polite">
             <div
-              className="hero-overlay hero-overlay--brianna"
-              style={{
-                opacity: Math.max(0, 1 - night * 1.35),
-                transform: `translateY(${night * 20}px)`,
-                pointerEvents: night > 0.75 ? 'none' : 'auto',
-              }}
+              className={`hero-overlay hero-overlay--brianna ${isNight ? 'hero-overlay--hidden' : ''}`}
             >
               <WorkflowStack
                 person={DAY.brianna}
-                accent="#E4795B"
+                accent="#E8C36A"
                 activeIndex={dayActiveBrianna}
                 variant="human"
               />
             </div>
             <div
-              className="hero-overlay hero-overlay--auxo-day"
-              style={{
-                opacity: Math.max(0, 1 - night * 1.4),
-                transform: `translateY(${night * -10}px)`,
-                pointerEvents: night > 0.7 ? 'none' : 'auto',
-              }}
+              className={`hero-overlay hero-overlay--auxo-day ${isNight ? 'hero-overlay--hidden' : ''}`}
             >
               <WorkflowStack
                 person={DAY.auxo}
@@ -214,12 +213,7 @@ const HeroSection = ({ onRequestDemo }) => {
               />
             </div>
             <div
-              className="hero-overlay hero-overlay--auxo-night"
-              style={{
-                opacity: Math.min(1, Math.max(0, (night - 0.3) / 0.45)),
-                transform: `translateY(${(1 - night) * 24}px)`,
-                pointerEvents: night < 0.45 ? 'none' : 'auto',
-              }}
+              className={`hero-overlay hero-overlay--auxo-night ${!isNight ? 'hero-overlay--hidden' : ''}`}
             >
               <WorkflowStack
                 person={NIGHT.auxo}

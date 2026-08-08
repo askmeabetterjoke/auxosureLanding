@@ -1,9 +1,10 @@
 import React, { useState, useCallback } from 'react';
 import OvalHeaderNav from './components/OvalHeaderNav';
 import HeroSection from './components/HeroSection';
-import BuilderSection from './components/BuilderSection';
+import HowItWorksSection from './components/HowItWorksSection';
+import CapabilitiesSection from './components/CapabilitiesSection';
 import ServicePortfolio from './components/ServicePortfolio';
-import DeliverySection from './components/DeliverySection';
+import ContactSection from './components/ContactSection';
 import IntegrationMarquee from './components/IntegrationMarquee';
 import Footer from './components/Footer';
 import DemoModal from './components/DemoModal';
@@ -32,9 +33,10 @@ function App() {
       <OvalHeaderNav onRequestDemo={openDemo} />
       <main>
         <HeroSection onRequestDemo={openDemo} />
-        <BuilderSection />
+        <CapabilitiesSection />
         <ServicePortfolio onRequestDemo={openDemo} />
-        <DeliverySection onBookCall={() => openCall()} />
+        <HowItWorksSection />
+        <ContactSection />
         <IntegrationMarquee />
       </main>
       <Footer onRequestDemo={openDemo} />

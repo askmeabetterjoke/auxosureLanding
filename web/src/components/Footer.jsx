@@ -12,9 +12,9 @@ const Footer = ({ onRequestDemo }) => {
           </p>
         </div>
         <div className="footer-links">
-          <a href="#build">Build</a>
           <a href="#services">Services</a>
           <a href="#delivery">Delivery</a>
+          <a href="#contact">Contact</a>
           <a href="#integrations">Integrations</a>
           <button type="button" className="footer-cta" onClick={onRequestDemo}>
             Book a call
