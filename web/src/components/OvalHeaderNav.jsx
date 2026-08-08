@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import AnimatedLogo from './AnimatedLogo';
 
 const NAV_LINKS = [
+  { href: '#capabilities', label: 'Capabilities', id: 'capabilities' },
   { href: '#services', label: 'Services', id: 'services' },
   { href: '#delivery', label: 'Delivery', id: 'delivery' },
   { href: '#integrations', label: 'Integrations', id: 'integrations' },

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import dayHero from '../assets/hero/day.jpeg';
 import nightHero from '../assets/hero/night.jpeg';
 
@@ -38,9 +38,6 @@ const NIGHT = {
 
 const PRODUCER_TASK_MS = 2000;
 const AI_TASK_MS = 1000;
-/** Scroll past this (px) → night; above → day. Hysteresis avoids flicker. */
-const NIGHT_ENTER_PX = 80;
-const DAY_ENTER_PX = 40;
 
 function useTaskCycle(taskCount, intervalMs, enabled) {
   const [index, setIndex] = useState(0);
@@ -122,23 +119,35 @@ function WorkflowStack({ person, accent, activeIndex, variant = 'human' }) {
 
 const HeroSection = ({ onRequestDemo }) => {
   const [phase, setPhase] = useState('day');
+  const pinRef = useRef(null);
 
   const isNight = phase === 'night';
   const night = isNight ? 1 : 0;
 
   useEffect(() => {
-    const onScroll = () => {
-      const y = window.scrollY;
-      setPhase((current) => {
-        if (current === 'day' && y >= NIGHT_ENTER_PX) return 'night';
-        if (current === 'night' && y <= DAY_ENTER_PX) return 'day';
-        return current;
-      });
+    const pin = pinRef.current;
+    if (!pin) return undefined;
+
+    const update = () => {
+      const rect = pin.getBoundingClientRect();
+      const total = pin.offsetHeight - window.innerHeight;
+      if (total <= 0) {
+        setPhase('day');
+        return;
+      }
+
+      const scrolled = Math.min(Math.max(-rect.top, 0), total);
+      const progress = scrolled / total;
+      setPhase(progress < 0.5 ? 'day' : 'night');
     };
 
-    onScroll();
-    window.addEventListener('scroll', onScroll, { passive: true });
-    return () => window.removeEventListener('scroll', onScroll);
+    update();
+    window.addEventListener('scroll', update, { passive: true });
+    window.addEventListener('resize', update);
+    return () => {
+      window.removeEventListener('scroll', update);
+      window.removeEventListener('resize', update);
+    };
   }, []);
 
   const dayActiveBrianna = useTaskCycle(
@@ -150,7 +159,7 @@ const HeroSection = ({ onRequestDemo }) => {
   const nightActiveAuxo = useTaskCycle(NIGHT.auxo.tasks.length, AI_TASK_MS, isNight);
 
   return (
-    <section className="hero-pin" aria-label="Meet Auxo day and night">
+    <section className="hero-pin" ref={pinRef} aria-label="Meet Auxo day and night">
       <div
         className={`hero-sticky ${isNight ? 'hero-sticky--night' : 'hero-sticky--day'}`}
         style={{

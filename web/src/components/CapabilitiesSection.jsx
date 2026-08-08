@@ -131,7 +131,7 @@ const CapabilitiesSection = () => {
     <section className="section cap-section" id="capabilities">
       <div className="container">
         <div className="cap-intro">
-          <div className="pill-tag pill-tag--on-ink">
+          <div className="pill-tag">
             <span className="pill-dot" />
             Capabilities
           </div>
@@ -146,7 +146,7 @@ const CapabilitiesSection = () => {
           <article className="cap-card">
             <div className="cap-card-inner cap-card-inner--tight">
               <DocumentVisual />
-              <div className="pill-tag pill-tag--on-ink" style={{ marginTop: 'auto' }}>
+              <div className="pill-tag" style={{ marginTop: 'auto' }}>
                 <span className="pill-dot" />
                 Document intelligence
               </div>
@@ -191,7 +191,7 @@ const CapabilitiesSection = () => {
                 </div>
                 <SoundWave />
               </div>
-              <div className="pill-tag pill-tag--on-ink">
+              <div className="pill-tag">
                 <span className="pill-dot" />
                 Omnichannel voice
               </div>
