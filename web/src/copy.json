@@ -366,7 +366,7 @@
     "description": "Four pillars that cover the desk, the producer, service, and the book. Start with the one that hurts. Add the rest on the same rails.",
     "cta": "Book a call",
     "footerLabel": "How we ship",
-    "footerLine": "Pick the first service. Licensed people keep the exceptions.",
+    "footerLine": "Pick a service, and we will get it in production in 3 weeks.",
     "pillars": [
       {
         "id": "front-office",
@@ -491,7 +491,7 @@
     "headline": "First call to delivery in 3 weeks",
     "description": "Same model every time: strategize, build, run. We build alongside your team so it fits how your shop already operates, and your people keep the exceptions that need a license.",
     "close": "One pain at a time. First service live in 3 weeks.",
-    "cta": "Book a call",
+    "cta": "Signup for the fast lane",
     "phases": [
       {
         "id": "strategize",
@@ -547,6 +547,7 @@
   "integrations": {
     "headline": "Works with the systems you already run",
     "lede": "AMS, PAS, CRM, and telephony. Your workflows stay the same. Status shows up here without exporting from three different systems.",
+    "contact": "You can reach out to us directly at",
     "items": [
       "Applied Epic",
       "Vertafore",

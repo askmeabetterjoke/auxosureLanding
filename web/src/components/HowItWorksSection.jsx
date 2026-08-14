@@ -8,9 +8,14 @@ const HowItWorksSection = () => {
     <section className="section model-section" id="delivery">
       <div className="container">
         <div className="model-intro">
-          <p className="model-eyebrow">{eyebrow}</p>
-          <h2 className="model-title">{headline}</h2>
-          <p className="model-lede">{description}</p>
+          <div className="model-intro-copy">
+            <p className="model-eyebrow">{eyebrow}</p>
+            <h2 className="model-title">{headline}</h2>
+            <p className="model-lede">{description}</p>
+          </div>
+          <a className="btn btn-primary model-intro-cta" href={`mailto:${copy.footer.email}`}>
+            {cta}
+          </a>
         </div>
 
         <div className="model-grid">
@@ -31,17 +36,6 @@ const HowItWorksSection = () => {
               </ul>
             </article>
           ))}
-        </div>
-
-        <div className="model-cta">
-          <a
-            className="btn btn-primary"
-            href={copy.header.ctaHref}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            {cta}
-          </a>
         </div>
       </div>
     </section>

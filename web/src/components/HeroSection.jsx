@@ -125,6 +125,7 @@ function WorkflowStack({ person, accent, activeIndex, variant = 'human' }) {
 
 const HeroSection = () => {
   const [phase, setPhase] = useState('day');
+  const [xPlayed, setXPlayed] = useState(false);
   const pinRef = useRef(null);
 
   const isNight = phase === 'night';
@@ -191,7 +192,12 @@ const HeroSection = () => {
               <span className="hero-brand" aria-label="Auxo">
                 <span className="hero-brand-a">A</span>
                 <span className="hero-brand-u">u</span>
-                <span className="hero-brand-x">X</span>
+                <span
+                  className={`hero-brand-x${xPlayed ? ' hero-anim-once' : ''}`}
+                  onMouseEnter={() => setXPlayed(true)}
+                >
+                  X
+                </span>
                 <span className="hero-brand-o">o</span>
               </span>
               , your confident voice in{' '}

@@ -13,16 +13,23 @@ const OvalHeaderNav = () => {
     const onScroll = () => {
       setScrolled(window.scrollY > 40);
 
-      const offset = 120;
+      const probe = Math.round(window.innerHeight * 0.38);
       let current = '';
       for (const link of NAV_LINKS) {
         const el = document.getElementById(link.id);
         if (!el) continue;
-        const top = el.getBoundingClientRect().top;
-        if (top - offset <= 0) {
+        if (el.getBoundingClientRect().top - probe <= 0) {
           current = link.href;
         }
       }
+
+      const doc = document.documentElement;
+      const atBottom =
+        window.innerHeight + window.scrollY >= doc.scrollHeight - 48;
+      if (atBottom && NAV_LINKS.length) {
+        current = NAV_LINKS[NAV_LINKS.length - 1].href;
+      }
+
       setActiveHref(current);
     };
 
