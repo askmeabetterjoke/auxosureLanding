@@ -188,14 +188,13 @@ const HeroSection = () => {
         <div className="hero-layout">
           <div className="hero-copy">
             <h1>
-              With{' '}
               <span className="hero-brand" aria-label="Auxo">
                 <span className="hero-brand-a">A</span>
                 <span className="hero-brand-u">u</span>
                 <span className="hero-brand-x">X</span>
                 <span className="hero-brand-o">o</span>
               </span>
-              , get the high in{' '}
+              , your confident voice in{' '}
               <span className="hero-running" aria-hidden="false">
                 {'running'.split('').map((letter, i) => (
                   <span
@@ -207,7 +206,7 @@ const HeroSection = () => {
                   </span>
                 ))}
               </span>{' '}
-              high agency operations.
+              insurance operations.
             </h1>
             <p className="hero-sub">{copy.hero.subline}</p>
             <div className="hero-actions">
