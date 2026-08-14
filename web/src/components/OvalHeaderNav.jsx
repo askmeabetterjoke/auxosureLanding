@@ -1,14 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import AnimatedLogo from './AnimatedLogo';
+import copy from '../copy.json';
 
-const NAV_LINKS = [
-  { href: '#capabilities', label: 'Capabilities', id: 'capabilities' },
-  { href: '#services', label: 'Services', id: 'services' },
-  { href: '#delivery', label: 'Delivery', id: 'delivery' },
-  { href: '#integrations', label: 'Integrations', id: 'integrations' },
-];
+const NAV_LINKS = copy.header.nav;
 
-const OvalHeaderNav = ({ onRequestDemo }) => {
+const OvalHeaderNav = () => {
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
   const [activeHref, setActiveHref] = useState('');
@@ -69,9 +65,14 @@ const OvalHeaderNav = ({ onRequestDemo }) => {
           ))}
         </ul>
 
-        <button className="btn btn-primary btn-sm oval-nav-cta" onClick={onRequestDemo}>
-          Book a call
-        </button>
+        <a
+          className="btn btn-primary btn-sm oval-nav-cta"
+          href={copy.header.ctaHref}
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          {copy.header.ctaText}
+        </a>
 
         <button
           className="oval-nav-burger"
@@ -95,16 +96,16 @@ const OvalHeaderNav = ({ onRequestDemo }) => {
               {link.label}
             </a>
           ))}
-          <button
+          <a
             className="btn btn-primary"
             style={{ marginTop: 8 }}
-            onClick={() => {
-              setMobileOpen(false);
-              onRequestDemo();
-            }}
+            href={copy.header.ctaHref}
+            target="_blank"
+            rel="noopener noreferrer"
+            onClick={handleNavClick}
           >
-            Book a call
-          </button>
+            {copy.header.ctaText}
+          </a>
         </div>
       )}
     </div>

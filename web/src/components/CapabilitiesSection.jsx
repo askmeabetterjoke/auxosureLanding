@@ -1,199 +1,243 @@
 import React from 'react';
+import copy from '../copy.json';
+import {
+  FnolMock,
+  CoiMock,
+  IntakeQuoteMock,
+  InboxMock,
+  DocumentVisual,
+} from './ProductMock';
 
-const DOCS = [
-  { name: 'ACORD 125.pdf', type: 'pdf' },
-  { name: 'Loss runs 2021-2025.pdf', type: 'pdf' },
-  { name: 'SOV Harbor Logistics.xlsx', type: 'xls' },
-  { name: 'Broker intake note', type: 'msg' },
-];
-
-const EXTRACTED = [
-  { label: 'Named insured', value: 'Harbor Logistics Group' },
-  { label: 'Lines', value: 'Cargo · Warehouse Liability' },
-  { label: 'Effective', value: '2026-09-01' },
-];
-
-const CHECKS = [
-  'ACORD 125 + 126 completed',
-  'SOV reconciled · 4 locations',
-  '5-yr loss runs attached',
-];
-
-function SoundWave() {
-  const bars = 28;
+/* Inline mini mocks for the capabilities cards */
+function IntegrationsMock() {
+  const logos = [
+    'Applied Epic',
+    'Vertafore',
+    'Guidewire',
+    'Duck Creek',
+    'HawkSoft',
+    'EZLynx',
+    'NowCerts',
+    'AgencyMatrix',
+  ];
   return (
-    <div className="soundwave-container">
-      <div className="soundwave-track">
-        {Array.from({ length: bars }).map((_, i) => (
+    <div className="cap-mock-logos">
+      <div className="cap-mock-logos-grid">
+        {logos.map((name) => (
+          <div key={name} className="cap-mock-logo-cell">
+            <span className="cap-mock-logo-text">{name}</span>
+          </div>
+        ))}
+      </div>
+      <p className="cap-mock-logos-foot">
+        40+ live integrations across AMS, PAS, and telephony.
+      </p>
+    </div>
+  );
+}
+
+function VoiceMock() {
+  return (
+    <div className="cap-mock-voice">
+      <div className="cap-mock-voice-header">
+        <span className="cap-mock-voice-badge">
+          <span className="cap-mock-voice-live" />
+          Live call
+        </span>
+        <span className="cap-mock-voice-time">2:23</span>
+      </div>
+      <div className="cap-mock-voice-wave">
+        {Array.from({ length: 28 }).map((_, i) => (
           <div
             key={i}
-            className="soundwave-bar"
+            className="cap-mock-voice-bar"
             style={{
-              animationDelay: `${i * 0.08}s`,
-              animationDuration: `${0.8 + Math.random() * 0.6}s`,
+              height: `${12 + Math.sin(i * 0.8) * 10 + Math.random() * 14}px`,
             }}
           />
         ))}
       </div>
+      <div className="cap-mock-voice-thread">
+        <div className="cap-mock-voice-msg cap-mock-voice-msg--caller">
+          <strong>Jane Doe</strong>
+          <p>Yes, my policy number is PM 673-233-574</p>
+        </div>
+        <div className="cap-mock-voice-msg cap-mock-voice-msg--auxo">
+          <strong>Auxo</strong>
+          <p>
+            I have reviewed your policy and noticed an upcoming renewal. I have
+            sent you an email with the details.
+          </p>
+        </div>
+      </div>
     </div>
   );
 }
 
-function DocumentVisual() {
+function IntakeMock() {
   return (
-    <div className="cap-doc-visual">
-      <div className="cap-doc-header">
-        <span className="cap-doc-label">SUBMISSION PACKAGE</span>
-        <span className="cap-doc-status">
-          <span className="cap-doc-status-dot" />
-          Ready to send
-        </span>
+    <div className="cap-mock-intake">
+      <DocumentVisual
+        label="Submission package"
+        status="Quote package in producer review"
+        docs={[
+          { name: 'ACORD 125.pdf', type: 'pdf' },
+          { name: 'Loss runs 2021-2025.pdf', type: 'pdf' },
+          { name: 'SOV Harbor Logistics.xlsx', type: 'xls' },
+        ]}
+        sender="marcus@northlinebrokerage.com"
+        fields={[
+          { label: 'Named insured', value: 'Harbor Logistics Group' },
+          { label: 'Lines', value: 'Cargo · Warehouse Liability' },
+          { label: 'Effective', value: '2026-09-01' },
+        ]}
+        checks={[
+          'ACORD 125 + 126 completed',
+          'SOV reconciled, 4 locations',
+          '5-yr loss runs attached',
+        ]}
+      />
+    </div>
+  );
+}
+
+function FnolMiniMock() {
+  return (
+    <div className="cap-mock-fnol">
+      <div className="cap-mock-fnol-header">
+        <strong>Harbor Logistics</strong>
+        <span className="cap-mock-fnol-badge">FNOL</span>
       </div>
-      <div className="cap-doc-body">
-        <div className="cap-doc-col cap-doc-col--left">
-          <span className="cap-doc-col-label">FORWARDED TO AUXO</span>
-          <div className="cap-doc-list">
-            {DOCS.map((doc) => (
-              <div key={doc.name} className="cap-doc-item">
-                <span className={`cap-doc-icon cap-doc-icon--${doc.type}`}>
-                  {doc.type === 'pdf' && (
-                    <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
-                      <rect x="2" y="1" width="14" height="16" rx="2" fill="rgba(228,121,91,0.25)" />
-                      <path d="M5 6h8M5 9h6M5 12h4" stroke="rgba(228,121,91,0.7)" strokeWidth="1.2" strokeLinecap="round" />
-                    </svg>
-                  )}
-                  {doc.type === 'xls' && (
-                    <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
-                      <rect x="2" y="1" width="14" height="16" rx="2" fill="rgba(61,155,95,0.25)" />
-                      <path d="M5 5h8M5 8h8M5 11h8M5 14h5" stroke="rgba(61,155,95,0.7)" strokeWidth="1.2" strokeLinecap="round" />
-                    </svg>
-                  )}
-                  {doc.type === 'msg' && (
-                    <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
-                      <rect x="1" y="3" width="16" height="12" rx="2" fill="rgba(62,92,118,0.35)" />
-                      <path d="M2 5l7 5 7-5" stroke="rgba(123,163,196,0.9)" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round" />
-                    </svg>
-                  )}
-                </span>
-                <span className="cap-doc-name">{doc.name}</span>
-              </div>
-            ))}
-          </div>
-          <div className="cap-doc-sender">
-            <span className="cap-doc-sender-avatar">M</span>
-            <span className="cap-doc-sender-email">marcus@northlinebrokerage.com</span>
-          </div>
-        </div>
+      <div className="cap-mock-fnol-body">
+        <p className="cap-mock-fnol-line">
+          <span className="cap-mock-fnol-label">Caller</span>
+          Marcus, Northline
+        </p>
+        <p className="cap-mock-fnol-line">
+          <span className="cap-mock-fnol-label">Loss</span>
+          Warehouse water, dock 3
+        </p>
+        <p className="cap-mock-fnol-line">
+          <span className="cap-mock-fnol-label">Claim</span>
+          AX-44182
+        </p>
+        <p className="cap-mock-fnol-line">
+          <span className="cap-mock-fnol-label">Status</span>
+          Clean file for adjuster
+        </p>
+      </div>
+      <p className="cap-mock-fnol-transcript">
+        Auxo: I have the water at dock 3, last night, no injuries. Claim
+        AX-44182 is open. The file is ready for the adjuster.
+      </p>
+    </div>
+  );
+}
 
-        <div className="cap-doc-divider" />
-
-        <div className="cap-doc-col cap-doc-col--right">
-          <div className="cap-doc-col-label-wrap">
-            <span className="cap-doc-col-icon">
-              <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-                <rect x="1" y="1" width="14" height="14" rx="3" stroke="var(--accent)" strokeWidth="1.5" />
-                <path d="M5 8l2 2 4-4" stroke="var(--accent)" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-              </svg>
-            </span>
-            <span className="cap-doc-col-label">FILLED BY AUXO</span>
-          </div>
-
-          <div className="cap-doc-fields">
-            {EXTRACTED.map((field) => (
-              <div key={field.label} className="cap-doc-field">
-                <span className="cap-doc-field-label">{field.label}</span>
-                <span className="cap-doc-field-value">{field.value}</span>
-              </div>
-            ))}
-          </div>
-
-          <div className="cap-doc-checks">
-            {CHECKS.map((check) => (
-              <div key={check} className="cap-doc-check">
-                <span className="cap-doc-check-icon">
-                  <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
-                    <circle cx="7" cy="7" r="6.5" fill="var(--accent)" />
-                    <path d="M4 7l2 2 4-4" stroke="#fff" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-                  </svg>
-                </span>
-                <span className="cap-doc-check-text">{check}</span>
-              </div>
-            ))}
-          </div>
-        </div>
+function CoiMiniMock() {
+  return (
+    <div className="cap-mock-coi">
+      <div className="cap-mock-coi-header">
+        <strong>Apex Logistics</strong>
+        <span className="cap-mock-coi-badge">COI</span>
+      </div>
+      <div className="cap-mock-coi-body">
+        <p className="cap-mock-coi-line">
+          <span className="cap-mock-coi-label">Request</span>
+          Additional insured, job site 14
+        </p>
+        <p className="cap-mock-coi-line">
+          <span className="cap-mock-coi-label">Form</span>
+          Certificate of liability
+        </p>
+        <p className="cap-mock-coi-line">
+          <span className="cap-mock-coi-label">Policy</span>
+          GL vs binder check
+        </p>
+        <p className="cap-mock-coi-line">
+          <span className="cap-mock-coi-label">Status</span>
+          <span className="cap-mock-coi-status">COI issued, emailed to GC</span>
+        </p>
+      </div>
+      <div className="cap-mock-coi-hold">
+        <span className="cap-mock-coi-hold-label">Hold</span>
+        Endorsement wording, ask producer
       </div>
     </div>
   );
 }
 
-const CapabilitiesSection = () => {
+const CARDS = [
+  {
+    id: 'integrations',
+    title: 'Systems you already run',
+    description:
+      'Auxo reads and writes in the AMS, PAS, CRM, and telephony you already run, so the file does not live in a second database.',
+    mock: <IntegrationsMock />,
+  },
+  {
+    id: 'omnichannel',
+    title: 'Omni-channel communication',
+    description:
+      'Inbound and outbound on phone, SMS, and email, in the tone your agency already uses. Every call answered. Exceptions routed to a licensed human.',
+    mock: <VoiceMock />,
+  },
+  {
+    id: 'intake',
+    title: 'Submission intake and quote turnaround',
+    description:
+      'ACORDs, loss runs, and dec pages read into structured fields. Gaps flagged. Carrier quotes to client proposal without the manual rebuild.',
+    mock: <IntakeMock />,
+  },
+  {
+    id: 'fnol',
+    title: 'First notice, clean file',
+    description:
+      'Intake on the call. Structured file for the desk. Claim opened, documents attached, and adjuster notified while the caller is still on the line.',
+    mock: <FnolMiniMock />,
+  },
+  {
+    id: 'coi',
+    title: 'Certificates and endorsements',
+    description:
+      'COIs and midterm changes without a scavenger hunt. Read the endorsement, check the book SOP, issue the certificate, file to the AMS.',
+    mock: <CoiMiniMock />,
+  },
+];
+
+const CapabilitiesSection = ({ onRequestDemo }) => {
+  const { overline, headline, lede, cta } = copy.capabilities;
+
   return (
     <section className="section cap-section" id="capabilities">
       <div className="container">
-        <div className="cap-intro">
-          <h2 className="cap-section-title">The Engine Powering the Modern Agency</h2>
-          <p className="cap-section-desc">
-            Automate your most time-consuming workflows across every channel, so your team can
-            focus on building relationships and closing policies.
-          </p>
+        {/* Header row */}
+        <div className="cap-header-row">
+          <div className="cap-header-copy">
+            <p className="cap-kicker">{overline}</p>
+            <h2 className="cap-title">{headline}</h2>
+            <p className="cap-lede">{lede}</p>
+          </div>
+          <button
+            type="button"
+            className="btn btn-primary cap-header-cta"
+            onClick={onRequestDemo}
+          >
+            {cta}
+          </button>
         </div>
 
-        <div className="cap-grid-half">
-          <article className="cap-card">
-            <div className="cap-card-inner cap-card-inner--tight">
-              <DocumentVisual />
-              <h3 className="cap-card-title">Zero-Touch Submission Packages.</h3>
-              <p className="cap-card-desc">
-                Stop wrestling with PDFs. Our AI instantly ingests ACORDs, dec pages, and loss
-                runs, fills what it can, flags gaps, and raises approvals when a workflow calls
-                for it.
-              </p>
-              <a className="cap-card-link" href="#services">
-                See it in action
-                <span aria-hidden="true"> →</span>
-              </a>
-            </div>
-          </article>
-
-          <article className="cap-card">
-            <div className="cap-card-inner">
-              <div className="voice-lang-pills">
-                <span className="voice-lang-pill voice-lang-pill--active">English</span>
-                <span className="voice-lang-pill">Español</span>
-              </div>
-
-              <div className="cap-voice-visual">
-                <div className="cap-voice-avatars">
-                  <div className="cap-avatar cap-avatar--team">
-                    <svg viewBox="0 0 64 64" width="48" height="48">
-                      <circle cx="32" cy="24" r="14" fill="rgba(250,247,242,0.35)" />
-                      <path d="M12 56c0-11 9-20 20-20s20 9 20 20" fill="rgba(250,247,242,0.25)" />
-                    </svg>
-                    <span className="cap-avatar-label">Team's calls</span>
-                  </div>
-                  <div className="cap-voice-arrow">
-                    <span>Training...</span>
-                  </div>
-                  <div className="cap-avatar cap-avatar--agent">
-                    <div className="cap-avatar-ring">
-                      <span className="cap-avatar-initial">A</span>
-                    </div>
-                    <span className="cap-avatar-label">Auxo agent</span>
-                  </div>
-                </div>
-                <SoundWave />
-              </div>
-              <h3 className="cap-card-title">Your Top Agent, Cloned at Scale.</h3>
-              <p className="cap-card-desc">
-                Train our AI on your pitch, objection handling, and escalation playbooks. Every
-                call sounds like it is coming from someone who has been on your team for years.
-              </p>
-              <a className="cap-card-link" href="#contact">
-                Hear a sample
-                <span aria-hidden="true"> →</span>
-              </a>
-            </div>
-          </article>
+        {/* Horizontal card grid */}
+        <div className="cap-scroll">
+          <div className="cap-cards">
+            {CARDS.map((card) => (
+              <article key={card.id} className="cap-card">
+                <h3 className="cap-card-title">{card.title}</h3>
+                <div className="cap-card-mock">{card.mock}</div>
+                <p className="cap-card-desc">{card.description}</p>
+              </article>
+            ))}
+          </div>
         </div>
       </div>
     </section>

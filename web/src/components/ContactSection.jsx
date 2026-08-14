@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import copy from '../copy.json';
 
 const ContactSection = () => {
   const [form, setForm] = useState({ email: '', company: '' });
@@ -29,31 +30,25 @@ const ContactSection = () => {
     <section className="section contact-section" id="contact">
       <div className="container contact-layout">
         <div className="contact-copy">
-          <p className="contact-eyebrow">Auxosure</p>
-          <h2 className="contact-title">
-            The agency workflow exists. Making it work inside your operation is the hard part.
-          </h2>
-          <p className="contact-body">
-            Voice, intake, renewals, and routing only stick when they match your playbooks and
-            systems. We co-build it and co-own the result.{' '}
-            <strong>Your team runs it on day one.</strong>
-          </p>
+          <p className="contact-eyebrow">{copy.contact.eyebrow}</p>
+          <h2 className="contact-title">{copy.contact.headline}</h2>
+          <p className="contact-body">{copy.contact.body}</p>
         </div>
 
         <div className="contact-panel">
           {submitted ? (
             <div className="contact-success" role="status">
-              <h3>Thanks. We got it.</h3>
-              <p>Someone from Auxosure will reach out shortly.</p>
+              <h3>{copy.contact.successTitle}</h3>
+              <p>{copy.contact.successBody}</p>
             </div>
           ) : (
             <form className="contact-form" onSubmit={onSubmit} noValidate>
               <label className="contact-field">
-                <span>Work email</span>
+                <span>{copy.contact.emailLabel}</span>
                 <input
                   type="email"
                   name="email"
-                  placeholder="you@agency.com"
+                  placeholder={copy.contact.emailPlaceholder}
                   value={form.email}
                   onChange={onChange}
                   autoComplete="email"
@@ -61,11 +56,11 @@ const ContactSection = () => {
                 {errors.email ? <em className="contact-error">{errors.email}</em> : null}
               </label>
               <label className="contact-field">
-                <span>Company</span>
+                <span>{copy.contact.companyLabel}</span>
                 <input
                   type="text"
                   name="company"
-                  placeholder="Agency or MGA name"
+                  placeholder={copy.contact.companyPlaceholder}
                   value={form.company}
                   onChange={onChange}
                   autoComplete="organization"
@@ -73,9 +68,9 @@ const ContactSection = () => {
                 {errors.company ? <em className="contact-error">{errors.company}</em> : null}
               </label>
               <button type="submit" className="btn contact-submit">
-                Talk to the team
+                {copy.contact.cta}
               </button>
-              <p className="contact-note">We read every submission.</p>
+              <p className="contact-note">{copy.contact.note}</p>
             </form>
           )}
         </div>

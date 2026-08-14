@@ -1,36 +1,552 @@
 {
   "brand": {
     "company": "Auxosure",
-    "product": "Auxo"
+    "product": "Auxo",
+    "positioning": "AI partner in agency growth"
   },
   "header": {
     "title": "Auxosure",
-    "ctaText": "Book a call"
+    "ctaText": "Book a call",
+    "ctaHref": "https://calendly.com/ask-auxosure/30min",
+    "nav": [
+      { "href": "#services", "label": "Services", "id": "services" },
+      { "href": "#work", "label": "Platform capabilities", "id": "work" },
+      { "href": "#delivery", "label": "Delivery", "id": "delivery" },
+      { "href": "#integrations", "label": "Integrations", "id": "integrations" }
+    ]
   },
   "hero": {
     "pill": "Meet Auxo",
-    "headline": "Meet Auxo, your confident voice in insurance operations.",
-    "description": "Our AI-powered voice automation and work orchestration platform automates document submissions, customer communications, portal filings, and analytics to compress turnaround times from days to minutes.",
+    "headline": "With Auxo, get the high in running high agency operations.",
+    "description": "Voice AI, email, iMessage, carrier portals, documents, and orchestration. Your agency runs at full autonomy, never forgets, never starts from scratch.",
+    "subline": "Voice AI, email, iMessage, carrier portals, documents, and orchestration. Your agency runs at full autonomy, never forgets, never starts from scratch.",
     "primaryCta": "Book a call",
-    "secondaryCta": "See the service portfolio"
+    "secondaryCta": "See the portfolio",
+    "secondaryHref": "#services"
+  },
+  "capabilities": {
+    "overline": "Platform",
+    "headline": "A platform your shop can run, with an engineer in the building.",
+    "lede": "Auxo is how the agency runs the desk, not a chatbot bolted onto email. We wire it to your stack, your playbooks, and your license boundaries. You book a call. We sit with ops. The first lane goes live in three weeks.",
+    "cta": "Book a call",
+    "cards": [
+      {
+        "id": "integrations",
+        "title": "One schema across every AMS",
+        "body": "Auxo normalizes AMS360, HawkSoft, Epic, and the rest into one consistent shape for clients, policies, coverages, and expirations, then writes back through documented APIs."
+      },
+      {
+        "id": "fde",
+        "title": "Forward deployed, not dropped in",
+        "body": "An Auxosure engineer sits with your team, and the first service is live in three weeks: Strategize, Build, Run."
+      },
+      {
+        "id": "orchestration",
+        "title": "Same services, each book's rules",
+        "body": "Renewals, certificates, and intake run the same way every time. Limits, carrier order, and approvals are encoded per book. If a desk runs more than one AMS, the books stay separate."
+      },
+      {
+        "id": "control",
+        "title": "Humans keep the exceptions",
+        "body": "Licensed CSRs and producers see what Auxo did, approve the gaps, and take the calls that need a license."
+      }
+    ]
+  },
+  "work": {
+    "overline": "Platform capabilities",
+    "headline": "Work that runs end to end.",
+    "lede": "See Auxo on first notice, certificates, and intake to quote. Start with the lane that hurts. The rest of the nine-module engine sits underneath.",
+    "cards": [
+      {
+        "id": "fnol",
+        "label": "Retention",
+        "moduleIds": ["fnol"],
+        "title": "First notice, clean file",
+        "line": "Intake on the call. Structured file for the desk.",
+        "meta": [
+          { "label": "Intake", "value": "On call" },
+          { "label": "File", "value": "Structured" },
+          { "label": "Handoff", "value": "Adjuster" }
+        ],
+        "mockTitle": "FNOL intake",
+        "mock": {
+          "account": "Harbor Logistics",
+          "caller": "Marcus, Northline",
+          "loss": "Warehouse water, dock 3",
+          "dateOfLoss": "11 Aug 2026",
+          "claim": "AX-44182",
+          "status": "Clean file for adjuster",
+          "owner": "Auxo, CSR on exceptions",
+          "transcript": "I have the water at dock 3, last night, no injuries. Claim AX-44182 is open. The file is ready for the adjuster."
+        }
+      },
+      {
+        "id": "coi",
+        "label": "Ops",
+        "moduleIds": ["policy-checker"],
+        "title": "Certificates and endorsements",
+        "line": "Read the endorsement from the policy PDF, check that book's SOP, then issue the certificate.",
+        "meta": [
+          { "label": "Read", "value": "Policy PDF" },
+          { "label": "Check", "value": "Book SOP" },
+          { "label": "Issue", "value": "Certificate" }
+        ],
+        "mockTitle": "Policy Checker",
+        "mock": {
+          "account": "Apex Logistics",
+          "request": "Additional insured, job site 14",
+          "source": "Commercial package.pdf",
+          "extracted": "Blanket AI form, p. 47",
+          "sop": "Apex GL floor and holder wording",
+          "form": "ACORD 25",
+          "status": "Certificate issued, emailed to GC, filed to the AMS",
+          "hold": "Endorsement wording, ask producer",
+          "steps": [
+            "Read policy PDF",
+            "Extract endorsement",
+            "Check book SOP",
+            "Issue certificate"
+          ]
+        }
+      },
+      {
+        "id": "renewal-radar",
+        "label": "Retention",
+        "moduleIds": ["renewal-tool"],
+        "title": "Renewal radar",
+        "line": "Surface expirations on that book's window, flag at-risk files, and start outreach before the producer has to chase.",
+        "meta": [
+          { "label": "Window", "value": "90 days" },
+          { "label": "At risk", "value": "3 files" },
+          { "label": "Outreach", "value": "Queued" }
+        ],
+        "mockTitle": "Renewal radar",
+        "mock": {
+          "window": "90-day book window",
+          "status": "12 due · 3 at risk · 2 waiting on insured",
+          "rows": [
+            {
+              "account": "Apex Logistics",
+              "expires": "42 days",
+              "line": "GL · Cargo",
+              "flag": "At risk"
+            },
+            {
+              "account": "Harbor Logistics",
+              "expires": "61 days",
+              "line": "Property",
+              "flag": "Outreach queued"
+            },
+            {
+              "account": "Northline Retail",
+              "expires": "18 days",
+              "line": "BOP",
+              "flag": "Producer review"
+            }
+          ]
+        }
+      },
+      {
+        "id": "intake-quote",
+        "label": "Sales",
+        "moduleIds": ["acord-intake", "quote-builder", "lead-routing"],
+        "title": "Intake to quote",
+        "line": "ACORD in. Gaps flagged. Proposal out.",
+        "meta": [
+          { "label": "ACORD", "value": "In" },
+          { "label": "Gaps", "value": "Flagged" },
+          { "label": "Out", "value": "Proposal" }
+        ],
+        "mockTitle": "Submission package",
+        "mock": {
+          "docs": [
+            "ACORD 125.pdf",
+            "Loss runs 2021-2025.pdf",
+            "SOV Harbor Logistics.xlsx",
+            "Broker intake note"
+          ],
+          "from": "marcus@northlinebrokerage.com",
+          "namedInsured": "Harbor Logistics Group",
+          "lines": "Cargo · Warehouse Liability",
+          "effective": "2026-09-01",
+          "checks": [
+            "ACORD 125 + 126 completed",
+            "SOV reconciled, 4 locations",
+            "5-yr loss runs attached"
+          ],
+          "status": "Quote package in producer review"
+        }
+      }
+    ]
+  },
+  "productProof": {
+    "overline": "Platform capabilities",
+    "headline": "Work that runs end to end.",
+    "lede": "See Auxo on first notice, certificates, and intake to quote. Start with the lane that hurts. The rest of the nine-module engine sits underneath.",
+    "cards": [
+      {
+        "id": "fnol",
+        "title": "First notice, clean file",
+        "body": "Intake on the call. Structured file for the desk."
+      },
+      {
+        "id": "coi",
+        "title": "Certificates and endorsements",
+        "body": "Read the endorsement from the policy PDF, check that book's SOP, then issue the certificate."
+      },
+      {
+        "id": "renewal-radar",
+        "title": "Renewal radar",
+        "body": "Surface expirations on that book's window, flag at-risk files, and start outreach before the producer has to chase."
+      },
+      {
+        "id": "submission",
+        "title": "Intake to quote",
+        "body": "ACORD in. Gaps flagged. Proposal out."
+      }
+    ]
+  },
+  "why": {
+    "overline": "Operating model",
+    "headline": "Why agencies keep the humans in the loop",
+    "lede": "Auxo drafts, files, and chases. Licensed people approve gaps and take the files that need a license. That boundary is the product.",
+    "cards": [
+      {
+        "id": "inbox",
+        "title": "One queue across voice, email, and SMS",
+        "body": "The CSR is not hunting four inboxes. Unread means an exception, not another folder.",
+        "threads": [
+          "Auxo · Harbor Logistics · FNOL AX-44182, file complete",
+          "CSR · Apex Logistics · missing ACORD 125 schedule",
+          "Auxo · Voice · renewal outreach, waiting on insured",
+          "CSR · Northline · producer review on quote package"
+        ]
+      },
+      {
+        "id": "documents",
+        "title": "Extract, fill, flag",
+        "body": "ACORDs, loss runs, and dec pages land in one package. Auxo fills what the file supports and lists the gaps.",
+        "status": "Harbor Logistics package, ready for producer"
+      },
+      {
+        "id": "handoffs",
+        "title": "Decide, approve, write back",
+        "body": "Auxo checks that book's SOP before it moves the file. A licensed human approves. The system writes back to the AMS. Books stay isolated. Scoped access and an action log are table stakes.",
+        "steps": ["Check book SOP", "Human approves", "Write back to AMS"]
+      },
+      {
+        "id": "asks-human",
+        "title": "Auxo stops when the file is incomplete",
+        "body": "Reliability your CSR already brings. Missing schedule, coverage intent, or endorsement wording gets a question, not a silent send.",
+        "prompt": "Missing ACORD 125 schedule for Apex Logistics. Ask producer?",
+        "actions": ["Approve", "Edit", "Take the call"]
+      }
+    ]
+  },
+  "whyAuxo": {
+    "overline": "Operating model",
+    "headline": "Why agencies keep the humans in the loop",
+    "lede": "Auxo drafts, files, and chases. Licensed people approve gaps and take the files that need a license. That boundary is the product."
+  },
+  "corePlatform": {
+    "overline": "Core platform",
+    "headline": "Works with the systems you already run",
+    "lede": "AMS, PAS, CRM, and telephony. Your workflows stay the same. Status shows up here without exporting from three different systems.",
+    "footnote": "40+ live integrations across AMS, PAS, and telephony.",
+    "cards": [
+      {
+        "id": "home",
+        "title": "Today’s desk",
+        "body": "Open files on the desk this morning, exception count, next renewal. The agency front door, not a consumer homepage.",
+        "mock": {
+          "title": "Agency home",
+          "openWorklanes": "18",
+          "exceptions": "4",
+          "nextRenewal": "Apex Logistics, 42 days"
+        }
+      },
+      {
+        "id": "dashboard",
+        "title": "Pipeline and exceptions",
+        "body": "Placement, open files, and hours back on the bench without stitching AMS exports. Metrics stay anonymous. No agency name on the chart.",
+        "mock": {
+          "boundPremium": "Bound premium MTD",
+          "hoursPerFile": "Hours per file",
+          "openExceptions": "4",
+          "waitingOnCarrier": "7"
+        }
+      },
+      {
+        "id": "proof",
+        "title": "How we ship",
+        "quote": "The first service is live in three weeks. CSRs keep the exceptions that need a license.",
+        "attribution": "Auxosure forward deployed engineer"
+      }
+    ],
+    "tiles": [
+      {
+        "id": "voice",
+        "title": "Voice and messaging",
+        "body": "Inbound and outbound on phone, SMS, and email, in the tone your agency already uses."
+      },
+      {
+        "id": "documents",
+        "title": "Document processing",
+        "body": "ACORDs, dec pages, loss runs, SOVs, and certificates read into structured fields, with gaps listed."
+      },
+      {
+        "id": "portals",
+        "title": "Carrier portal actions",
+        "body": "Filings, status checks, and downloads against the portals your CSRs already live in."
+      },
+      {
+        "id": "orchestration",
+        "title": "Workflow orchestration",
+        "body": "Named services with stops, approvals, and handoffs to licensed staff."
+      },
+      {
+        "id": "observability",
+        "title": "Observability",
+        "body": "Status, SLA, transcript, and document trail on every file Auxo touches."
+      },
+      {
+        "id": "dashboard",
+        "title": "Producer dashboard",
+        "body": "Production, open files, exceptions, and pipeline without another export."
+      }
+    ]
+  },
+  "analytics": {
+    "overline": "Visibility",
+    "headline": "See what ran, what is waiting, and what moved.",
+    "lede": "Producers and ops leads see open files, exceptions waiting on a human, and where premium moved. No AMS export required. Same dashboard as the rest of Auxo.",
+    "bullets": [
+      "18 open files",
+      "4 waiting on a CSR",
+      "$1.24M bound premium MTD"
+    ],
+    "mock": {
+      "title": "Agency pulse",
+      "openFiles": "18",
+      "exceptions": "4",
+      "boundPremium": "$1.24M",
+      "closedAuxo": "73",
+      "closedCsr": "17",
+      "rows": [
+        {
+          "worklane": "FNOL",
+          "volume": "7",
+          "exceptions": "0",
+          "owner": ["Auxo"]
+        },
+        {
+          "worklane": "ACORD Intake",
+          "volume": "5",
+          "exceptions": "0",
+          "owner": ["Auxo"]
+        },
+        {
+          "worklane": "Renewals",
+          "volume": "4",
+          "exceptions": "2",
+          "owner": ["Auxo", "CSR"]
+        },
+        {
+          "worklane": "Quotes",
+          "volume": "2",
+          "exceptions": "2",
+          "owner": ["Auxo", "CSR"]
+        }
+      ]
+    }
   },
   "services": {
-    "pill": "The Auxo Engine",
+    "pill": "Service portfolio",
     "headline": "End-to-end agency automation",
-    "description": "Nine modules built to scale your book and protect your margins. Hover a line. Watch the dollars move.",
-    "cta": "Request a Demo"
+    "description": "Four pillars that cover the desk, the producer, service, and the book. Start with the one that hurts. Add the rest on the same rails.",
+    "cta": "Book a call",
+    "footerLabel": "How we ship",
+    "footerLine": "Pick the first service. Licensed people keep the exceptions.",
+    "pillars": [
+      {
+        "id": "front-office",
+        "number": "1",
+        "label": "Front office",
+        "title": "Handle every request without adding to the queue.",
+        "body": "Inbound demand answered, qualified, and routed before it piles up on the desk.",
+        "modules": [
+          {
+            "id": "inbound-calls",
+            "name": "Inbound Calls",
+            "line": "Answer new business and existing customer calls, capture the reason for the call, and route it to the right person."
+          },
+          {
+            "id": "lead-intake",
+            "name": "Lead Intake",
+            "line": "Qualify new business, collect basic account information, and create the intake record for the producer."
+          },
+          {
+            "id": "document-requests",
+            "name": "Document Requests",
+            "line": "Request ACORDs, loss runs, driver lists, applications, and other information needed to move the account forward."
+          },
+          {
+            "id": "appointments-followups",
+            "name": "Appointments & Follow-Ups",
+            "line": "Schedule producer calls, confirm appointments, and follow up when customers don't respond."
+          }
+        ]
+      },
+      {
+        "id": "producer-support",
+        "number": "2",
+        "label": "Producer support",
+        "title": "Keep producers selling instead of chasing information.",
+        "body": "Submissions, gaps, quoting, and carrier chase stay on rails so producers stay in front of the client.",
+        "modules": [
+          {
+            "id": "submission-intake",
+            "name": "Submission Intake",
+            "line": "Collect ACORDs, applications, loss runs, SOVs, and supporting documents for new business."
+          },
+          {
+            "id": "missing-information",
+            "name": "Missing Information",
+            "line": "Identify what's missing from a submission and follow up with the client to complete the file."
+          },
+          {
+            "id": "ai-quoting",
+            "name": "AI Quoting",
+            "line": "Run the submission through supported carrier portals, collect quotes and requirements, and bring the results back for review."
+          },
+          {
+            "id": "carrier-followup",
+            "name": "Carrier & Underwriter Follow-Up",
+            "line": "Check submission status, follow up on outstanding questions, and keep producers informed."
+          }
+        ]
+      },
+      {
+        "id": "policy-service",
+        "number": "3",
+        "label": "Policy service",
+        "title": "Take everyday service off your CSRs.",
+        "body": "Endorsements, certificates, billing questions, and document filing handled without a growing backstack.",
+        "modules": [
+          {
+            "id": "endorsements",
+            "name": "Endorsements",
+            "line": "Capture policy change requests, collect supporting information, and route them for processing."
+          },
+          {
+            "id": "certificates-id-cards",
+            "name": "Certificates & ID Cards",
+            "line": "Handle COI and ID card requests without making customers wait for a CSR."
+          },
+          {
+            "id": "billing-policy-questions",
+            "name": "Billing & Policy Questions",
+            "line": "Answer routine billing and policy questions and route anything requiring licensed staff."
+          },
+          {
+            "id": "policy-documents",
+            "name": "Policy Documents",
+            "line": "Collect, organize, and attach policy documents, correspondence, and supporting files to the right account."
+          }
+        ]
+      },
+      {
+        "id": "book-management",
+        "number": "4",
+        "label": "Book management",
+        "title": "Stay ahead of the files that protect your book.",
+        "body": "Renewals, claims, commissions, and open loops tracked before they fall through the cracks.",
+        "modules": [
+          {
+            "id": "renewals",
+            "name": "Renewals",
+            "line": "Track upcoming renewals, collect updated information, and follow up on outstanding requirements."
+          },
+          {
+            "id": "claims",
+            "name": "Claims",
+            "line": "Capture FNOL information, collect supporting documents, and provide customers with claim status updates."
+          },
+          {
+            "id": "commission-reconciliation",
+            "name": "Commission Reconciliation",
+            "line": "Match carrier commission statements, identify discrepancies, and prepare exceptions for the accounting team."
+          },
+          {
+            "id": "customer-followup",
+            "name": "Customer Follow-Up",
+            "line": "Follow up on outstanding requests, documents, payments, and other items that could otherwise fall through the cracks."
+          }
+        ]
+      }
+    ]
   },
   "delivery": {
     "eyebrow": "Auxosure delivery",
     "headline": "First call to delivery in 3 weeks",
-    "description": "Same model every time: strategize, build, run. We build alongside your team so delivery lands in three weeks."
+    "description": "Same model every time: strategize, build, run. We build alongside your team so it fits how your shop already operates, and your people keep the exceptions that need a license.",
+    "close": "One pain at a time. First service live in 3 weeks.",
+    "cta": "Book a call",
+    "phases": [
+      {
+        "id": "strategize",
+        "phase": "01",
+        "week": "Week 1",
+        "title": "Strategize",
+        "body": "From the first call, we map how your shop actually runs and lock the first service worth automating.",
+        "points": [
+          "Kickoff and workflow audit",
+          "First service selected",
+          "Success metrics agreed up front"
+        ]
+      },
+      {
+        "id": "build",
+        "phase": "02",
+        "week": "Week 2",
+        "title": "Build",
+        "body": "Auxo learns your tone, forms, escalations, and carrier rules. We wire it into the stack you already run.",
+        "points": [
+          "Playbooks and documents ingested",
+          "Brand, tone, and handoff rules",
+          "Controlled-lane staging"
+        ]
+      },
+      {
+        "id": "run",
+        "phase": "03",
+        "week": "Week 3",
+        "title": "Run",
+        "body": "First service goes live. Your team owns day one. Licensed people keep the exceptions that need them.",
+        "points": [
+          "Go-live in production",
+          "Exception review with your team",
+          "Tune and plan the next lane"
+        ]
+      }
+    ]
   },
   "contact": {
     "eyebrow": "Auxosure",
-    "headline": "The agency workflow exists. Making it work inside your operation is the hard part.",
-    "cta": "Talk to the team"
+    "headline": "Tell us the first service you want live.",
+    "body": "Voice, intake, renewals, and routing only stick when they match your playbooks and systems. We co-build it. Your team runs it on day one.",
+    "cta": "Talk to the team",
+    "emailLabel": "Work email",
+    "emailPlaceholder": "you@agency.com",
+    "companyLabel": "Company",
+    "companyPlaceholder": "Agency, MGA, or servicing team",
+    "note": "We read every submission.",
+    "successTitle": "Thanks. We got it.",
+    "successBody": "Someone from Auxosure will reach out shortly."
   },
   "integrations": {
+    "headline": "Works with the systems you already run",
+    "lede": "AMS, PAS, CRM, and telephony. Your workflows stay the same. Status shows up here without exporting from three different systems.",
     "items": [
       "Applied Epic",
       "Vertafore",
@@ -46,6 +562,27 @@
     "footerText": "40+ live integrations across AMS, PAS, and telephony."
   },
   "footer": {
-    "copyright": "All rights reserved."
+    "copyright": "All rights reserved.",
+    "email": "ask@auxosure.com"
+  },
+  "modal": {
+    "title": "Book a call",
+    "bodyCall": "Tell us which service you want live first. We will come prepared with a three-week cut of that service.",
+    "bodyGeneral": "See Auxo on renewals, FNOL, certificates, and the ops your team still does by hand.",
+    "submit": "Book a call",
+    "successCallTitle": "Call booked",
+    "successGeneralTitle": "Request received",
+    "successCallBody": "We will follow up within one business day to schedule a call.",
+    "successGeneralBody": "We will reach out within one business day to schedule your call."
+  },
+  "roi": {
+    "overline": "Capacity",
+    "headline": "Estimate hours back to your bench",
+    "description": "Set monthly submissions and team size. See hours returned, capacity, and a conservative dollar range. Directional only. We validate against your files in week 1."
+  },
+  "voicePlayground": {
+    "overline": "Hear Auxo",
+    "headline": "Three services, one voice",
+    "description": "Renewal outreach, first notice, and quoting triage. Same tone rules. Same escalation path."
   }
 }

@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { SERVICES } from './ServicePortfolio';
+import copy from '../copy.json';
 
 const DemoModal = ({ isOpen, onClose, mode = 'demo', initialServiceId = '' }) => {
   const isCall = mode === 'call';
@@ -62,9 +63,9 @@ const DemoModal = ({ isOpen, onClose, mode = 'demo', initialServiceId = '' }) =>
         type="button"
         className="modal-minimized"
         onClick={() => setMinimized(false)}
-        aria-label="Restore Book a call dialog"
+        aria-label={`Restore ${copy.modal.title} dialog`}
       >
-        <span className="modal-minimized-label">Book a call</span>
+        <span className="modal-minimized-label">{copy.modal.title}</span>
         <span className="modal-minimized-action">Restore</span>
       </button>
     );
@@ -95,9 +96,6 @@ const DemoModal = ({ isOpen, onClose, mode = 'demo', initialServiceId = '' }) =>
     setForm((prev) => ({ ...prev, [name]: value }));
     if (errors[name]) setErrors((prev) => ({ ...prev, [name]: undefined }));
   };
-
-  const serviceName =
-    SERVICES.find((s) => s.id === form.service)?.name || 'your workflow';
 
   return (
     <div
@@ -131,24 +129,18 @@ const DemoModal = ({ isOpen, onClose, mode = 'demo', initialServiceId = '' }) =>
         {submitted ? (
           <div className="modal-success">
             <div className="modal-success-icon">✓</div>
-            <h2 id="demo-modal-title">{isCall ? 'Call booked' : 'Request received'}</h2>
-            <p>
-              {isCall
-                ? `Thanks, ${form.name.split(' ')[0]}. We will follow up within one business day to schedule a call on ${serviceName}.`
-                : `Thanks, ${form.name.split(' ')[0]}! We will reach out within one business day to schedule your call.`}
-            </p>
+            <h2 id="demo-modal-title">
+              {isCall ? copy.modal.successCallTitle : copy.modal.successGeneralTitle}
+            </h2>
+            <p>{isCall ? copy.modal.successCallBody : copy.modal.successGeneralBody}</p>
             <button className="btn btn-primary" onClick={onClose}>
               Done
             </button>
           </div>
         ) : (
           <>
-            <h2 id="demo-modal-title">Book a call</h2>
-            <p>
-              {isCall
-                ? 'Tell us which workflow you want live first. We will come prepared with a three-week cut of that service.'
-                : 'See Auxo on renewals, FNOL, and the ops work your team still does by hand.'}
-            </p>
+            <h2 id="demo-modal-title">{copy.modal.title}</h2>
+            <p>{isCall ? copy.modal.bodyCall : copy.modal.bodyGeneral}</p>
             <form onSubmit={handleSubmit} noValidate>
               <div className="form-group">
                 <label htmlFor="demo-name">Full name</label>
@@ -235,7 +227,7 @@ const DemoModal = ({ isOpen, onClose, mode = 'demo', initialServiceId = '' }) =>
                 </>
               )}
               <button type="submit" className="btn btn-primary" style={{ width: '100%', marginTop: 8 }}>
-                Book a call
+                {copy.modal.submit}
               </button>
             </form>
           </>

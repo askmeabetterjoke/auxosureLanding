@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import dayHero from '../assets/hero/day.jpeg';
 import nightHero from '../assets/hero/night.jpeg';
+import copy from '../copy.json';
 
 const DAY = {
   brianna: {
@@ -29,9 +30,9 @@ const NIGHT = {
     name: 'Auxo',
     role: 'AI COWorker',
     tasks: [
+      'Connecting with Brian on FNOL',
       'Prepare marketing campaign for new policy product',
       'Generate bordereau Report',
-      'Call Elena Rostova for updated jewelry appraisal schedule',
     ],
   },
 };
@@ -122,7 +123,7 @@ function WorkflowStack({ person, accent, activeIndex, variant = 'human' }) {
   );
 }
 
-const HeroSection = ({ onRequestDemo }) => {
+const HeroSection = () => {
   const [phase, setPhase] = useState('day');
   const pinRef = useRef(null);
 
@@ -186,18 +187,40 @@ const HeroSection = ({ onRequestDemo }) => {
 
         <div className="hero-layout">
           <div className="hero-copy">
-            <h1>Meet Auxo, your confident voice in insurance operations.</h1>
-            <p className="hero-sub">
-              Our AI-powered voice automation and work orchestration platform automates document
-              submissions, customer communications, portal filings, and analytics to compress
-              turnaround times from days to minutes.
-            </p>
+            <h1>
+              With{' '}
+              <span className="hero-brand" aria-label="Auxo">
+                <span className="hero-brand-a">A</span>
+                <span className="hero-brand-u">u</span>
+                <span className="hero-brand-x">X</span>
+                <span className="hero-brand-o">o</span>
+              </span>
+              , get the high in{' '}
+              <span className="hero-running" aria-hidden="false">
+                {'running'.split('').map((letter, i) => (
+                  <span
+                    key={`${letter}-${i}`}
+                    className="hero-running-letter"
+                    style={{ '--i': i }}
+                  >
+                    {letter}
+                  </span>
+                ))}
+              </span>{' '}
+              high agency operations.
+            </h1>
+            <p className="hero-sub">{copy.hero.subline}</p>
             <div className="hero-actions">
-              <button className="btn btn-primary" onClick={onRequestDemo}>
-                Book a call
-              </button>
-              <a className="btn btn-hero-ghost" href="#services">
-                See the service portfolio
+              <a
+                className="btn btn-primary"
+                href={copy.header.ctaHref}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                {copy.hero.primaryCta}
+              </a>
+              <a className="btn btn-hero-ghost" href={copy.hero.secondaryHref}>
+                {copy.hero.secondaryCta}
               </a>
             </div>
           </div>
