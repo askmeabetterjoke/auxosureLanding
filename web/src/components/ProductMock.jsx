@@ -117,6 +117,62 @@ export function CheckCircleIcon() {
   );
 }
 
+function CheckMarkIcon() {
+  return (
+    <svg width="17" height="17" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+      <path
+        d="M4.5 12.8l4.4 4.4 10.6-11"
+        stroke="#3D9B5F"
+        strokeWidth="1.7"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+  );
+}
+
+function ShieldCheckIcon() {
+  return (
+    <svg width="19" height="19" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+      <path
+        d="M12 3l7 3v5.5c0 4.2-2.9 7.6-7 9.5-4.1-1.9-7-5.3-7-9.5V6l7-3z"
+        stroke="#3E5C76"
+        strokeWidth="1.6"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      <path
+        d="M9.3 12l2 2 3.6-3.8"
+        stroke="#3E5C76"
+        strokeWidth="1.6"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+  );
+}
+
+function highlightPhrase(text, phrase) {
+  if (!text || !phrase || !text.includes(phrase)) {
+    return text;
+  }
+
+  const [before, after] = text.split(phrase);
+  return (
+    <>
+      {before}
+      <strong>{phrase}</strong>
+      {after}
+    </>
+  );
+}
+
+const RENEWAL_FLAG_ACCENT = {
+  'Producer review': 'coral',
+  'At risk': 'gold',
+  'Outreach queued': 'blue',
+};
+
 function MockSectionHead({ label, accent = false, trailing = null }) {
   return (
     <div className={`lane-mock-section-head${accent ? ' lane-mock-section-head--accent' : ''}`}>
@@ -124,6 +180,40 @@ function MockSectionHead({ label, accent = false, trailing = null }) {
       <span className="lane-mock-section-rule" aria-hidden="true" />
       {trailing ? <span className="lane-mock-section-trail">{trailing}</span> : null}
     </div>
+  );
+}
+
+export function LaneMetaStrip({ items = [], tones = ['blue', 'green', 'coral'] }) {
+  if (!items.length) {
+    return null;
+  }
+
+  return (
+    <div className="lane-mock-meta" aria-label="Workflow summary">
+      {items.map((item, index) => (
+        <div
+          key={item.label}
+          className={`lane-mock-meta-cell lane-mock-meta-cell--${tones[index] || 'blue'}${
+            index < items.length - 1 ? ' lane-mock-meta-cell--split' : ''
+          }`}
+        >
+          <span className="lane-mock-meta-label">{item.label}</span>
+          <span className="lane-mock-meta-value">{item.value}</span>
+        </div>
+      ))}
+    </div>
+  );
+}
+
+function CapabilityMockFrame({ variant, title, caption, children }) {
+  if (variant === 'capability') {
+    return children;
+  }
+
+  return (
+    <ProductMock title={title} caption={caption}>
+      {children}
+    </ProductMock>
   );
 }
 
@@ -157,6 +247,8 @@ export function SubmissionPackageMock({
   refId,
   readCount,
   status,
+  meta,
+  metaTones,
 }) {
   const viewportRef = useRef(null);
   const trackRef = useRef(null);
@@ -252,6 +344,7 @@ export function SubmissionPackageMock({
           </div>
         </div>
       </div>
+      <LaneMetaStrip items={meta} tones={metaTones} />
     </div>
   );
 }
@@ -263,7 +356,13 @@ const FNOL_WAVE_HEIGHTS = [
 
 const FNOL_WAVE_CORAL = new Set([2, 3, 4, 5, 6, 7, 8, 10, 11, 12, 14, 15, 16, 18, 19, 21, 23, 25, 27, 29]);
 
-export function FnolMock({ data = {}, title = 'FNOL intake' }) {
+export function FnolMock({
+  data = {},
+  title = 'FNOL intake',
+  variant,
+  meta,
+  metaTones,
+}) {
   const pills = data.pills || [];
   const fields = [
     { label: 'Account', value: data.account },
@@ -273,7 +372,7 @@ export function FnolMock({ data = {}, title = 'FNOL intake' }) {
   ].filter((field) => field.value);
 
   return (
-    <ProductMock title={title} caption="Retention">
+    <CapabilityMockFrame variant={variant} title={title} caption="Retention">
       <div className="lane-mock lane-mock--fnol">
         <div className="lane-mock-call">
           <div className="lane-mock-call-head">
@@ -342,90 +441,250 @@ export function FnolMock({ data = {}, title = 'FNOL intake' }) {
             {data.handoffTime ? <span className="lane-mock-handoff-time">{data.handoffTime}</span> : null}
           </div>
         ) : null}
+        <LaneMetaStrip items={meta} tones={metaTones} />
       </div>
-    </ProductMock>
+    </CapabilityMockFrame>
   );
 }
 
-export function CoiMock({ data = {}, title = 'Policy Checker' }) {
-  const steps = data.steps || [
-    'Read policy PDF',
-    'Extract endorsement',
-    'Check book SOP',
-    'Issue certificate',
-  ];
+export function CoiMock({
+  data = {},
+  title = 'Policy checker',
+  variant,
+  meta,
+  metaTones,
+}) {
+  const sopChecks = data.sopChecks || [];
+  const endorsementText = data.endorsementText || data.extracted || '';
 
   return (
-    <ProductMock title={title} caption="Ops">
-      <ol className="coi-flow" aria-label="Certificate worklane">
-        {steps.map((step, i) => (
-          <li key={step} className={i < steps.length - 1 ? 'coi-flow-step' : 'coi-flow-step coi-flow-step--done'}>
-            <span className="coi-flow-num">{String(i + 1).padStart(2, '0')}</span>
-            <span className="coi-flow-label">{step}</span>
-          </li>
-        ))}
-      </ol>
-      <dl className="pmock-dl pmock-dl--pad">
-        <div>
-          <dt>Account</dt>
-          <dd>{data.account}</dd>
+    <CapabilityMockFrame variant={variant} title={title} caption="Ops">
+      <div className="lane-mock lane-mock--policy-checker">
+        <div className="lane-mock-pc-head">
+          <span className="lane-mock-live-dot" aria-hidden="true" />
+          <span className="lane-mock-pc-status">{data.statusBar || 'Certificate issued'}</span>
+          {data.stepMeta ? <span className="lane-mock-pc-meta">{data.stepMeta}</span> : null}
         </div>
-        <div>
-          <dt>Request</dt>
-          <dd>{data.request}</dd>
-        </div>
-        <div>
-          <dt>Source PDF</dt>
-          <dd>{data.source || data.policy}</dd>
-        </div>
-        <div>
-          <dt>Extracted</dt>
-          <dd>{data.extracted || data.form}</dd>
-        </div>
-        <div>
-          <dt>SOP check</dt>
-          <dd>{data.sop || 'Book limits and holder wording'}</dd>
-        </div>
-        <div>
-          <dt>Certificate</dt>
-          <dd>{data.form || 'ACORD 25'}</dd>
-        </div>
-      </dl>
-      <p className="pmock-status">{data.status}</p>
-      {data.hold ? <p className="pmock-hold">{data.hold}</p> : null}
-    </ProductMock>
-  );
-}
 
-export function RenewalRadarMock({ data = {}, title = 'Renewal radar' }) {
-  const rows = data.rows || [];
+        <div className="lane-mock-pc-account">
+          <div className="lane-mock-pc-account-block">
+            <span className="lane-mock-pc-label">Account</span>
+            <span className="lane-mock-pc-value">{data.account}</span>
+          </div>
+          <span className="lane-mock-pc-divider" aria-hidden="true" />
+          <div className="lane-mock-pc-account-block">
+            <span className="lane-mock-pc-label">Request</span>
+            <span className="lane-mock-pc-value">{data.request}</span>
+          </div>
+        </div>
 
-  return (
-    <ProductMock title={title} caption={data.window || 'Retention'}>
-      <div className="radar-mock">
-        <p className="radar-status">{data.status}</p>
-        <ul className="radar-list">
-          {rows.map((row) => (
-            <li key={row.account} className="radar-row">
-              <div className="radar-row-main">
-                <span className="radar-account">{row.account}</span>
-                <span className="radar-line">{row.line}</span>
-              </div>
-              <div className="radar-row-meta">
-                <span className="radar-expires">{row.expires}</span>
-                <span
-                  className={`radar-flag ${
-                    row.flag === 'At risk' ? 'radar-flag--risk' : ''
-                  } ${row.flag === 'Producer review' ? 'radar-flag--review' : ''}`}
-                >
-                  {row.flag}
-                </span>
+        <div className="lane-mock-pc-scroll">
+          <div className="lane-mock-pc-rail" aria-hidden="true">
+            <span className="lane-mock-pc-rail-track" />
+            <span className="lane-mock-pc-rail-fill" />
+          </div>
+
+          <ol className="lane-mock-pc-steps" aria-label="Certificate workflow">
+            <li className="lane-mock-pc-step" style={{ animationDelay: '0.05s' }}>
+              <span className="lane-mock-pc-step-num lane-mock-pc-step-num--blue">01</span>
+              <div className="lane-mock-pc-step-body">
+                <span className="lane-mock-pc-step-title">Read the policy PDF</span>
+                <div className="lane-mock-pc-pdf">
+                  <span className="lane-mock-pc-pdf-scan" aria-hidden="true" />
+                  <span className="lane-mock-pc-pdf-type">PDF</span>
+                  <span className="lane-mock-pc-pdf-name">{data.source || data.policy}</span>
+                  {data.sourcePages ? (
+                    <span className="lane-mock-pc-pdf-pages">{data.sourcePages}</span>
+                  ) : null}
+                </div>
               </div>
             </li>
-          ))}
-        </ul>
+
+            <li className="lane-mock-pc-step" style={{ animationDelay: '0.16s' }}>
+              <span className="lane-mock-pc-step-num lane-mock-pc-step-num--blue">02</span>
+              <div className="lane-mock-pc-step-body">
+                <span className="lane-mock-pc-step-title">Extract the endorsement</span>
+                <div className="lane-mock-pc-extract">
+                  {data.endorsementPage ? (
+                    <span className="lane-mock-pc-extract-page">{data.endorsementPage}</span>
+                  ) : null}
+                  <p className="lane-mock-pc-extract-text">
+                    {highlightPhrase(endorsementText, data.endorsementHighlight)}
+                  </p>
+                </div>
+              </div>
+            </li>
+
+            <li className="lane-mock-pc-step" style={{ animationDelay: '0.27s' }}>
+              <span className="lane-mock-pc-step-num lane-mock-pc-step-num--green">03</span>
+              <div className="lane-mock-pc-step-body">
+                <span className="lane-mock-pc-step-title">Check the book&apos;s SOP</span>
+                <div className="lane-mock-pc-checks">
+                  {sopChecks.map((check) => (
+                    <div key={check} className="lane-mock-pc-check">
+                      <CheckMarkIcon />
+                      <span>{check}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </li>
+
+            <li className="lane-mock-pc-step" style={{ animationDelay: '0.38s' }}>
+              <span className="lane-mock-pc-step-num lane-mock-pc-step-num--coral">04</span>
+              <div className="lane-mock-pc-step-body">
+                <span className="lane-mock-pc-step-title">Issue the certificate</span>
+                <div className="lane-mock-pc-issue">
+                  <div className="lane-mock-pc-issue-head">
+                    {data.certificateId ? (
+                      <span className="lane-mock-pc-issue-id">{data.certificateId}</span>
+                    ) : null}
+                    {data.emailedAt ? (
+                      <span className="lane-mock-pc-issue-time">{data.emailedAt}</span>
+                    ) : null}
+                  </div>
+                  <p className="lane-mock-pc-issue-summary">
+                    {data.certificateSummary || data.status}
+                  </p>
+                </div>
+              </div>
+            </li>
+          </ol>
+
+          {data.auditNote ? (
+            <div className="lane-mock-pc-audit">
+              <ShieldCheckIcon />
+              <p>{data.auditNote}</p>
+            </div>
+          ) : null}
+        </div>
+        <LaneMetaStrip items={meta} tones={metaTones} />
       </div>
-    </ProductMock>
+    </CapabilityMockFrame>
+  );
+}
+
+export function RenewalRadarMock({
+  data = {},
+  title = 'Renewal radar',
+  variant,
+  meta,
+  metaTones,
+}) {
+  const rows = data.rows || [];
+  const markers = data.markers || [];
+  const pills = data.pills || [];
+
+  return (
+    <CapabilityMockFrame variant={variant} title={title} caption={data.window || 'Retention'}>
+      <div className="lane-mock lane-mock--renewal-radar">
+        <div className="lane-mock-rr-head">
+          <div className="lane-mock-rr-head-bar">
+            <span className="lane-mock-live-dot" aria-hidden="true" />
+            <span className="lane-mock-rr-window">{data.window || '90-day book window'}</span>
+            {data.sweptAt ? <span className="lane-mock-rr-swept">{data.sweptAt}</span> : null}
+          </div>
+
+          <div className="lane-mock-rr-timeline" aria-hidden="true">
+            <span className="lane-mock-rr-track" />
+            <span className="lane-mock-rr-tick" style={{ left: '0%' }} />
+            <span className="lane-mock-rr-tick" style={{ left: '33.3%' }} />
+            <span className="lane-mock-rr-tick" style={{ left: '66.6%' }} />
+            <span className="lane-mock-rr-tick lane-mock-rr-tick--expiry" style={{ left: '100%' }} />
+
+            {markers.map((marker) => (
+              <div
+                key={marker.label}
+                className={`lane-mock-rr-marker lane-mock-rr-marker--${marker.tone || 'blue'}`}
+                style={{ left: `${marker.position}%` }}
+              >
+                <span className="lane-mock-rr-marker-label">{marker.label}</span>
+                <span className="lane-mock-rr-marker-stem" />
+                <span
+                  className={`lane-mock-rr-marker-dot${
+                    marker.pulse ? ' lane-mock-rr-marker-dot--pulse' : ''
+                  }`}
+                />
+              </div>
+            ))}
+          </div>
+
+          <div className="lane-mock-rr-scale">
+            <span>90 days out</span>
+            <span>60</span>
+            <span>30</span>
+            <span className="lane-mock-rr-scale-expiry">Expiry</span>
+          </div>
+
+          {pills.length > 0 ? (
+            <div className="lane-mock-rr-pills">
+              {pills.map((pill) => (
+                <span
+                  key={pill.label}
+                  className={`lane-mock-rr-pill lane-mock-rr-pill--${pill.tone || 'neutral'}`}
+                >
+                  {pill.label}
+                </span>
+              ))}
+            </div>
+          ) : null}
+        </div>
+
+        <div className="lane-mock-rr-scroll">
+          <MockSectionHead label="Worked by Auxo overnight" />
+
+          <ul className="lane-mock-rr-list">
+            {rows.map((row, index) => {
+              const accent = row.accent || RENEWAL_FLAG_ACCENT[row.flag] || 'blue';
+              return (
+                <li
+                  key={row.account}
+                  className={`lane-mock-rr-row lane-mock-rr-row--${accent}`}
+                  style={{ animationDelay: `${0.05 + index * 0.09}s` }}
+                >
+                  <div className="lane-mock-rr-row-head">
+                    <span className="lane-mock-rr-account">{row.account}</span>
+                    <span className="lane-mock-rr-line">{row.line}</span>
+                    <span className="lane-mock-rr-expires">{row.expires}</span>
+                  </div>
+                  {row.progress ? (
+                    <div className="lane-mock-rr-progress" aria-hidden="true">
+                      <span
+                        className={`lane-mock-rr-progress-fill lane-mock-rr-progress-fill--${accent}`}
+                        style={{ width: `${row.progress}%`, animationDelay: `${index * 0.1}s` }}
+                      />
+                    </div>
+                  ) : null}
+                  <div className="lane-mock-rr-row-foot">
+                    <span className={`lane-mock-rr-flag lane-mock-rr-flag--${accent}`}>
+                      {row.flag}
+                    </span>
+                    {row.note ? <span className="lane-mock-rr-note">{row.note}</span> : null}
+                  </div>
+                </li>
+              );
+            })}
+          </ul>
+
+          {data.queueNote ? (
+            <div className="lane-mock-rr-queue">
+              <CheckMarkIcon />
+              <p>
+                {data.queueNoteStrong ? (
+                  <>
+                    <strong>{data.queueNoteStrong}</strong>
+                    {data.queueNoteRest ? ` — ${data.queueNoteRest}` : null}
+                  </>
+                ) : (
+                  data.queueNote
+                )}
+              </p>
+            </div>
+          ) : null}
+        </div>
+        <LaneMetaStrip items={meta} tones={metaTones} />
+      </div>
+    </CapabilityMockFrame>
   );
 }
 
@@ -449,11 +708,17 @@ export function ModuleIndexMock({ data = {}, title = 'Module index' }) {
   );
 }
 
-export function IntakeQuoteMock({ data = {}, title = 'Submission package' }) {
+export function IntakeQuoteMock({
+  data = {},
+  title = 'Submission package',
+  variant,
+  meta,
+  metaTones,
+}) {
   return (
-    <ProductMock title={title} caption="Sales">
-      <SubmissionPackageMock {...data} />
-    </ProductMock>
+    <CapabilityMockFrame variant={variant} title={title} caption="Sales">
+      <SubmissionPackageMock {...data} meta={meta} metaTones={metaTones} />
+    </CapabilityMockFrame>
   );
 }
 

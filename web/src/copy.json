@@ -17,7 +17,7 @@
     ]
   },
   "hero": {
-    "tagline": "AI workforce for Insurance Agency Ops.",
+    "tagline": "AI workforce for Insurance Agency Ops",
     "subline": "Auxosure is your AI native revenue growth engine and productivity stack for running your agency and grow your book of business.",
     "primaryCta": "Book a call",
     "secondaryCta": "See the portfolio",
@@ -94,22 +94,25 @@
           { "label": "Check", "value": "Book SOP" },
           { "label": "Issue", "value": "Certificate" }
         ],
-        "mockTitle": "Policy Checker",
+        "mockTitle": "Policy checker",
         "mock": {
           "account": "Apex Logistics",
           "request": "Additional insured, job site 14",
           "source": "Commercial package.pdf",
-          "extracted": "Blanket AI form, p. 47",
-          "sop": "Apex GL floor and holder wording",
-          "form": "ACORD 25",
-          "status": "Certificate issued, emailed to GC, filed to the AMS",
-          "hold": "Endorsement wording, ask producer",
-          "steps": [
-            "Read policy PDF",
-            "Extract endorsement",
-            "Check book SOP",
-            "Issue certificate"
-          ]
+          "sourcePages": "312 PP",
+          "endorsementPage": "Found · page 47",
+          "endorsementText": "Blanket additional insured form — CG 20 33, where required by written contract.",
+          "endorsementHighlight": "CG 20 33",
+          "sopChecks": [
+            "Apex GL floor met — $2M / $4M",
+            "Holder wording matches the book standard"
+          ],
+          "certificateId": "COI-14882",
+          "emailedAt": "Emailed 11:06 AM",
+          "certificateSummary": "Meridian Construction added as additional insured, job site 14.",
+          "auditNote": "Every value traced to page 47 of the bound policy — nothing typed from memory.",
+          "statusBar": "Certificate issued",
+          "stepMeta": "4 steps · 6 min"
         }
       },
       {
@@ -126,25 +129,46 @@
         "mockTitle": "Renewal radar",
         "mock": {
           "window": "90-day book window",
-          "status": "12 due · 3 at risk · 2 waiting on insured",
+          "sweptAt": "Swept 6:00 AM",
+          "pills": [
+            { "label": "12 due", "tone": "neutral" },
+            { "label": "3 at risk", "tone": "coral" },
+            { "label": "2 waiting on insured", "tone": "gold" }
+          ],
+          "markers": [
+            { "label": "Harbor · 61d", "position": 32.2, "tone": "blue" },
+            { "label": "Apex · 42d", "position": 53.3, "tone": "gold" },
+            { "label": "Northline · 18d", "position": 80, "tone": "coral", "pulse": true }
+          ],
+          "queueNoteStrong": "9 of 12 already handled",
+          "queueNoteRest": "packets built, carriers asked, insureds nudged. Three need a producer.",
           "rows": [
+            {
+              "account": "Northline Retail",
+              "expires": "18 days",
+              "line": "BOP",
+              "flag": "Producer review",
+              "note": "Packet built, 4 markets quoted — needs a licensed call.",
+              "progress": 80,
+              "accent": "coral"
+            },
             {
               "account": "Apex Logistics",
               "expires": "42 days",
               "line": "GL · Cargo",
-              "flag": "At risk"
+              "flag": "At risk",
+              "note": "Loss ratio up; third reminder sent for updated SOV.",
+              "progress": 53,
+              "accent": "gold"
             },
             {
               "account": "Harbor Logistics",
               "expires": "61 days",
               "line": "Property",
-              "flag": "Outreach queued"
-            },
-            {
-              "account": "Northline Retail",
-              "expires": "18 days",
-              "line": "BOP",
-              "flag": "Producer review"
+              "flag": "Outreach queued",
+              "note": "Review email scheduled for Monday, 8:00 AM.",
+              "progress": 32,
+              "accent": "blue"
             }
           ]
         }
@@ -631,5 +655,106 @@
     ],
     "notes": ["Where is this info?", "Who's working on this?"],
     "annotations": ["Different systems", "Manual work", "Things slip", "No visibility"]
+  },
+  "futureHub": {
+    "overline": "The Auxo shift",
+    "headline": "Same team. A much bigger book.",
+    "lede": "Auxo runs the work that moves between your people, systems, and carriers, so your licensed team spends the day on decisions, not data entry.",
+    "futureLabel": "The future",
+    "licensedTeam": {
+      "kicker": "Your licensed team",
+      "line": "Focus on people. Close more."
+    },
+    "channels": [
+      { "type": "phone", "stroke": "#5FA87A" },
+      { "type": "email", "stroke": "#7BA3C4" },
+      { "type": "document", "stroke": "#E4795B" }
+    ],
+    "nodes": [
+      {
+        "title": "Carriers",
+        "body": "Files in the portal, chases the underwriter, keeps every market in sync.",
+        "icon": "carriers",
+        "stroke": "#9BB6CD",
+        "borderColor": "rgba(155, 182, 205, 0.45)",
+        "iconLeft": 1024,
+        "iconTop": 508.4,
+        "textLeft": 1160,
+        "textTop": 494,
+        "textWidth": 340,
+        "align": "left",
+        "delay": "0.1s"
+      },
+      {
+        "title": "Underwriting",
+        "body": "Collects docs, answers subjectivities, keeps submissions moving.",
+        "icon": "underwriting",
+        "stroke": "#7BA3C4",
+        "borderColor": "rgba(123, 163, 196, 0.55)",
+        "iconLeft": 1082,
+        "iconTop": 692,
+        "textLeft": 1180,
+        "textTop": 678,
+        "textWidth": 340,
+        "align": "left",
+        "delay": "0.22s"
+      },
+      {
+        "title": "Claims / FNOL",
+        "body": "Takes first notice on the call, logs it, keeps the insured updated.",
+        "icon": "claims",
+        "stroke": "#E4795B",
+        "borderColor": "rgba(228, 121, 91, 0.55)",
+        "iconLeft": 1024,
+        "iconTop": 875.6,
+        "textLeft": 1160,
+        "textTop": 862,
+        "textWidth": 340,
+        "align": "left",
+        "delay": "0.34s"
+      },
+      {
+        "title": "Accounting",
+        "body": "Reconciles statements, postings, commissions and payables.",
+        "icon": "accounting",
+        "stroke": "#9BB6CD",
+        "borderColor": "rgba(155, 182, 205, 0.45)",
+        "iconLeft": 500,
+        "iconTop": 508.4,
+        "textLeft": 100,
+        "textTop": 494,
+        "textWidth": 340,
+        "align": "right",
+        "delay": "0.13s"
+      },
+      {
+        "title": "Renewals",
+        "body": "Works the 120-day clock and builds the renewal packet early.",
+        "icon": "renewals",
+        "stroke": "#5FA87A",
+        "borderColor": "rgba(95, 168, 122, 0.50)",
+        "iconLeft": 442,
+        "iconTop": 692,
+        "textLeft": 80,
+        "textTop": 678,
+        "textWidth": 340,
+        "align": "right",
+        "delay": "0.25s"
+      },
+      {
+        "title": "Certificates",
+        "body": "Issues and updates COIs off the policy of record, in minutes.",
+        "icon": "certificates",
+        "stroke": "#7BA3C4",
+        "borderColor": "rgba(123, 163, 196, 0.55)",
+        "iconLeft": 500,
+        "iconTop": 875.6,
+        "textLeft": 100,
+        "textTop": 862,
+        "textWidth": 340,
+        "align": "right",
+        "delay": "0.37s"
+      }
+    ]
   }
 }

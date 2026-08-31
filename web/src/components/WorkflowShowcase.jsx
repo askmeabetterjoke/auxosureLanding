@@ -9,34 +9,38 @@ const MOCKS = {
   'intake-quote': IntakeQuoteMock,
 };
 
+const META_TONES = {
+  fnol: ['blue', 'green', 'coral'],
+  coi: ['blue', 'green', 'coral'],
+  'renewal-radar': ['blue', 'gold', 'coral'],
+  'intake-quote': ['blue', 'gold', 'coral'],
+};
+
 function WorkCard({ card, inert = false }) {
   const Mock = MOCKS[card.id];
-  const meta = card.meta || [];
 
   return (
-    <article className="work-card work-card--swipe" aria-hidden={inert || undefined}>
-      <div className="work-card-mock work-card-mock--tall">
-        <Mock data={card.mock} title={card.mockTitle} />
-      </div>
-      <div className="work-card-foot">
-        <div className="work-card-copy">
-          <p className="work-card-label">{card.label}</p>
+    <article className="work-card work-card--swipe work-card--capability" aria-hidden={inert || undefined}>
+      <div className="work-card-shell">
+        <header className="work-card-intro">
+          <div className="work-card-kicker">
+            <span className="work-card-label">{card.label}</span>
+            <span className="work-card-kicker-rule" aria-hidden="true" />
+            <span className="work-card-kicker-trail">{card.mockTitle}</span>
+          </div>
           <h3 className="work-card-headline">{card.title}</h3>
           <p className="work-card-body">{card.line}</p>
+        </header>
+
+        <div className="work-card-panel">
+          <Mock
+            data={card.mock}
+            title={card.mockTitle}
+            meta={card.meta}
+            metaTones={META_TONES[card.id]}
+            variant="capability"
+          />
         </div>
-        {meta.length > 0 ? (
-          <div className="work-card-meta" aria-label={`${card.title} workflow`}>
-            {meta.map((item, index) => (
-              <div key={item.label} className="work-card-meta-item">
-                <span className="work-card-meta-label">{item.label}</span>
-                <span className="work-card-meta-value">{item.value}</span>
-                {index < meta.length - 1 ? (
-                  <span className="work-card-meta-rule" aria-hidden="true" />
-                ) : null}
-              </div>
-            ))}
-          </div>
-        ) : null}
       </div>
     </article>
   );
