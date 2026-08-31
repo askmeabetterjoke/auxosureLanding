@@ -17,7 +17,7 @@
     ]
   },
   "hero": {
-    "tagline": "AI workforce for Insurance Agency Ops",
+    "taglineRest": "high agency ambitions",
     "subline": "Auxosure is your AI native revenue growth engine and productivity stack for running your agency and grow your book of business.",
     "primaryCta": "Book a call",
     "secondaryCta": "See the portfolio",
@@ -371,7 +371,7 @@
     "footer": {
       "updated": "Updated 40 seconds ago",
       "cta": "See it in action →",
-      "ctaHref": "#work"
+      "ctaHref": "https://calendly.com/ask-auxosure/30min"
     },
     "mock": {
       "title": "Agency pulse",

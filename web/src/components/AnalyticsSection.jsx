@@ -197,7 +197,12 @@ const AnalyticsSection = () => {
           <div className="analytics-footer">
             <span className="analytics-live-dot" aria-hidden="true" />
             <span className="analytics-updated">{footer.updated}</span>
-            <a className="analytics-footer-cta" href={footer.ctaHref}>
+            <a
+              className="analytics-footer-cta"
+              href={footer.ctaHref}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
               {footer.cta}
             </a>
           </div>

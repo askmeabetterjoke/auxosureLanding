@@ -1,5 +1,5 @@
 import React from 'react';
-import { CORAL, SkidMarks, XGlyph } from './logoMarks';
+import { LOGO_ACCENT, SkidMarks, XGlyph } from './logoMarks';
 
 const AnimatedLogo = ({ size = 'medium', darkTheme = true, compact = false, onClick }) => {
   const getScaleFactor = () => {
@@ -50,7 +50,13 @@ const AnimatedLogo = ({ size = 'medium', darkTheme = true, compact = false, onCl
 
   const scale = getScaleFactor();
   const textColor = darkTheme ? '#FAF7F2' : '#262A44';
+  const accentColor = LOGO_ACCENT;
   const themeClass = darkTheme ? 'animated-logo--dark' : 'animated-logo--light';
+  const letterStyle = {
+    fontSize: scale.fontSize,
+    fontWeight: 700,
+    letterSpacing: '-0.02em',
+  };
 
   return (
     <div
@@ -69,10 +75,8 @@ const AnimatedLogo = ({ size = 'medium', darkTheme = true, compact = false, onCl
     >
       {compact ? (
         <>
-          <div style={{ display: 'flex', alignItems: 'baseline' }}>
-            <span style={{ fontSize: scale.fontSize, fontWeight: 700, color: CORAL, letterSpacing: '-0.02em' }}>
-              a
-            </span>
+          <div style={{ display: 'flex', alignItems: 'baseline', color: accentColor }}>
+            <span style={letterStyle}>a</span>
             <XGlyph width={scale.svgXWidth} height={scale.svgXHeight} subtle />
           </div>
           <SkidMarks width={scale.svgSkidWidth} height={scale.svgSkidHeight} />
@@ -80,16 +84,10 @@ const AnimatedLogo = ({ size = 'medium', darkTheme = true, compact = false, onCl
       ) : (
         <>
           <div style={{ display: 'flex', alignItems: 'baseline' }}>
-            <span style={{ fontSize: scale.fontSize, fontWeight: 700, color: CORAL, letterSpacing: '-0.02em' }}>
-              a
-            </span>
-            <span style={{ fontSize: scale.fontSize, fontWeight: 700, color: textColor, letterSpacing: '-0.02em' }}>
-              u
-            </span>
-            <XGlyph width={scale.svgXWidth} height={scale.svgXHeight} />
-            <span style={{ fontSize: scale.fontSize, fontWeight: 700, color: textColor, letterSpacing: '-0.02em' }}>
-              osure
-            </span>
+            <span style={{ ...letterStyle, color: accentColor }}>a</span>
+            <span style={{ ...letterStyle, color: accentColor }}>u</span>
+            <XGlyph width={scale.svgXWidth} height={scale.svgXHeight} style={{ color: accentColor }} />
+            <span style={{ ...letterStyle, color: textColor }}>osure</span>
           </div>
           <SkidMarks width={scale.svgSkidWidth} height={scale.svgSkidHeight} />
         </>

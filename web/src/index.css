@@ -414,15 +414,15 @@ section[id] {
   --skid-3: #E4795B;
 }
 
-/* Recolour skid marks per lockup — component ships all coral strokes */
+/* Recolour skid marks per lockup */
 svg[viewBox='0 0 52 40'] line:nth-of-type(1) {
-  stroke: var(--skid-1, #E4795B);
+  stroke: var(--skid-1, currentColor);
 }
 svg[viewBox='0 0 52 40'] line:nth-of-type(2) {
-  stroke: var(--skid-2, #E4795B);
+  stroke: var(--skid-2, currentColor);
 }
 svg[viewBox='0 0 52 40'] line:nth-of-type(3) {
-  stroke: var(--skid-3, #E4795B);
+  stroke: var(--skid-3, currentColor);
 }
 
 .logo-x-glyph {
@@ -589,10 +589,142 @@ svg[viewBox='0 0 52 40'] line:nth-of-type(3) {
   letter-spacing: -0.03em;
   color: #ffffff;
   margin: 0 0 clamp(16px, 2vw, 22px);
-  max-width: 16ch;
+  max-width: min(560px, 100%);
+  overflow: visible;
   text-shadow:
     0 1px 2px rgba(0, 0, 0, 0.45),
     0 6px 20px rgba(0, 0, 0, 0.35);
+}
+
+.hero-unlock-word {
+  position: relative;
+  display: inline-block;
+  color: var(--accent);
+  cursor: default;
+  outline: none;
+  vertical-align: baseline;
+  overflow: visible;
+  padding: 0.04em 0 0.16em;
+}
+
+.hero-unlock-word-text {
+  display: inline-block;
+  transition: opacity 0.18s ease, transform 0.18s ease;
+}
+
+.hero-unlock-word-lock {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 1.18em;
+  height: 1.18em;
+  color: var(--accent);
+  opacity: 0;
+  pointer-events: none;
+  transform: translate(-50%, -50%) scale(0.55);
+  transform-origin: center;
+  filter: drop-shadow(0 2px 8px rgba(228, 121, 91, 0.45));
+  overflow: visible;
+}
+
+.hero-unlock-key {
+  transform-origin: 28px 37px;
+  opacity: 0;
+}
+
+.hero-unlock-shackle {
+  transform-origin: 20px 28px;
+}
+
+.hero-unlock-word:hover .hero-unlock-word-text,
+.hero-unlock-word:focus-visible .hero-unlock-word-text {
+  opacity: 0;
+  transform: scale(0.88);
+}
+
+.hero-unlock-word:hover .hero-unlock-word-lock,
+.hero-unlock-word:focus-visible .hero-unlock-word-lock {
+  animation: hero-lock-reveal 0.95s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.hero-unlock-word:hover .hero-unlock-key,
+.hero-unlock-word:focus-visible .hero-unlock-key {
+  animation: hero-key-unlock 0.95s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.hero-unlock-word:hover .hero-unlock-shackle,
+.hero-unlock-word:focus-visible .hero-unlock-shackle {
+  animation: hero-shackle-open 0.42s cubic-bezier(0.16, 1, 0.3, 1) 0.52s forwards;
+}
+
+@keyframes hero-lock-reveal {
+  0% {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(0.55);
+  }
+  18% {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1.08);
+  }
+  100% {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+  }
+}
+
+@keyframes hero-key-unlock {
+  0% {
+    opacity: 0;
+    transform: translate(10px, -6px) rotate(-40deg);
+  }
+  22% {
+    opacity: 1;
+    transform: translate(0, 0) rotate(0deg);
+  }
+  55% {
+    transform: translate(0, 0) rotate(0deg);
+  }
+  100% {
+    opacity: 1;
+    transform: translate(0, 0) rotate(-95deg);
+  }
+}
+
+@keyframes hero-shackle-open {
+  0% {
+    transform: translateY(0) rotate(0deg);
+  }
+  100% {
+    transform: translateY(-7px) rotate(-14deg);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-unlock-word:hover .hero-unlock-word-text,
+  .hero-unlock-word:focus-visible .hero-unlock-word-text {
+    opacity: 0;
+    transform: none;
+  }
+
+  .hero-unlock-word:hover .hero-unlock-word-lock,
+  .hero-unlock-word:focus-visible .hero-unlock-word-lock {
+    animation: none;
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+  }
+
+  .hero-unlock-word:hover .hero-unlock-key,
+  .hero-unlock-word:focus-visible .hero-unlock-key {
+    animation: none;
+    opacity: 1;
+    transform: rotate(-95deg);
+  }
+
+  .hero-unlock-word:hover .hero-unlock-shackle,
+  .hero-unlock-word:focus-visible .hero-unlock-shackle {
+    animation: none;
+    transform: translateY(-7px) rotate(-14deg);
+  }
 }
 
 .hero-subline {
@@ -613,14 +745,14 @@ svg[viewBox='0 0 52 40'] line:nth-of-type(3) {
   letter-spacing: -0.03em;
 }
 
-.hero-brand-a {
+.hero-brand-a,
+.hero-brand-u {
   color: var(--accent);
   text-shadow:
     0 1px 2px rgba(0, 0, 0, 0.45),
     0 6px 18px rgba(228, 121, 91, 0.45);
 }
 
-.hero-brand-u,
 .hero-brand-o {
   color: #FFFFFF;
 }
@@ -635,6 +767,7 @@ svg[viewBox='0 0 52 40'] line:nth-of-type(3) {
   margin: 0 -0.04em 0 0.02em;
   vertical-align: baseline;
   transform-origin: 50% 92%;
+  color: var(--accent);
   filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.45))
     drop-shadow(0 6px 18px rgba(228, 121, 91, 0.45));
 }
@@ -681,7 +814,10 @@ svg[viewBox='0 0 52 40'] line:nth-of-type(3) {
 
 @media (prefers-reduced-motion: reduce) {
   .hero-brand-x-glyph,
-  .hero-running-letter {
+  .hero-running-letter,
+  .hero-unlock-word-lock,
+  .hero-unlock-key,
+  .hero-unlock-shackle {
     animation: none !important;
   }
 }
@@ -802,10 +938,10 @@ svg[viewBox='0 0 52 40'] line:nth-of-type(3) {
 .workflow-stack--auxo .workflow-stack-avatar {
   --skid-1: rgba(250, 247, 242, 0.42);
   --skid-2: #DCDCDE;
-  --skid-3: #E4795B;
+  --skid-3: #FAF7F2;
   border-radius: 8px;
-  background: rgba(255, 107, 87, 0.2);
-  color: #E4795B;
+  background: rgba(250, 247, 242, 0.12);
+  color: #FAF7F2;
   position: relative;
 }
 
@@ -814,7 +950,7 @@ svg[viewBox='0 0 52 40'] line:nth-of-type(3) {
   position: absolute;
   inset: -3px;
   border-radius: 10px;
-  border: 1.5px solid var(--accent);
+  border: 1.5px solid rgba(250, 247, 242, 0.55);
   opacity: 0;
   animation: auxo-avatar-pulse 2s ease-out infinite;
 }
@@ -6788,6 +6924,42 @@ svg[viewBox='0 0 52 40'] line:nth-of-type(3) {
   min-height: 0;
 }
 
+.work-card--capability .lane-mock--renewal-radar {
+  overflow: visible;
+}
+
+.work-card--capability .lane-mock-rr-timeline {
+  margin-top: 56px;
+}
+
+.work-card--capability .lane-mock-rr-marker-label {
+  top: -44px;
+  font-size: 7px;
+  padding: 3px 7px;
+}
+
+.work-card--capability .lane-mock-rr-marker-label--gold {
+  top: -70px;
+}
+
+.work-card--capability .lane-mock-rr-marker-stem--blue,
+.work-card--capability .lane-mock-rr-marker-stem--coral {
+  top: -18px;
+  height: 16px;
+}
+
+.work-card--capability .lane-mock-rr-marker-stem--gold {
+  top: -46px;
+  height: 44px;
+}
+
+.work-card--capability .lane-mock-rr-marker-dot {
+  width: 12px;
+  height: 12px;
+  margin-left: -6px;
+  border-width: 2px;
+}
+
 .lane-mock-bar,
 .lane-mock-call-head {
   display: flex;
@@ -7203,6 +7375,7 @@ svg[viewBox='0 0 52 40'] line:nth-of-type(3) {
 .lane-mock--policy-checker,
 .lane-mock--renewal-radar {
   font-size: 13px;
+  overflow: visible;
 }
 
 .lane-mock-pc-head,
@@ -7551,24 +7724,43 @@ svg[viewBox='0 0 52 40'] line:nth-of-type(3) {
 
 .lane-mock-rr-head {
   padding: 12px 14px 14px;
+  overflow: visible;
 }
 
 .lane-mock-rr-head-bar {
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 10px;
+}
+
+.lane-mock-rr-window {
+  flex: 1;
+  min-width: 0;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--paper);
+}
+
+.lane-mock-rr-swept {
+  flex: none;
+  margin-left: auto;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  color: rgba(250, 247, 242, 0.55);
+  white-space: nowrap;
 }
 
 .lane-mock-rr-timeline {
   position: relative;
-  margin-top: 28px;
-  height: 8px;
-}
-
-.lane-mock-rr-track {
-  display: block;
+  margin-top: 52px;
   height: 8px;
   border-radius: 4px;
+  overflow: visible;
   background: linear-gradient(
     90deg,
     rgba(123, 163, 196, 0.45) 0%,
@@ -7579,9 +7771,9 @@ svg[viewBox='0 0 52 40'] line:nth-of-type(3) {
 
 .lane-mock-rr-tick {
   position: absolute;
-  top: -18px;
+  top: -30px;
   width: 2px;
-  height: 14px;
+  height: 22px;
   margin-left: -1px;
   background: rgba(250, 247, 242, 0.2);
 }
@@ -7590,18 +7782,11 @@ svg[viewBox='0 0 52 40'] line:nth-of-type(3) {
   background: rgba(228, 121, 91, 0.75);
 }
 
-.lane-mock-rr-marker {
-  position: absolute;
-  top: 0;
-  transform: translateX(-50%);
-}
-
 .lane-mock-rr-marker-label {
   position: absolute;
-  bottom: 28px;
-  left: 50%;
+  top: -56px;
   transform: translateX(-50%);
-  padding: 4px 8px;
+  padding: 5px 10px;
   border-radius: 999px;
   font-family: var(--font-mono);
   font-size: 8px;
@@ -7609,21 +7794,25 @@ svg[viewBox='0 0 52 40'] line:nth-of-type(3) {
   letter-spacing: 0.08em;
   text-transform: uppercase;
   white-space: nowrap;
+  line-height: 1;
+  pointer-events: none;
 }
 
-.lane-mock-rr-marker--blue .lane-mock-rr-marker-label {
+.lane-mock-rr-marker-label--blue {
   background: rgba(123, 163, 196, 0.22);
   border: 1px solid rgba(123, 163, 196, 0.6);
   color: #dce7f0;
 }
 
-.lane-mock-rr-marker--gold .lane-mock-rr-marker-label {
+.lane-mock-rr-marker-label--gold {
+  top: -92px;
   background: rgba(232, 195, 106, 0.2);
   border: 1px solid rgba(232, 195, 106, 0.6);
   color: #f3e3bc;
 }
 
-.lane-mock-rr-marker--coral .lane-mock-rr-marker-label {
+.lane-mock-rr-marker-label--coral {
+  transform: translateX(-62%);
   background: rgba(228, 121, 91, 0.24);
   border: 1px solid rgba(228, 121, 91, 0.7);
   color: var(--paper);
@@ -7631,31 +7820,30 @@ svg[viewBox='0 0 52 40'] line:nth-of-type(3) {
 
 .lane-mock-rr-marker-stem {
   position: absolute;
-  bottom: 8px;
-  left: 50%;
+  top: -24px;
   width: 1px;
+  height: 24px;
   margin-left: -0.5px;
+  pointer-events: none;
+}
+
+.lane-mock-rr-marker-stem--blue {
   background: rgba(123, 163, 196, 0.55);
 }
 
-.lane-mock-rr-marker--blue .lane-mock-rr-marker-stem {
-  height: 16px;
-}
-
-.lane-mock-rr-marker--gold .lane-mock-rr-marker-stem {
-  height: 36px;
+.lane-mock-rr-marker-stem--gold {
+  top: -60px;
+  height: 60px;
   background: rgba(232, 195, 106, 0.55);
 }
 
-.lane-mock-rr-marker--coral .lane-mock-rr-marker-stem {
-  height: 16px;
+.lane-mock-rr-marker-stem--coral {
   background: rgba(228, 121, 91, 0.65);
 }
 
 .lane-mock-rr-marker-dot {
   position: absolute;
-  bottom: -2px;
-  left: 50%;
+  top: -4px;
   width: 14px;
   height: 14px;
   margin-left: -7px;
@@ -7663,13 +7851,14 @@ svg[viewBox='0 0 52 40'] line:nth-of-type(3) {
   border-radius: 50%;
   background: var(--ink);
   border: 3px solid #7ba3c4;
+  pointer-events: none;
 }
 
-.lane-mock-rr-marker--gold .lane-mock-rr-marker-dot {
+.lane-mock-rr-marker-dot--gold {
   border-color: #e8c36a;
 }
 
-.lane-mock-rr-marker--coral .lane-mock-rr-marker-dot {
+.lane-mock-rr-marker-dot--coral {
   background: var(--accent);
   border-color: var(--accent);
 }
@@ -8110,7 +8299,10 @@ svg[viewBox='0 0 52 40'] line:nth-of-type(3) {
   width: 34px;
   height: 34px;
   border-radius: 11px;
-  background: rgba(228, 121, 91, 0.14);
+  background: rgba(38, 42, 68, 0.08);
+  --skid-1: rgba(38, 42, 68, 0.30);
+  --skid-2: rgba(38, 42, 68, 0.58);
+  --skid-3: rgba(38, 42, 68, 0.82);
   overflow: hidden;
 }
 

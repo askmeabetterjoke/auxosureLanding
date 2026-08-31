@@ -44,7 +44,6 @@ function MarqueeRow({ items, direction = 'left' }) {
 
 const IntegrationMarquee = ({ embedded = false }) => {
   const withLogos = integrations.filter((item) => item.logo);
-  const reverseLogos = [...withLogos].reverse();
 
   const footnote = (
     <p className="integrations-footnote">{copy.integrations.footerText}</p>
@@ -68,7 +67,6 @@ const IntegrationMarquee = ({ embedded = false }) => {
       </div>
       <div className="integrations-marquee" aria-label="Integration partners">
         <MarqueeRow items={withLogos} direction="left" />
-        <MarqueeRow items={reverseLogos} direction="right" />
       </div>
       {footnote}
     </section>

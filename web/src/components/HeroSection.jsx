@@ -123,6 +123,51 @@ function WorkflowStack({ person, accent, activeIndex, variant = 'human' }) {
   );
 }
 
+function HeroUnlockWord() {
+  return (
+    <span className="hero-unlock-word" tabIndex={0}>
+      <span className="hero-unlock-word-text">Unlock</span>
+      <svg
+        className="hero-unlock-word-lock"
+        viewBox="0 0 56 64"
+        fill="none"
+        overflow="visible"
+        xmlns="http://www.w3.org/2000/svg"
+        aria-hidden="true"
+      >
+        <rect
+          className="hero-unlock-body"
+          x="14"
+          y="28"
+          width="28"
+          height="22"
+          rx="5"
+          stroke="currentColor"
+          strokeWidth="3"
+        />
+        <path
+          className="hero-unlock-shackle"
+          d="M20 28 V18 C20 12.5 24.5 8 28 8 C31.5 8 36 12.5 36 18 V28"
+          stroke="currentColor"
+          strokeWidth="3"
+          strokeLinecap="round"
+        />
+        <circle className="hero-unlock-keyhole" cx="28" cy="37" r="2.5" fill="currentColor" />
+        <g className="hero-unlock-key">
+          <circle cx="41" cy="22" r="5" stroke="currentColor" strokeWidth="2.5" />
+          <path
+            d="M36 22 H28 V37"
+            stroke="currentColor"
+            strokeWidth="2.5"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          />
+        </g>
+      </svg>
+    </span>
+  );
+}
+
 const HeroSection = () => {
   const [phase, setPhase] = useState('day');
   const pinRef = useRef(null);
@@ -187,7 +232,9 @@ const HeroSection = () => {
 
         <div className="hero-layout">
           <div className="hero-copy">
-            <h1 className="hero-tagline">{copy.hero.tagline}</h1>
+            <h1 className="hero-tagline">
+              <HeroUnlockWord /> {copy.hero.taglineRest}
+            </h1>
             <p className="hero-subline">{copy.hero.subline}</p>
             <div className="hero-actions">
               <a

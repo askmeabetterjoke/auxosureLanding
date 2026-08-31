@@ -586,27 +586,36 @@ export function RenewalRadarMock({
           </div>
 
           <div className="lane-mock-rr-timeline" aria-hidden="true">
-            <span className="lane-mock-rr-track" />
             <span className="lane-mock-rr-tick" style={{ left: '0%' }} />
             <span className="lane-mock-rr-tick" style={{ left: '33.3%' }} />
             <span className="lane-mock-rr-tick" style={{ left: '66.6%' }} />
             <span className="lane-mock-rr-tick lane-mock-rr-tick--expiry" style={{ left: '100%' }} />
 
-            {markers.map((marker) => (
-              <div
-                key={marker.label}
-                className={`lane-mock-rr-marker lane-mock-rr-marker--${marker.tone || 'blue'}`}
-                style={{ left: `${marker.position}%` }}
-              >
-                <span className="lane-mock-rr-marker-label">{marker.label}</span>
-                <span className="lane-mock-rr-marker-stem" />
-                <span
-                  className={`lane-mock-rr-marker-dot${
-                    marker.pulse ? ' lane-mock-rr-marker-dot--pulse' : ''
-                  }`}
-                />
-              </div>
-            ))}
+            {markers.map((marker) => {
+              const tone = marker.tone || 'blue';
+              return (
+                <React.Fragment key={marker.label}>
+                  <span
+                    className={`lane-mock-rr-marker-label lane-mock-rr-marker-label--${tone}`}
+                    style={{ left: `${marker.position}%` }}
+                  >
+                    {marker.label}
+                  </span>
+                  <span
+                    className={`lane-mock-rr-marker-stem lane-mock-rr-marker-stem--${tone}`}
+                    style={{ left: `${marker.position}%` }}
+                    aria-hidden="true"
+                  />
+                  <span
+                    className={`lane-mock-rr-marker-dot lane-mock-rr-marker-dot--${tone}${
+                      marker.pulse ? ' lane-mock-rr-marker-dot--pulse' : ''
+                    }`}
+                    style={{ left: `${marker.position}%` }}
+                    aria-hidden="true"
+                  />
+                </React.Fragment>
+              );
+            })}
           </div>
 
           <div className="lane-mock-rr-scale">
