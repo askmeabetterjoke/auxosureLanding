@@ -73,7 +73,7 @@ function SplitPanel({ week }) {
 }
 
 const HowItWorksSection = () => {
-  const { eyebrow, headline, description, cta, ctaHref, stats, calendarTitle } = copy.delivery;
+  const { eyebrow, headline, description, cta, ctaHref, calendarTitle } = copy.delivery;
   const [activeWeek, setActiveWeek] = useState(2);
   const week = DELIVERY_WEEKS.find((item) => item.n === activeWeek) || DELIVERY_WEEKS[0];
 
@@ -90,14 +90,6 @@ const HowItWorksSection = () => {
             <a className="btn btn-primary delivery-intro-cta" href={ctaHref} target="_blank" rel="noopener noreferrer">
               {cta}
             </a>
-            <div className="delivery-stat-grid">
-              {stats.map((stat) => (
-                <div key={stat.label} className="delivery-stat-tile">
-                  <div className="delivery-stat-value">{stat.value}</div>
-                  <div className="delivery-stat-label">{stat.label}</div>
-                </div>
-              ))}
-            </div>
           </div>
         </div>
 

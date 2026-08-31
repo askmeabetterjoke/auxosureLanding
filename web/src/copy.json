@@ -541,11 +541,6 @@
     "description": "Same model every time: strategize, build, run. We build alongside your team so it fits how your shop already operates, and your people keep the exceptions that need a license.",
     "cta": "Signup for the fast lane",
     "ctaHref": "https://calendly.com/ask-auxosure/30min",
-    "stats": [
-      { "value": "21", "label": "Days to live" },
-      { "value": "1", "label": "Service first" },
-      { "value": "0", "label": "Systems replaced" }
-    ],
     "calendarTitle": "The 21 days, day by day"
   },
   "contact": {
