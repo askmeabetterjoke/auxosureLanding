@@ -53,22 +53,29 @@ const CARD_ICONS = [
 const FLOAT_CARDS = [
   { left: 648, top: 306, width: 228, delay: '0s' },
   { left: 940, top: 232, width: 236, delay: '0.8s' },
-  { left: 1200, top: 322, width: 220, delay: '1.6s' },
+  { left: 1284, top: 322, width: 236, delay: '1.6s' },
   { left: 648, top: 446, width: 228, delay: '2.4s' },
-  { left: 1200, top: 452, width: 220, delay: '3.2s' },
-  { left: 1200, top: 582, width: 220, delay: '4s' },
+  { left: 1284, top: 452, width: 220, delay: '3.2s' },
+  { left: 1284, top: 582, width: 220, delay: '4s' },
 ];
 
 const ANNOTATIONS = [
   { left: 648, top: 268, label: copy.sprawl.annotations[0] },
-  { left: 1200, top: 284, label: copy.sprawl.annotations[1] },
+  { left: 1284, top: 284, label: copy.sprawl.annotations[1] },
   { left: 648, top: 566, label: copy.sprawl.annotations[2] },
-  { left: 1200, top: 702, label: copy.sprawl.annotations[3] },
+  { left: 1284, top: 702, label: copy.sprawl.annotations[3] },
 ];
 
 const NOTES = [
   { left: 1136, top: 398, rotate: -2, text: copy.sprawl.notes[0] },
   { left: 1136, top: 502, rotate: 1.5, text: copy.sprawl.notes[1] },
+];
+
+const THREAD_PATHS = [
+  'M812,276 C846,284 862,292 866,302',
+  'M1436,296 C1462,300 1476,308 1478,318',
+  'M762,578 C790,588 806,600 812,614',
+  'M1400,714 C1370,724 1348,734 1336,744',
 ];
 
 function pct(value, base) {
@@ -108,9 +115,9 @@ function FloatCard({ label, icon, left, top, width, delay }) {
   );
 }
 
-function SprawlDiagram() {
+function SprawlScene() {
   return (
-    <div className="sprawl-diagram" aria-hidden="true">
+    <div className="sprawl-scene" aria-hidden="true">
       <img
         className="sprawl-desk-art"
         src={assetUrl('sprawl-desk.png')}
@@ -118,23 +125,31 @@ function SprawlDiagram() {
         loading="lazy"
         decoding="async"
         style={{
-          left: pct(600, CANVAS_W),
+          left: pct(620, CANVAS_W),
           top: pct(300, CANVAS_H),
-          width: pct(940, CANVAS_W),
+          width: pct(980, CANVAS_W),
           height: pct(546, CANVAS_H),
         }}
       />
 
       <svg className="sprawl-threads" viewBox={`0 0 ${CANVAS_W} ${CANVAS_H}`} preserveAspectRatio="none">
-        <g className="sprawl-threads-group">
-          <path d="M880,348 C932,382 964,412 1002,440" />
-          <path d="M880,488 C924,500 954,514 994,528" />
-          <path d="M1058,316 C1054,344 1052,360 1054,376" />
-          <path d="M1280,364 C1238,392 1198,414 1158,436" />
-          <path d="M1280,494 C1244,508 1208,522 1174,534" />
-          <path d="M1280,624 C1238,618 1200,606 1166,590" />
-          <path d="M900,296 C1000,258 1170,262 1278,306" />
-          <path d="M896,520 C980,684 1230,700 1288,640" />
+        <defs>
+          <marker
+            id="sprawl-arrow"
+            viewBox="0 0 10 10"
+            refX="8"
+            refY="5"
+            markerWidth="5.5"
+            markerHeight="5.5"
+            orient="auto-start-reverse"
+          >
+            <path d="M0 1 L9 5 L0 9 Z" fill="#E4795B" />
+          </marker>
+        </defs>
+        <g className="sprawl-threads-group" markerEnd="url(#sprawl-arrow)">
+          {THREAD_PATHS.map((d) => (
+            <path key={d} d={d} />
+          ))}
         </g>
       </svg>
 
@@ -213,27 +228,29 @@ const SystemSprawlSection = () => {
       aria-labelledby="sprawl-heading"
     >
       <div className="sprawl-stage">
-        <div className="sprawl-copy">
-          <p className="sprawl-kicker">{overline}</p>
-          <h2 className="sprawl-title" id="sprawl-heading">
-            {headline}
-          </h2>
-          <p className="sprawl-lede">{lede}</p>
+        <div className="sprawl-canvas">
+          <div className="sprawl-copy">
+            <p className="sprawl-kicker">{overline}</p>
+            <h2 className="sprawl-title" id="sprawl-heading">
+              {headline}
+            </h2>
+            <p className="sprawl-lede">{lede}</p>
 
-          <ul className="sprawl-pains">
-            {painPoints.map((point, index) => (
-              <li key={point.title} className="sprawl-pain">
-                <PainIcon>{PAIN_ICONS[index]}</PainIcon>
-                <div>
-                  <h3>{point.title}</h3>
-                  <p>{point.body}</p>
-                </div>
-              </li>
-            ))}
-          </ul>
+            <ul className="sprawl-pains">
+              {painPoints.map((point, index) => (
+                <li key={point.title} className="sprawl-pain">
+                  <PainIcon>{PAIN_ICONS[index]}</PainIcon>
+                  <div>
+                    <h3>{point.title}</h3>
+                    <p>{point.body}</p>
+                  </div>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          <SprawlScene />
         </div>
-
-        <SprawlDiagram />
       </div>
     </section>
   );
