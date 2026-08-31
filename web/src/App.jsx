@@ -1,6 +1,7 @@
 import React from 'react';
 import OvalHeaderNav from './components/OvalHeaderNav';
 import HeroSection from './components/HeroSection';
+import SystemSprawlSection from './components/SystemSprawlSection';
 import HowItWorksSection from './components/HowItWorksSection';
 import ServicePortfolio from './components/ServicePortfolio';
 import WorkflowShowcase from './components/WorkflowShowcase';
@@ -14,6 +15,7 @@ function App() {
       <OvalHeaderNav />
       <main>
         <HeroSection />
+        <SystemSprawlSection />
         <ServicePortfolio />
         <WorkflowShowcase />
         <AnalyticsSection />

@@ -27,17 +27,24 @@ function LogoTiles({ items, duplicate = false }) {
   );
 }
 
-const IntegrationMarquee = ({ embedded = false }) => {
-  const withLogos = integrations.filter((item) => item.logo);
-
-  const marquee = (
-    <div className="marquee-wrapper" aria-label="Integration partners">
-      <div className="marquee-track">
-        <LogoTiles items={withLogos} />
-        <LogoTiles items={withLogos} duplicate />
+function MarqueeRow({ items, direction = 'left' }) {
+  return (
+    <div className="marquee-wrapper">
+      <div className={`marquee-track marquee-track--${direction}`}>
+        <div className="marquee-set">
+          <LogoTiles items={items} />
+        </div>
+        <div className="marquee-set" aria-hidden="true">
+          <LogoTiles items={items} duplicate />
+        </div>
       </div>
     </div>
   );
+}
+
+const IntegrationMarquee = ({ embedded = false }) => {
+  const withLogos = integrations.filter((item) => item.logo);
+  const reverseLogos = [...withLogos].reverse();
 
   const footnote = (
     <p className="integrations-footnote">{copy.integrations.footerText}</p>
@@ -46,7 +53,7 @@ const IntegrationMarquee = ({ embedded = false }) => {
   if (embedded) {
     return (
       <div className="core-logos">
-        {marquee}
+        <MarqueeRow items={withLogos} direction="left" />
         {footnote}
       </div>
     );
@@ -55,10 +62,14 @@ const IntegrationMarquee = ({ embedded = false }) => {
   return (
     <section className="section integrations-section" id="integrations">
       <div className="container integrations-intro">
+        <p className="integrations-kicker">{copy.integrations.overline}</p>
         <h2 className="section-title">{copy.integrations.headline}</h2>
         <p className="section-desc">{copy.integrations.lede}</p>
       </div>
-      {marquee}
+      <div className="integrations-marquee" aria-label="Integration partners">
+        <MarqueeRow items={withLogos} direction="left" />
+        <MarqueeRow items={reverseLogos} direction="right" />
+      </div>
       {footnote}
     </section>
   );

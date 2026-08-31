@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 
 export function ProductMock({ title, caption, theme = 'light', children }) {
   return (
@@ -102,31 +102,246 @@ export function DocumentVisual({
   );
 }
 
-export function FnolMock({ data = {}, title = 'FNOL' }) {
+export function CheckCircleIcon() {
+  return (
+    <svg width="17" height="17" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+      <circle cx="12" cy="12" r="8.6" stroke="#3D9B5F" strokeWidth="1.6" />
+      <path
+        d="M8.6 12.2l2.4 2.4 4.4-4.8"
+        stroke="#3D9B5F"
+        strokeWidth="1.6"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+  );
+}
+
+function MockSectionHead({ label, accent = false, trailing = null }) {
+  return (
+    <div className={`lane-mock-section-head${accent ? ' lane-mock-section-head--accent' : ''}`}>
+      <span className="lane-mock-section-label">{label}</span>
+      <span className="lane-mock-section-rule" aria-hidden="true" />
+      {trailing ? <span className="lane-mock-section-trail">{trailing}</span> : null}
+    </div>
+  );
+}
+
+const DOC_TYPE_LABEL = {
+  pdf: 'PDF',
+  xls: 'XLS',
+  eml: 'EML',
+};
+
+function normalizeDocs(docs = []) {
+  return docs.map((doc) =>
+    typeof doc === 'string'
+      ? {
+          name: doc,
+          type: doc.toLowerCase().includes('xls') ? 'xls' : 'pdf',
+        }
+      : doc
+  );
+}
+
+export function SubmissionPackageMock({
+  docs,
+  namedInsured,
+  lines,
+  effective,
+  boundPremium,
+  boundPremiumDelta,
+  checks = [],
+  checkTime,
+  statusBar,
+  refId,
+  readCount,
+  status,
+}) {
+  const viewportRef = useRef(null);
+  const trackRef = useRef(null);
+  const [panDistance, setPanDistance] = useState(0);
+  const normalizedDocs = normalizeDocs(docs);
+  const fields = [
+    { label: 'Named insured', value: namedInsured },
+    { label: 'Lines', value: lines },
+    { label: 'Effective', value: effective },
+    boundPremium ? { label: 'Bound premium', value: boundPremium, delta: boundPremiumDelta } : null,
+  ].filter(Boolean);
+
+  useEffect(() => {
+    const measure = () => {
+      const viewport = viewportRef.current;
+      const track = trackRef.current;
+      if (!viewport || !track) return;
+      setPanDistance(Math.max(0, track.scrollHeight - viewport.clientHeight));
+    };
+
+    measure();
+    window.addEventListener('resize', measure);
+
+    const observer = typeof ResizeObserver !== 'undefined'
+      ? new ResizeObserver(measure)
+      : null;
+    if (observer && viewportRef.current) {
+      observer.observe(viewportRef.current);
+      if (trackRef.current) observer.observe(trackRef.current);
+    }
+
+    return () => {
+      window.removeEventListener('resize', measure);
+      observer?.disconnect();
+    };
+  }, [normalizedDocs.length, fields.length, checks.length]);
+
+  return (
+    <div className="lane-mock lane-mock--submission">
+      <div className="lane-mock-viewport" ref={viewportRef}>
+        <div
+          ref={trackRef}
+          className={`lane-mock-scroll-track${panDistance > 0 ? ' lane-mock-scroll-track--pan' : ''}`}
+          style={{ '--submission-pan': `-${panDistance}px` }}
+        >
+          <div className="lane-mock-bar">
+            <span className="lane-mock-live-dot" aria-hidden="true" />
+            <span className="lane-mock-bar-title">{statusBar || status}</span>
+            {refId ? <span className="lane-mock-bar-id">{refId}</span> : null}
+          </div>
+
+          <div className="lane-mock-panel">
+            <MockSectionHead label="Forwarded to Auxo" trailing={readCount} />
+            <div className="lane-mock-docs">
+              {normalizedDocs.map((doc, index) => (
+                <div
+                  key={doc.name}
+                  className="lane-mock-doc"
+                  style={{ animationDelay: `${0.05 + index * 0.07}s` }}
+                >
+                  <span className={`lane-mock-doc-type lane-mock-doc-type--${doc.type}`}>
+                    {DOC_TYPE_LABEL[doc.type] || 'PDF'}
+                  </span>
+                  <span className="lane-mock-doc-name">{doc.name}</span>
+                  <CheckCircleIcon />
+                </div>
+              ))}
+            </div>
+          </div>
+
+          <div className="lane-mock-panel lane-mock-panel--filled">
+            <MockSectionHead label="Filled by Auxo" accent />
+            <div className="lane-mock-fields">
+              {fields.map((field) => (
+                <div key={field.label} className="lane-mock-field">
+                  <span className="lane-mock-field-label">{field.label}</span>
+                  <span className="lane-mock-field-value">
+                    {field.value}
+                    {field.delta ? (
+                      <span className="lane-mock-field-delta">{field.delta}</span>
+                    ) : null}
+                  </span>
+                </div>
+              ))}
+            </div>
+            {checks[0] ? (
+              <div className="lane-mock-check-row">
+                <CheckCircleIcon />
+                <span className="lane-mock-check-text">{checks[0]}</span>
+                {checkTime ? <span className="lane-mock-check-time">{checkTime}</span> : null}
+              </div>
+            ) : null}
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+const FNOL_WAVE_HEIGHTS = [
+  24, 44, 70, 36, 88, 52, 30, 64, 78, 40, 92, 48, 68, 34, 82, 56, 72, 38, 86, 46,
+  60, 28, 74, 42, 66, 32, 80, 50, 58, 26, 54, 36, 62, 30, 48, 22,
+];
+
+const FNOL_WAVE_CORAL = new Set([2, 3, 4, 5, 6, 7, 8, 10, 11, 12, 14, 15, 16, 18, 19, 21, 23, 25, 27, 29]);
+
+export function FnolMock({ data = {}, title = 'FNOL intake' }) {
+  const pills = data.pills || [];
+  const fields = [
+    { label: 'Account', value: data.account },
+    { label: 'Caller', value: data.caller },
+    { label: 'Loss', value: data.loss },
+    { label: 'Claim', value: data.claim },
+  ].filter((field) => field.value);
+
   return (
     <ProductMock title={title} caption="Retention">
-      <div className="fnol-mock">
-        <SoundWave />
-        {data.transcript ? <p className="fnol-line">Auxo: {data.transcript}</p> : null}
-        <dl className="pmock-dl">
-          <div>
-            <dt>Account</dt>
-            <dd>{data.account}</dd>
+      <div className="lane-mock lane-mock--fnol">
+        <div className="lane-mock-call">
+          <div className="lane-mock-call-head">
+            <span className="lane-mock-live-dot" aria-hidden="true" />
+            <span className="lane-mock-call-title">Live call · Auxo answering</span>
+            {data.callTime ? <span className="lane-mock-call-time">{data.callTime}</span> : null}
           </div>
-          <div>
-            <dt>Caller</dt>
-            <dd>{data.caller}</dd>
+
+          <div className="lane-mock-wave" aria-hidden="true">
+            {FNOL_WAVE_HEIGHTS.map((height, index) => (
+              <span
+                key={index}
+                className={`lane-mock-wave-bar${FNOL_WAVE_CORAL.has(index) ? ' lane-mock-wave-bar--coral' : ''}`}
+                style={{
+                  height: `${height}%`,
+                  animationDelay: `${index * 0.06}s`,
+                }}
+              />
+            ))}
+            <span className="lane-mock-wave-playhead" />
           </div>
-          <div>
-            <dt>Loss</dt>
-            <dd>{data.loss}</dd>
+
+          {pills.length > 0 ? (
+            <div className="lane-mock-pills">
+              {pills.map((pill, index) => (
+                <span
+                  key={pill}
+                  className={`lane-mock-pill${index === 0 ? ' lane-mock-pill--accent' : ''}`}
+                >
+                  {pill}
+                </span>
+              ))}
+            </div>
+          ) : null}
+        </div>
+
+        {data.transcript ? (
+          <div className="lane-mock-panel">
+            <p className="lane-mock-transcript">
+              <strong>Auxo:</strong> {data.transcript}
+            </p>
           </div>
-          <div>
-            <dt>Claim</dt>
-            <dd>{data.claim}</dd>
+        ) : null}
+
+        {fields.length > 0 ? (
+          <div className="lane-mock-panel lane-mock-panel--compact">
+            <MockSectionHead label="Captured off the call" accent />
+            <div className="lane-mock-grid">
+              {fields.map((field) => (
+                <div key={field.label} className="lane-mock-grid-cell">
+                  <span className="lane-mock-grid-label">{field.label}</span>
+                  <span className="lane-mock-grid-value">{field.value}</span>
+                </div>
+              ))}
+            </div>
           </div>
-        </dl>
-        <p className="pmock-status">{data.status}</p>
+        ) : null}
+
+        {data.status ? (
+          <div className="lane-mock-handoff">
+            <CheckCircleIcon />
+            <p className="lane-mock-handoff-copy">
+              <strong>{data.status === 'Clean file for adjuster' ? 'Clean file for the adjuster' : data.status}</strong>
+              {data.handoffDetail ? ` — ${data.handoffDetail}` : null}
+            </p>
+            {data.handoffTime ? <span className="lane-mock-handoff-time">{data.handoffTime}</span> : null}
+          </div>
+        ) : null}
       </div>
     </ProductMock>
   );
@@ -234,26 +449,10 @@ export function ModuleIndexMock({ data = {}, title = 'Module index' }) {
   );
 }
 
-export function IntakeQuoteMock({ data = {}, title = 'Intake to quote' }) {
-  const docs = (data.docs || []).map((name) => ({
-    name,
-    type: name.toLowerCase().includes('xls') ? 'xls' : 'pdf',
-  }));
+export function IntakeQuoteMock({ data = {}, title = 'Submission package' }) {
   return (
     <ProductMock title={title} caption="Sales">
-      <div className="intake-split">
-        <DocumentVisual
-          docs={docs.length ? docs : undefined}
-          sender={data.from}
-          fields={[
-            { label: 'Named insured', value: data.namedInsured },
-            { label: 'Lines', value: data.lines },
-            { label: 'Effective', value: data.effective },
-          ]}
-          checks={data.checks}
-          status={data.status}
-        />
-      </div>
+      <SubmissionPackageMock {...data} />
     </ProductMock>
   );
 }

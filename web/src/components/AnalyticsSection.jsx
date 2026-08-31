@@ -1,193 +1,208 @@
 import React from 'react';
 import copy from '../copy.json';
+import { SkidMarks } from './logoMarks';
 
-const DashboardMock = () => {
-  const rows = [
-    { worklane: 'FNOL', volume: '7', exceptions: '0', owners: ['Auxo'] },
-    { worklane: 'ACORD Intake', volume: '5', exceptions: '0', owners: ['Auxo'] },
-    { worklane: 'Renewals', volume: '4', exceptions: '2', owners: ['Auxo', 'CSR'] },
-    { worklane: 'Quotes', volume: '2', exceptions: '2', owners: ['Auxo', 'CSR'] },
-  ];
-  const closed = [
-    { day: 'Mon', auxo: 12, csr: 4 },
-    { day: 'Tue', auxo: 14, csr: 3 },
-    { day: 'Wed', auxo: 13, csr: 5 },
-    { day: 'Thu', auxo: 16, csr: 3 },
-    { day: 'Fri', auxo: 18, csr: 2 },
-  ];
-  const maxClosed = Math.max(...closed.flatMap((col) => [col.auxo, col.csr]));
-  const auxoClosed = closed.reduce((sum, col) => sum + col.auxo, 0);
-  const csrClosed = closed.reduce((sum, col) => sum + col.csr, 0);
+function DashboardMock() {
+  const mock = copy.analytics.mock;
+  const maxClosed = Math.max(...mock.closed.flatMap((col) => [col.auxo, col.csr]));
 
   return (
     <div className="dashboard-mock">
-      {/* Header bar */}
       <div className="dashboard-mock-header">
         <div className="dashboard-mock-header-left">
-          <span className="dashboard-mock-logo-pulse" aria-hidden="true">
-            <svg
-              className="dashboard-mock-logo"
-              viewBox="0 0 52 40"
-              width="22"
-              height="18"
-              fill="none"
-            >
-              <line
-                x1="4"
-                y1="32"
-                x2="13"
-                y2="16"
-                stroke="currentColor"
-                strokeWidth="6"
-                strokeLinecap="round"
-                className="dashboard-mock-skid"
-                data-skid="1"
-              />
-              <line
-                x1="17"
-                y1="34"
-                x2="29"
-                y2="10"
-                stroke="currentColor"
-                strokeWidth="6"
-                strokeLinecap="round"
-                className="dashboard-mock-skid"
-                data-skid="2"
-              />
-              <line
-                x1="33"
-                y1="36"
-                x2="48"
-                y2="4"
-                stroke="currentColor"
-                strokeWidth="6"
-                strokeLinecap="round"
-                className="dashboard-mock-skid"
-                data-skid="3"
-              />
-            </svg>
-            <span className="dashboard-mock-pulse-ring" />
+          <div className="dashboard-mock-mark" aria-hidden="true">
+            <SkidMarks width={24} height={18} />
+          </div>
+          <span className="dashboard-mock-title">{mock.title}</span>
+          <span className="dashboard-mock-live">
+            <span className="dashboard-mock-live-dot" />
+            Live
           </span>
-          <span className="dashboard-mock-title">Agency Pulse</span>
         </div>
-        <span className="dashboard-mock-view">Producer view</span>
+        <div className="dashboard-mock-views" role="tablist" aria-label="Dashboard view">
+          <span className="dashboard-mock-view dashboard-mock-view--active" role="tab" aria-selected="true">
+            Producer view
+          </span>
+          <span className="dashboard-mock-view" role="tab" aria-selected="false">
+            Ops view
+          </span>
+        </div>
       </div>
 
-      {/* Stat cards */}
       <div className="dashboard-mock-stats">
         <div className="dashboard-mock-stat">
           <span className="dashboard-mock-stat-label">Open files</span>
-          <span className="dashboard-mock-stat-value">18</span>
+          <div className="dashboard-mock-stat-main">
+            <span className="dashboard-mock-stat-value">{mock.openFiles}</span>
+            <div className="dashboard-mock-sparkline" aria-hidden="true">
+              {mock.sparkline.map((height, i) => (
+                <span
+                  key={i}
+                  className={`dashboard-mock-spark ${i === mock.sparkline.length - 1 ? 'dashboard-mock-spark--active' : ''}`}
+                  style={{ height: `${height}%` }}
+                />
+              ))}
+            </div>
+          </div>
+          <div className="dashboard-mock-progress">
+            <span className="dashboard-mock-progress-fill dashboard-mock-progress-fill--slate" style={{ width: `${mock.openFilesBar}%` }} />
+          </div>
+          <span className="dashboard-mock-stat-foot">{mock.openFilesDetail}</span>
         </div>
-        <div className="dashboard-mock-stat">
-          <span className="dashboard-mock-stat-label">Exceptions</span>
-          <span className="dashboard-mock-stat-value dashboard-mock-stat-value--alert">
-            4
-          </span>
+
+        <div className="dashboard-mock-stat dashboard-mock-stat--alert">
+          <span className="dashboard-mock-stat-label dashboard-mock-stat-label--alert">Exceptions</span>
+          <div className="dashboard-mock-stat-main">
+            <span className="dashboard-mock-stat-value dashboard-mock-stat-value--alert">{mock.exceptions}</span>
+            <span className="dashboard-mock-stat-sub">of 18 files</span>
+          </div>
+          <div className="dashboard-mock-progress">
+            <span className="dashboard-mock-progress-fill dashboard-mock-progress-fill--alert" style={{ width: `${mock.exceptionsBar}%` }} />
+          </div>
+          <span className="dashboard-mock-stat-foot">{mock.exceptionsDetail}</span>
         </div>
+
         <div className="dashboard-mock-stat">
           <span className="dashboard-mock-stat-label">Bound premium MTD</span>
-          <span className="dashboard-mock-stat-value">$1.24M</span>
+          <div className="dashboard-mock-stat-main">
+            <span className="dashboard-mock-stat-value">{mock.boundPremium}</span>
+            <span className="dashboard-mock-stat-delta">
+              <svg width="11" height="11" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                <path d="M12 19V6" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" />
+                <path d="M6 12l6-6 6 6" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round" />
+              </svg>
+              {mock.boundPremiumDelta}
+            </span>
+          </div>
+          <div className="dashboard-mock-progress">
+            <span className="dashboard-mock-progress-fill dashboard-mock-progress-fill--positive" style={{ width: `${mock.boundPremiumBar}%` }} />
+          </div>
+          <span className="dashboard-mock-stat-foot">{mock.boundPremiumDetail}</span>
         </div>
       </div>
 
-      {/* Table */}
-      <table className="dashboard-mock-table">
-        <thead>
-          <tr>
-            <th>Service</th>
-            <th>Open</th>
-            <th>Exceptions</th>
-            <th>Owner</th>
-          </tr>
-        </thead>
-        <tbody>
-          {rows.map((row) => (
-            <tr key={row.worklane}>
-              <td>
-                <span className="dashboard-mock-service">{row.worklane}</span>
-              </td>
-              <td>{row.volume}</td>
-              <td>
-                <span
-                  className={`dashboard-mock-exceptions ${
-                    row.exceptions !== '0'
-                      ? 'dashboard-mock-exceptions--has'
-                      : ''
-                  }`}
-                >
-                  {row.exceptions}
-                </span>
-              </td>
-              <td>
-                <span className="dashboard-mock-owners">
-                  {row.owners.map((owner) => (
-                    <span
-                      key={owner}
-                      className={`dashboard-mock-owner dashboard-mock-owner--${
-                        owner === 'Auxo' ? 'auxo' : 'human'
-                      }`}
-                    >
-                      {owner}
-                    </span>
-                  ))}
-                </span>
-              </td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
+      <div className="dashboard-mock-body">
+        <div className="dashboard-mock-table-head">
+          <span>Service</span>
+          <span>Open</span>
+          <span>Exceptions</span>
+          <span>Owner</span>
+        </div>
 
-      {/* Productivity chart */}
-      <div className="dashboard-mock-chart" aria-hidden="true">
-        <div className="dashboard-mock-chart-head">
-          <div className="dashboard-mock-chart-label">Files closed this week</div>
-          <div className="dashboard-mock-chart-legend">
+        {mock.rows.map((row, index) => (
+          <div
+            key={row.worklane}
+            className={`dashboard-mock-row${row.highlight ? ' dashboard-mock-row--highlight' : ''}`}
+            style={{ animationDelay: `${0.05 + index * 0.07}s` }}
+          >
+            <div className="dashboard-mock-service-cell">
+              <span className="dashboard-mock-service">{row.worklane}</span>
+              <div className="dashboard-mock-service-bars" aria-hidden="true">
+                {row.bars.map((bar, i) => (
+                  <span
+                    key={i}
+                    className={`dashboard-mock-service-bar dashboard-mock-service-bar--${bar.tone}`}
+                    style={{ width: `${bar.width}px` }}
+                  />
+                ))}
+              </div>
+            </div>
+            <span className="dashboard-mock-cell-mono">{row.volume}</span>
+            <span
+              className={`dashboard-mock-cell-mono${row.exceptions !== '0' ? ' dashboard-mock-cell-mono--alert' : ''}`}
+            >
+              {row.exceptions}
+            </span>
+            <div className="dashboard-mock-owners">
+              {row.owner.map((owner) => (
+                <span
+                  key={owner}
+                  className={`dashboard-mock-owner dashboard-mock-owner--${owner === 'Auxo' ? 'auxo' : 'human'}`}
+                >
+                  {owner}
+                </span>
+              ))}
+            </div>
+          </div>
+        ))}
+
+        <div className="dashboard-mock-chart">
+          <div className="dashboard-mock-chart-head">
+            <span className="dashboard-mock-chart-label">Files closed this week</span>
             <span className="dashboard-mock-legend dashboard-mock-legend--auxo">Auxo</span>
             <span className="dashboard-mock-legend dashboard-mock-legend--csr">CSR</span>
           </div>
-        </div>
-        <div className="dashboard-mock-bars">
-          {closed.map((col) => (
-            <div key={col.day} className="dashboard-mock-bar-col">
-              <div className="dashboard-mock-bar-pair">
-                <span
-                  className="dashboard-mock-bar dashboard-mock-bar--auxo"
-                  style={{ height: `${(col.auxo / maxClosed) * 100}%` }}
-                />
-                <span
-                  className="dashboard-mock-bar dashboard-mock-bar--csr"
-                  style={{ height: `${(col.csr / maxClosed) * 100}%` }}
-                />
+          <div className="dashboard-mock-bars" aria-hidden="true">
+            {mock.closed.map((col, index) => (
+              <div key={col.day} className="dashboard-mock-bar-col">
+                <div className="dashboard-mock-bar-pair">
+                  <span
+                    className="dashboard-mock-bar dashboard-mock-bar--auxo"
+                    style={{
+                      height: `${(col.auxo / maxClosed) * 100}%`,
+                      animationDelay: `${0.05 + index * 0.04}s`,
+                    }}
+                  >
+                    <span className="dashboard-mock-bar-value">{col.auxo}</span>
+                  </span>
+                  <span
+                    className="dashboard-mock-bar dashboard-mock-bar--csr"
+                    style={{
+                      height: `${(col.csr / maxClosed) * 100}%`,
+                      animationDelay: `${0.1 + index * 0.04}s`,
+                    }}
+                  />
+                </div>
+                <span className="dashboard-mock-bar-day">{col.day}</span>
               </div>
-              <span className="dashboard-mock-bar-day">{col.day}</span>
-            </div>
-          ))}
+            ))}
+          </div>
         </div>
-        <p className="dashboard-mock-chart-note">
-          {auxoClosed + csrClosed} closed this week. Auxo {auxoClosed}, CSR {csrClosed}. Hours per file down.
-        </p>
       </div>
     </div>
   );
-};
+}
 
 const AnalyticsSection = () => {
-  const { overline, headline, lede, bullets } = copy.analytics;
+  const { overline, headline, lede, stats, footer } = copy.analytics;
 
   return (
     <section className="section analytics-section" id="analytics">
       <div className="container analytics-layout">
         <div className="analytics-copy">
-          <p className="analytics-kicker">{overline}</p>
+          <div className="pill-tag pill-tag--on-ink">{overline}</div>
           <h2 className="analytics-title">{headline}</h2>
           <p className="analytics-lede">{lede}</p>
-          <ul className="analytics-bullets">
-            {bullets.map((item) => (
-              <li key={item}>{item}</li>
+
+          <div className="analytics-stat-rows">
+            {stats.map((stat) => (
+              <div key={stat.title} className="analytics-stat-row">
+                <span
+                  className={`analytics-stat-value${stat.accent ? ' analytics-stat-value--accent' : ''}`}
+                >
+                  {stat.value}
+                </span>
+                <div className="analytics-stat-copy">
+                  <div className="analytics-stat-title">{stat.title}</div>
+                  <div
+                    className={`analytics-stat-detail${stat.positive ? ' analytics-stat-detail--positive' : ''}`}
+                  >
+                    {stat.detail}
+                  </div>
+                </div>
+              </div>
             ))}
-          </ul>
+          </div>
+
+          <div className="analytics-footer">
+            <span className="analytics-live-dot" aria-hidden="true" />
+            <span className="analytics-updated">{footer.updated}</span>
+            <a className="analytics-footer-cta" href={footer.ctaHref}>
+              {footer.cta}
+            </a>
+          </div>
         </div>
+
         <div className="analytics-mock">
           <DashboardMock />
         </div>

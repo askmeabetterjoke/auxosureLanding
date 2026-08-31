@@ -1,0 +1,73 @@
+export const DELIVERY_ACCENTS = {
+  as: '#3E5C76',
+  ax: '#E4795B',
+  you: '#5FA87A',
+};
+
+export const DELIVERY_WEEKS = [
+  {
+    n: 1,
+    num: '01',
+    phase: 'Strategize',
+    range: 'days 1–7',
+    accent: DELIVERY_ACCENTS.as,
+    body: 'From the first call, we map how your shop actually runs and lock the first service worth automating.',
+    points: ['Kickoff and workflow audit', 'First service selected', 'Success metrics agreed up front'],
+    split: [60, 10, 30],
+    artifacts: ['Workflow map', 'Service scorecard', 'SOP inventory'],
+    milestone: 'Day 5 · first service locked',
+    days: [
+      { label: 'Kickoff call', owner: 'AS + YOU', ownerRole: 'you', milestone: true },
+      { label: 'Shadow the service desk', owner: 'AS', ownerRole: 'as' },
+      { label: 'Volume and turnaround audit', owner: 'AS', ownerRole: 'as' },
+      { label: 'Map the exceptions', owner: 'AS + YOU', ownerRole: 'you' },
+      { label: 'First service locked', owner: 'AS + YOU', ownerRole: 'as', milestone: true },
+      { label: 'Success metrics agreed', owner: 'AS', ownerRole: 'as' },
+      { label: 'Access requests filed', owner: 'AS', ownerRole: 'as' },
+    ],
+  },
+  {
+    n: 2,
+    num: '02',
+    phase: 'Build',
+    range: 'days 8–14',
+    accent: DELIVERY_ACCENTS.ax,
+    body: 'Auxo learns your tone, forms, escalations, and carrier rules. We wire it into the stack you already run.',
+    points: ['Playbooks and documents ingested', 'Brand, tone, and handoff rules', 'Controlled-lane staging'],
+    split: [45, 45, 10],
+    artifacts: ['Playbook set', 'Escalation matrix', 'Staging lane'],
+    milestone: 'Day 12 · controlled-lane staging',
+    days: [
+      { label: 'Stack connected, AMS and rater', owner: 'AS', ownerRole: 'as' },
+      { label: 'Playbooks and documents ingested', owner: 'AX', ownerRole: 'ax' },
+      { label: 'Tone, forms and templates learned', owner: 'AX', ownerRole: 'ax' },
+      { label: 'Carrier and appetite rules loaded', owner: 'AX', ownerRole: 'ax' },
+      { label: 'Controlled-lane staging', owner: 'AS + AX', ownerRole: 'ax', milestone: true },
+      { label: 'Dry run on real closed files', owner: 'AX', ownerRole: 'ax' },
+      { label: 'Escalation rules signed off', owner: 'YOU', ownerRole: 'you' },
+    ],
+  },
+  {
+    n: 3,
+    num: '03',
+    phase: 'Run',
+    range: 'days 15–21',
+    accent: DELIVERY_ACCENTS.you,
+    body: 'First service goes live. Your team owns day one. Licensed people keep the exceptions that need them.',
+    points: ['Go-live in production', 'Exception review with your team', 'Tune and plan the next lane'],
+    split: [20, 55, 25],
+    artifacts: ['Live service', 'Exception log', 'Lane-two plan'],
+    milestone: 'Day 21 · go-live in production',
+    days: [
+      { label: 'Soft launch, capped volume', owner: 'AX', ownerRole: 'ax' },
+      { label: 'First exception review', owner: 'YOU', ownerRole: 'you' },
+      { label: 'Volume ramp to full lane', owner: 'AX', ownerRole: 'ax' },
+      { label: 'Carrier portals switched on', owner: 'AX', ownerRole: 'ax' },
+      { label: 'Producer walkthrough', owner: 'AS + YOU', ownerRole: 'you' },
+      { label: 'Final tune on wording', owner: 'AS', ownerRole: 'as' },
+      { label: 'Go-live in production', owner: 'YOU + AX', ownerRole: 'ax', milestone: true },
+    ],
+  },
+];
+
+export const WEEKDAY_LABELS = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];

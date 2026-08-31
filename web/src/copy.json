@@ -11,15 +11,14 @@
     "nav": [
       { "href": "#services", "label": "Services", "id": "services" },
       { "href": "#work", "label": "Platform capabilities", "id": "work" },
+      { "href": "#analytics", "label": "Visibility", "id": "analytics" },
       { "href": "#delivery", "label": "Delivery", "id": "delivery" },
       { "href": "#integrations", "label": "Integrations", "id": "integrations" }
     ]
   },
   "hero": {
-    "pill": "Meet Auxo",
-    "headline": "Auxo, your confident voice in running insurance operations.",
-    "description": "Voice AI, email, iMessage, carrier portals, documents, and orchestration. Your agency runs at full autonomy, never forgets, never starts from scratch.",
-    "subline": "Voice AI, email, iMessage, carrier portals, documents, and orchestration. Your agency runs at full autonomy, never forgets, never starts from scratch.",
+    "tagline": "The AI workforce for insurance agencies.",
+    "subline": "One unified memory across every operational workflow.",
     "primaryCta": "Book a call",
     "secondaryCta": "See the portfolio",
     "secondaryHref": "#services"
@@ -77,7 +76,11 @@
           "claim": "AX-44182",
           "status": "Clean file for adjuster",
           "owner": "Auxo, CSR on exceptions",
-          "transcript": "I have the water at dock 3, last night, no injuries. Claim AX-44182 is open. The file is ready for the adjuster."
+          "callTime": "02:14 · 4:41 AM",
+          "pills": ["Claim AX-44182 open", "No injuries reported"],
+          "transcript": "I have the water at dock 3, last night, no injuries. Claim AX-44182 is open. The file is ready for the adjuster.",
+          "handoffDetail": "photos requested, acknowledgment emailed, AMS activity logged",
+          "handoffTime": "2 min"
         }
       },
       {
@@ -160,21 +163,23 @@
         "mockTitle": "Submission package",
         "mock": {
           "docs": [
-            "ACORD 125.pdf",
-            "Loss runs 2021-2025.pdf",
-            "SOV Harbor Logistics.xlsx",
-            "Broker intake note"
+            { "name": "ACORD 125.pdf", "type": "pdf" },
+            { "name": "Loss runs 2021–2025.pdf", "type": "pdf" },
+            { "name": "SOV Harbor Logistics.xlsx", "type": "xls" },
+            { "name": "Broker intake notes.pdf", "type": "pdf" }
           ],
           "from": "marcus@northlinebrokerage.com",
           "namedInsured": "Harbor Logistics Group",
           "lines": "Cargo · Warehouse Liability",
           "effective": "2026-09-01",
-          "checks": [
-            "ACORD 125 + 126 completed",
-            "SOV reconciled, 4 locations",
-            "5-yr loss runs attached"
-          ],
-          "status": "Quote package in producer review"
+          "boundPremium": "$48,200",
+          "boundPremiumDelta": "UP 4% YOY",
+          "checks": ["ACORD 125 + 126 completed"],
+          "checkTime": "9 min",
+          "status": "Quote package in producer review",
+          "statusBar": "Quote package · producer review",
+          "refId": "#SUB-28491",
+          "readCount": "5 read"
         }
       }
     ]
@@ -320,43 +325,87 @@
     "overline": "Visibility",
     "headline": "See what ran, what is waiting, and what moved.",
     "lede": "Producers and ops leads see open files, exceptions waiting on a human, and where premium moved. No AMS export required. Same dashboard as the rest of Auxo.",
-    "bullets": [
-      "18 open files",
-      "4 waiting on a CSR",
-      "$1.24M bound premium MTD"
+    "stats": [
+      {
+        "value": "18",
+        "title": "Open files across the book",
+        "detail": "14 running unattended"
+      },
+      {
+        "value": "4",
+        "title": "Waiting on a licensed human",
+        "detail": "Oldest sitting 1 day",
+        "accent": true
+      },
+      {
+        "value": "$1.24M",
+        "title": "Bound premium, month to date",
+        "detail": "Up 9% on last month",
+        "positive": true
+      }
     ],
+    "footer": {
+      "updated": "Updated 40 seconds ago",
+      "cta": "See it in action →",
+      "ctaHref": "#work"
+    },
     "mock": {
       "title": "Agency pulse",
       "openFiles": "18",
+      "openFilesDetail": "14 auxo · 4 human",
+      "openFilesBar": 78,
+      "sparkline": [38, 58, 46, 74, 62, 100],
       "exceptions": "4",
+      "exceptionsDetail": "All routed, none idle",
+      "exceptionsBar": 22,
       "boundPremium": "$1.24M",
-      "closedAuxo": "73",
-      "closedCsr": "17",
+      "boundPremiumDelta": "9%",
+      "boundPremiumBar": 64,
+      "boundPremiumDetail": "64% of $1.95M target",
       "rows": [
         {
           "worklane": "FNOL",
           "volume": "7",
           "exceptions": "0",
-          "owner": ["Auxo"]
+          "owner": ["Auxo"],
+          "bars": [{ "width": 76, "tone": "ok" }]
         },
         {
-          "worklane": "ACORD Intake",
+          "worklane": "ACORD intake",
           "volume": "5",
           "exceptions": "0",
-          "owner": ["Auxo"]
+          "owner": ["Auxo"],
+          "bars": [{ "width": 60, "tone": "ok" }]
         },
         {
           "worklane": "Renewals",
           "volume": "4",
           "exceptions": "2",
-          "owner": ["Auxo", "CSR"]
+          "owner": ["Auxo", "CSR"],
+          "highlight": true,
+          "bars": [
+            { "width": 30, "tone": "ok" },
+            { "width": 22, "tone": "alert" }
+          ]
         },
         {
           "worklane": "Quotes",
           "volume": "2",
           "exceptions": "2",
-          "owner": ["Auxo", "CSR"]
+          "owner": ["Auxo", "CSR"],
+          "highlight": true,
+          "bars": [
+            { "width": 14, "tone": "ok" },
+            { "width": 22, "tone": "alert" }
+          ]
         }
+      ],
+      "closed": [
+        { "day": "Mon", "auxo": 12, "csr": 4 },
+        { "day": "Tue", "auxo": 14, "csr": 3 },
+        { "day": "Wed", "auxo": 13, "csr": 5 },
+        { "day": "Thu", "auxo": 16, "csr": 3 },
+        { "day": "Fri", "auxo": 18, "csr": 2 }
       ]
     }
   },
@@ -490,46 +539,14 @@
     "eyebrow": "Auxosure delivery",
     "headline": "First call to delivery in 3 weeks",
     "description": "Same model every time: strategize, build, run. We build alongside your team so it fits how your shop already operates, and your people keep the exceptions that need a license.",
-    "close": "One pain at a time. First service live in 3 weeks.",
     "cta": "Signup for the fast lane",
-    "phases": [
-      {
-        "id": "strategize",
-        "phase": "01",
-        "week": "Week 1",
-        "title": "Strategize",
-        "body": "From the first call, we map how your shop actually runs and lock the first service worth automating.",
-        "points": [
-          "Kickoff and workflow audit",
-          "First service selected",
-          "Success metrics agreed up front"
-        ]
-      },
-      {
-        "id": "build",
-        "phase": "02",
-        "week": "Week 2",
-        "title": "Build",
-        "body": "Auxo learns your tone, forms, escalations, and carrier rules. We wire it into the stack you already run.",
-        "points": [
-          "Playbooks and documents ingested",
-          "Brand, tone, and handoff rules",
-          "Controlled-lane staging"
-        ]
-      },
-      {
-        "id": "run",
-        "phase": "03",
-        "week": "Week 3",
-        "title": "Run",
-        "body": "First service goes live. Your team owns day one. Licensed people keep the exceptions that need them.",
-        "points": [
-          "Go-live in production",
-          "Exception review with your team",
-          "Tune and plan the next lane"
-        ]
-      }
-    ]
+    "ctaHref": "https://calendly.com/ask-auxosure/30min",
+    "stats": [
+      { "value": "21", "label": "Days to live" },
+      { "value": "1", "label": "Service first" },
+      { "value": "0", "label": "Systems replaced" }
+    ],
+    "calendarTitle": "The 21 days, day by day"
   },
   "contact": {
     "eyebrow": "Auxosure",
@@ -545,8 +562,9 @@
     "successBody": "Someone from Auxosure will reach out shortly."
   },
   "integrations": {
+    "overline": "Integrations",
     "headline": "Works with the systems you already run",
-    "lede": "AMS, PAS, CRM, and telephony. Your workflows stay the same. Status shows up here without exporting from three different systems.",
+    "lede": "AMS, PAS, rater, CRM and telephony. Your workflows stay the same, and Auxo writes back where your team already looks.",
     "contact": "You can reach out to us directly at",
     "items": [
       "Applied Epic",
@@ -585,5 +603,38 @@
     "overline": "Hear Auxo",
     "headline": "Three services, one voice",
     "description": "Renewal outreach, first notice, and quoting triage. Same tone rules. Same escalation path."
+  },
+  "sprawl": {
+    "overline": "The agency problem",
+    "headline": "Every hour spent on operations is an hour not spent growing the book.",
+    "lede": "Every new account adds operational work across your team, making it harder to keep service fast, producers productive and the book growing.",
+    "painPoints": [
+      {
+        "title": "The file is never in one place",
+        "body": "ACORDs in email, loss runs in the portal, the real story in her notes."
+      },
+      {
+        "title": "Everything gets re-keyed",
+        "body": "The same insured typed into four systems before quoting starts."
+      },
+      {
+        "title": "Follow-up depends on memory",
+        "body": "Nobody works the 90-day renewal list until it's the 30-day list."
+      },
+      {
+        "title": "One desk holds every thread",
+        "body": "The day she's out is the day your turnaround time doubles."
+      }
+    ],
+    "cards": [
+      { "label": "Client Email" },
+      { "label": "New Submission" },
+      { "label": "ACORD Request" },
+      { "label": "Follow Up" },
+      { "label": "COI Request" },
+      { "label": "Renewal Due" }
+    ],
+    "notes": ["Where is this info?", "Who's working on this?"],
+    "annotations": ["Different systems", "Manual work", "Things slip", "No visibility"]
   }
 }

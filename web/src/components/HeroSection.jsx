@@ -2,130 +2,10 @@ import React, { useEffect, useRef, useState } from 'react';
 import dayHero from '../assets/hero/day.jpeg';
 import nightHero from '../assets/hero/night.jpeg';
 import copy from '../copy.json';
-
-const DAY = {
-  brianna: {
-    name: 'Brianna',
-    role: 'Producer',
-    tasks: [
-      'Negotiate $2M cyber limits with Underwriter',
-      'Present 2026 Renewal Strategy to Apex Logistics CFO',
-      'Close $80k General Liability policy for Vertex Mfg',
-    ],
-  },
-  auxo: {
-    name: 'Auxo',
-    role: 'AI COWorker',
-    tasks: [
-      'Call Sarah Jenkins for missing ACORD 125 schedule',
-      'Compile 3-year Loss Ratio Report for Travelers renewal',
-      'Issue COI to additional insured for Apex Logistics',
-      'Prepare proposal and quote for Henry Corp',
-    ],
-  },
-};
-
-const NIGHT = {
-  auxo: {
-    name: 'Auxo',
-    role: 'AI COWorker',
-    tasks: [
-      'Connecting with Brian on FNOL',
-      'Prepare marketing campaign for new policy product',
-      'Generate bordereau Report',
-    ],
-  },
-};
-
-const PRODUCER_TASK_MS = 2000;
-const AI_TASK_MS = 1500;
-
-function useTaskCycle(taskCount, intervalMs, enabled) {
-  const [index, setIndex] = useState(0);
-
-  useEffect(() => {
-    if (!enabled) {
-      setIndex(0);
-      return undefined;
-    }
-
-    setIndex(0);
-    if (taskCount <= 0) return undefined;
-
-    const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    const delay = prefersReduced ? intervalMs * 2.5 : intervalMs;
-
-    const id = setInterval(() => {
-      setIndex((i) => {
-        const next = i + 1;
-        return next > taskCount ? 0 : next;
-      });
-    }, delay);
-
-    return () => clearInterval(id);
-  }, [taskCount, intervalMs, enabled]);
-
-  return index;
-}
-
-function AuxoMark() {
-  return (
-    <svg
-      className="workflow-stack-mark"
-      viewBox="0 0 52 40"
-      width="16"
-      height="12"
-      aria-hidden="true"
-    >
-      <line x1="4" y1="32" x2="13" y2="16" stroke="currentColor" strokeWidth="6" strokeLinecap="round" />
-      <line x1="17" y1="34" x2="29" y2="10" stroke="currentColor" strokeWidth="6" strokeLinecap="round" />
-      <line x1="33" y1="36" x2="48" y2="4" stroke="currentColor" strokeWidth="6" strokeLinecap="round" />
-    </svg>
-  );
-}
-
-function WorkflowStack({ person, accent, activeIndex, variant = 'human' }) {
-  const isAuxo = person.name === 'Auxo';
-  const taskCount = person.tasks.length;
-  const allDone = activeIndex >= taskCount;
-
-  return (
-    <div className={`workflow-stack workflow-stack--${variant}`} style={{ '--wf-accent': accent }}>
-      <div className="workflow-stack-label">
-        <span className="workflow-stack-avatar" aria-hidden="true">
-          {isAuxo ? <AuxoMark /> : person.name.charAt(0)}
-        </span>
-        <span className="workflow-stack-title">
-          {person.name}, {person.role}
-        </span>
-      </div>
-      <ul className="workflow-stack-list">
-        {person.tasks.map((task, i) => {
-          const isActive = !allDone && i === activeIndex;
-          const isDone = i < activeIndex || allDone;
-          return (
-            <li
-              key={task}
-              className={`workflow-card ${isActive ? 'workflow-card--active' : ''} ${isDone ? 'workflow-card--done' : ''}`}
-            >
-              <span className="workflow-card-text">{task}</span>
-              <span
-                className={`workflow-card-status ${isDone ? 'workflow-card-status--done' : ''} ${isActive ? 'workflow-card-status--active' : ''}`}
-                aria-hidden="true"
-              >
-                {isDone ? '✓' : ''}
-              </span>
-            </li>
-          );
-        })}
-      </ul>
-    </div>
-  );
-}
+import AnimatedLogo from './AnimatedLogo';
 
 const HeroSection = () => {
   const [phase, setPhase] = useState('day');
-  const [xPlayed, setXPlayed] = useState(false);
   const pinRef = useRef(null);
 
   const isNight = phase === 'night';
@@ -157,16 +37,8 @@ const HeroSection = () => {
     };
   }, []);
 
-  const dayActiveBrianna = useTaskCycle(
-    DAY.brianna.tasks.length,
-    PRODUCER_TASK_MS,
-    !isNight
-  );
-  const dayActiveAuxo = useTaskCycle(DAY.auxo.tasks.length, AI_TASK_MS, !isNight);
-  const nightActiveAuxo = useTaskCycle(NIGHT.auxo.tasks.length, AI_TASK_MS, isNight);
-
   return (
-    <section className="hero-pin" ref={pinRef} aria-label="Meet Auxo day and night">
+    <section className="hero-pin" ref={pinRef} aria-label="Auxosure hero">
       <div
         className={`hero-sticky ${isNight ? 'hero-sticky--night' : 'hero-sticky--day'}`}
         style={{
@@ -188,33 +60,11 @@ const HeroSection = () => {
 
         <div className="hero-layout">
           <div className="hero-copy">
-            <h1>
-              <span className="hero-brand" aria-label="Auxo">
-                <span className="hero-brand-a">A</span>
-                <span className="hero-brand-u">u</span>
-                <span
-                  className={`hero-brand-x${xPlayed ? ' hero-anim-once' : ''}`}
-                  onMouseEnter={() => setXPlayed(true)}
-                >
-                  X
-                </span>
-                <span className="hero-brand-o">o</span>
-              </span>
-              , your confident voice in{' '}
-              <span className="hero-running" aria-hidden="false">
-                {'running'.split('').map((letter, i) => (
-                  <span
-                    key={`${letter}-${i}`}
-                    className="hero-running-letter"
-                    style={{ '--i': i }}
-                  >
-                    {letter}
-                  </span>
-                ))}
-              </span>{' '}
-              insurance operations.
-            </h1>
-            <p className="hero-sub">{copy.hero.subline}</p>
+            <div className="hero-wordmark">
+              <AnimatedLogo size="hero" darkTheme />
+            </div>
+            <h1 className="hero-tagline">{copy.hero.tagline}</h1>
+            <p className="hero-subline">{copy.hero.subline}</p>
             <div className="hero-actions">
               <a
                 className="btn btn-primary"
@@ -227,39 +77,6 @@ const HeroSection = () => {
               <a className="btn btn-hero-ghost" href={copy.hero.secondaryHref}>
                 {copy.hero.secondaryCta}
               </a>
-            </div>
-          </div>
-
-          <div className="hero-overlays" aria-live="polite">
-            <div
-              className={`hero-overlay hero-overlay--brianna ${isNight ? 'hero-overlay--hidden' : ''}`}
-            >
-              <WorkflowStack
-                person={DAY.brianna}
-                accent="#E8C36A"
-                activeIndex={dayActiveBrianna}
-                variant="human"
-              />
-            </div>
-            <div
-              className={`hero-overlay hero-overlay--auxo-day ${isNight ? 'hero-overlay--hidden' : ''}`}
-            >
-              <WorkflowStack
-                person={DAY.auxo}
-                accent="#E4795B"
-                activeIndex={dayActiveAuxo}
-                variant="auxo"
-              />
-            </div>
-            <div
-              className={`hero-overlay hero-overlay--auxo-night ${!isNight ? 'hero-overlay--hidden' : ''}`}
-            >
-              <WorkflowStack
-                person={NIGHT.auxo}
-                accent="#E4795B"
-                activeIndex={nightActiveAuxo}
-                variant="auxo"
-              />
             </div>
           </div>
         </div>
