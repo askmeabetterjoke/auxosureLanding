@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import dayHero from '../assets/hero/day.jpeg';
 import nightHero from '../assets/hero/night.jpeg';
 import copy from '../copy.json';
+import { SkidMarks } from './logoMarks';
 
 const DAY = {
   brianna: {
@@ -69,19 +70,7 @@ function useTaskCycle(taskCount, intervalMs, enabled) {
 }
 
 function AuxoMark() {
-  return (
-    <svg
-      className="workflow-stack-mark"
-      viewBox="0 0 52 40"
-      width="16"
-      height="12"
-      aria-hidden="true"
-    >
-      <line x1="4" y1="32" x2="13" y2="16" stroke="currentColor" strokeWidth="6" strokeLinecap="round" />
-      <line x1="17" y1="34" x2="29" y2="10" stroke="currentColor" strokeWidth="6" strokeLinecap="round" />
-      <line x1="33" y1="36" x2="48" y2="4" stroke="currentColor" strokeWidth="6" strokeLinecap="round" />
-    </svg>
-  );
+  return <SkidMarks width={18} height={14} className="workflow-stack-mark" />;
 }
 
 function WorkflowStack({ person, accent, activeIndex, variant = 'human' }) {
