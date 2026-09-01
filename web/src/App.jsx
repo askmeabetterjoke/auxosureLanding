@@ -9,6 +9,10 @@ import WorkflowShowcase from './components/WorkflowShowcase';
 import AnalyticsSection from './components/AnalyticsSection';
 import IntegrationMarquee from './components/IntegrationMarquee';
 import Footer from './components/Footer';
+import ResponsiveSection from './components/ResponsiveSection';
+import MobileSystemSprawlSection from './components/mobile/MobileSystemSprawlSection';
+import MobileFutureHubSection from './components/mobile/MobileFutureHubSection';
+import MobileDeliverySection from './components/mobile/MobileDeliverySection';
 
 function App() {
   return (
@@ -16,12 +20,21 @@ function App() {
       <OvalHeaderNav />
       <main>
         <HeroSection />
-        <SystemSprawlSection />
-        <FutureHubSection />
+        <ResponsiveSection
+          desktop={<SystemSprawlSection />}
+          mobile={<MobileSystemSprawlSection />}
+        />
+        <ResponsiveSection
+          desktop={<FutureHubSection />}
+          mobile={<MobileFutureHubSection />}
+        />
         <ServicePortfolio />
         <WorkflowShowcase />
         <AnalyticsSection />
-        <HowItWorksSection />
+        <ResponsiveSection
+          desktop={<HowItWorksSection />}
+          mobile={<MobileDeliverySection />}
+        />
         <IntegrationMarquee />
       </main>
       <Footer />
