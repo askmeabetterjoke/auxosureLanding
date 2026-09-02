@@ -531,6 +531,7 @@ svg[viewBox='0 0 52 40'] line:nth-of-type(3) {
 .hero-photo--day {
   opacity: var(--day);
   z-index: 0;
+  background-position: 58% center;
 }
 
 .hero-photo--night {
@@ -1281,8 +1282,7 @@ svg[viewBox='0 0 52 40'] line:nth-of-type(3) {
 
 .sprawl-annotation {
   position: absolute;
-  z-index: 3;
-  transform: translateX(-50%);
+  z-index: 5;
   padding: 5px 10px;
   border-radius: 6px;
   background: rgba(253, 251, 247, 0.92);

@@ -60,10 +60,10 @@ const FLOAT_CARDS = [
 ];
 
 const ANNOTATIONS = [
-  { left: 648, top: 268, label: copy.sprawl.annotations[0] },
-  { left: 1284, top: 284, label: copy.sprawl.annotations[1] },
-  { left: 648, top: 566, label: copy.sprawl.annotations[2] },
-  { left: 1284, top: 702, label: copy.sprawl.annotations[3] },
+  { left: 908, top: 200, label: copy.sprawl.annotations[0], anchor: 'center' },
+  { left: 1284, top: 284, label: copy.sprawl.annotations[1], anchor: 'start' },
+  { left: 648, top: 566, label: copy.sprawl.annotations[2], anchor: 'start' },
+  { left: 1284, top: 702, label: copy.sprawl.annotations[3], anchor: 'start' },
 ];
 
 const NOTES = [
@@ -72,7 +72,7 @@ const NOTES = [
 ];
 
 const THREAD_PATHS = [
-  'M812,276 C846,284 862,292 866,302',
+  'M908,230 C894,252 884,278 876,306',
   'M1436,296 C1462,300 1476,308 1478,318',
   'M762,578 C790,588 806,600 812,614',
   'M1400,714 C1370,724 1348,734 1336,744',
@@ -153,11 +153,15 @@ function SprawlScene() {
         </g>
       </svg>
 
-      {ANNOTATIONS.map(({ left, top, label }) => (
+      {ANNOTATIONS.map(({ left, top, label, anchor }) => (
         <span
           key={label}
           className="sprawl-annotation"
-          style={{ left: pct(left, CANVAS_W), top: pct(top, CANVAS_H) }}
+          style={{
+            left: pct(left, CANVAS_W),
+            top: pct(top, CANVAS_H),
+            transform: anchor === 'center' ? 'translateX(-50%)' : undefined,
+          }}
         >
           {label}
         </span>
